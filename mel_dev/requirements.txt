@@ -1,0 +1,6 @@
+mindspore-gpu==2.2.14
+pandas
+numpy
+pyarrow
+scikit-learn
+matplotlib
