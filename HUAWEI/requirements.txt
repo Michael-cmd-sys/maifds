@@ -1,0 +1,8 @@
+# Requirements for Phishing Ad & Referral Channel Detector AI
+scikit-learn
+pandas
+numpy
+requests
+beautifulsoup4 # For parsing HTML if needed
+spacy # For advanced NLP on ad_text
+whois # For WHOIS lookups
