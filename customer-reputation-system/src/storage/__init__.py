@@ -1,4 +1,4 @@
-"""Storage and Database package""""
+"""Storage and Database package"""
 
 from src.storage.database import DatabaseManager
 from src.storage.schemas import ALL_SCHEMAS
