@@ -1,1 +1,1 @@
-"""Source code package""""
+"""Source code package"""
