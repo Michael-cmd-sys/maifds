@@ -2,7 +2,6 @@
 Configuration settings for the Customer Reputation System
 """
 
-import os
 from pathlib import Path
 
 # Project root directory
