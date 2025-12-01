@@ -61,15 +61,6 @@ class Report(BaseModel):
     @field_validator("description")
     @classmethod
     def check_malicious_content(cls, v: str) -> str:
-        """Basic check for potentially malicious content"""
-        # Check for SQL injection patterns
-        sql_patterns = [
-            r"(\b(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC|EXECUTE)\b)",
-        ]
-        for pattern in sql_patterns:
-            if re.search(pattern, v, re.IGNORECASE):
-                raise ValueError("Potentially malicious content detected")
-
         # Check for XSS patterns
         xss_patterns = [
             r"<script[^>]*>.*?</script>",
