@@ -65,7 +65,6 @@ class Report(BaseModel):
         # Check for SQL injection patterns
         sql_patterns = [
             r"(\b(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC|EXECUTE)\b)",
-            r"(--|;|\/\*|\*\/)",
         ]
         for pattern in sql_patterns:
             if re.search(pattern, v, re.IGNORECASE):
