@@ -78,7 +78,7 @@ class ReportHandler:
             logger.error(f"Unexpected error during report submission: {e}")
             return {
                 "status": "error",
-                "message": f"Internal error: {str(e)}",
+                "message": "An internal error occurred",
                 "report_id": None,
             }
 
