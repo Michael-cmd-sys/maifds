@@ -1,4 +1,4 @@
-"""Report Ingestion Package""""
+"""Report Ingestion Package"""
 
 from src.ingestion.report_handler import ReportHandler
 
