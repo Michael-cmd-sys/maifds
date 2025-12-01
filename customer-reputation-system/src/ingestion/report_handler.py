@@ -5,7 +5,6 @@ Main report ingestion handler
 from typing import Dict, Any, Optional
 import json
 from datetime import datetime
-from pathlib import Path
 
 from pydantic import ValidationError
 
