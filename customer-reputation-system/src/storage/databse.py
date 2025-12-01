@@ -4,7 +4,6 @@ Database operations for report storage
 
 import sqlite3
 from typing import Optional, List, Dict, Any
-from datetime import datetime
 from pathlib import Path
 
 from config.settings import DATABASE_PATH
