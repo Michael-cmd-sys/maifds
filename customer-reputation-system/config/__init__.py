@@ -1,1 +1,1 @@
-""""Configuration Package""" ""
+"""Configuration Package"""
