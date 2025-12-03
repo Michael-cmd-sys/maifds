@@ -1,7 +1,0 @@
-First install the WSL extension from the extensions then crtl + alt + O if you are using windows and connect VS code to WSL.
-Then we can begin.
-
-Clone the project from your ubuntu terminal from git. SSH
-or clone it normal and copy to ubuntu
-
-
