@@ -25,7 +25,7 @@ click_tx_link_correlation/
     ├── rules.py
     ├── inference.py
     └── test_inference.py
-    
+
 1. Overview
 
 This feature detects fraudulent transactions that occur shortly after a user clicks a suspicious link.
