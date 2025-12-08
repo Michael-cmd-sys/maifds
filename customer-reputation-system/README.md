@@ -6,7 +6,7 @@ A robust report submission and ingestion system built with Python and MindSpore 
 
 This system allows customers to submit reports about merchants, which are validated, processed, and stored in a structured database. It's designed to be the foundation for a crowd-sourced reputation system.
 
-## 🚀 Features
+## 🚀Features
 
 - **Data Validation**: Robust input validation using Pydantic models
 - **Security**: Built-in SQL injection and XSS detection
