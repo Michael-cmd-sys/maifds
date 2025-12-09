@@ -4,3 +4,4 @@ numpy
 pyarrow
 scikit-learn
 matplotlib
+requests
