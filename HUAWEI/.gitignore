@@ -49,3 +49,6 @@ models/
 # Temporary files
 *.tmp
 temp/
+
+# Personal usage guide (not for GitHub)
+PERSONAL_USAGE_GUIDE.md
