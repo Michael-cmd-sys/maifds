@@ -1,26 +1,22 @@
-🚀 MindSpore-Powered Fraud Defense Suite — Feature Branch
+**🚀 MindSpore-Powered Fraud Defense Suite — Feature Branch**
 Advanced Mobile Money Fraud Detection & Telco-Integrated Defense Models
 
 
-📌 About This Branch
+**📌 About This Branch**
 
 This branch contains four fully–implemented fraud-detection features, forming the intelligent core of a full-stack telco financial-fraud prevention platform built with MindSpore.
 
 Each feature is modular, production-ready, and exposes:
 
-a data pipeline
-
-a MindSpore model
-
-a rule-based expert system
-
-an inference engine
-
-internal tests and documentation
+- a data pipeline  
+- a MindSpore model  
+- a rule-based expert system  
+- an inference engine  
+- internal tests and documentation
 
 This branch belongs to Gbine1, team lead and architect of these four modules.
 
-🧠 Implemented Features (4 / 10)
+**🧠 Implemented Features (4 / 10)**
 Feature	Description	ML Model	Rule Engine	Status
 
 | Feature | Description | ML Model | Rule Engine | Status |
@@ -31,8 +27,7 @@ Feature	Description	ML Model	Rule Engine	Status
 | 📡 Telco Notification Webhook | Sends structured fraud incidents to telco for investigation and mitigation. | No ML | Webhook & Auditing | ✅ Complete |
 
 
-🧠 Model Implementations (Feature-Level)
-
+**🧠 Model Implementations (Feature-Level)**
 | Feature | Model Name | Model Type | Framework | Checkpoint / Artifact |
 |-------|------------|-----------|-----------|------------------------|
 | Call-Triggered Defense | `CallTriggeredDefenseNet` | Tabular MLP Binary Classifier | MindSpore | `call_triggered_defense_mlp.ckpt` |
@@ -42,13 +37,15 @@ Feature	Description	ML Model	Rule Engine	Status
 > All machine-learning models are custom-designed tabular MLPs trained from scratch using MindSpore and combined with deterministic rule engines for high-precision fraud mitigation.
 
    
-📂 Repository Structure (Branch View)
+**📂 Repository Structure (Branch View)**
+
+```
 mel_dev/
 │
 ├── features/
 │   ├── call_triggered_defense/
 │   │   ├── data/
-│   │   │   ├── raw/ (ignored in Git)
+│   │   │   ├── raw/                # (ignored in Git)
 │   │   │   └── processed/
 │   │   │       └── call_tx_training_table.parquet
 │   │   ├── docs/
@@ -57,7 +54,11 @@ mel_dev/
 │   │   ├── notebooks/
 │   │   └── src/
 │   │       ├── config.py
-│       ... (pipelines, model, rules, inference)
+│   │       ├── data_pipeline.py
+│   │       ├── model.py
+│   │       ├── rules.py
+│   │       ├── inference.py
+│   │       └── train.py
 │
 │   ├── click_tx_link_correlation/
 │   │   ├── data/
@@ -72,7 +73,8 @@ mel_dev/
 │   │   └── src/
 │
 │   └── telco_notification_webhook/
-│       ├── data/logs/
+│       ├── data/
+│       │   └── logs/
 │       ├── docs/
 │       └── src/
 │           ├── client.py
@@ -81,25 +83,33 @@ mel_dev/
 │           └── test_client.py
 │
 └── requirements.txt
+```
 
-⚙️ Installation
-1. Clone repo
+
+**⚙️ Installation**
+**1. Clone repo**
+```bash
 git clone https://github.com/Michael-cmd-sys/maifds.git
 cd maifds_repo
+```
 
-2. Create virtual environment
+**2. Create virtual environment**
+```bash
 python3 -m venv mindspore_env
 source mindspore_env/bin/activate
+```
 
-3. Install dependencies
+**3. Install dependencies**
+```bash
 pip install -r requirements.txt
+```
 
-4. (Optional) Install GPU MindSpore if needed
+**4. (Optional) Install GPU MindSpore if needed**
 
 Follow official instructions:
 https://www.mindspore.cn/install
 
-🚀 Running Model Pipelines
+**🚀 Running Model Pipelines**
 
 Each feature has its own training script:
 
@@ -117,35 +127,38 @@ The webhook tester:
 python test_client.py
 
 
-🤝 Contribution Guide
+**🤝 Contribution Guide**
 
 To contribute to this branch:
 
-1. Checkout a new feature branch
+**1. Checkout a new feature branch**
+```bash
 git checkout -b feature/<name>
+```
 
-2. Follow existing folder structure
+**2. Follow existing folder structure**
 
 Each feature must include:
-
+```
 data/
 docs/
 src/
-notebooks/ (optional)
+```
 
-3. Commit cleanly
+**3. Commit cleanly**
+```bash
 git add .
 git commit -m "Describe your change"
 git push origin feature/<name>
+```
 
-4. Open Pull Request into melchizedek_dev
-Your code will be reviewed by Gbine1 (Team Lead).
+**4. Open Pull Request into `melchizedek_dev`**
+Your code will be reviewed by **Gbine1 (Team Lead)**.
 
-👤 Author
+**👤 Author**
 Gbine1 (Lead Developer & Architect)
 
 
-📜 License
-
+**📜 License**
 This project is for the Huawei MindSpore Innovation Competition.
 Internal academic and research use only.
