@@ -1,0 +1,17 @@
+{
+  "report_id": "ea769727-bc94-4f01-87d7-7e88f535e0ef",
+  "timestamp": "2025-12-12T01:36:48.792387",
+  "reporter_id": "user_002",
+  "merchant_id": "merchant_abc",
+  "report_type": "service_issue",
+  "rating": 2,
+  "title": "Poor customer service experience",
+  "description": "The merchant was unresponsive to my inquiries about delivery status. It took over 3 weeks to receive my order.",
+  "transaction_id": "txn_67890",
+  "amount": 75.5,
+  "metadata": {
+    "platform": "web",
+    "location": "Los Angeles, USA",
+    "device_info": null
+  }
+}

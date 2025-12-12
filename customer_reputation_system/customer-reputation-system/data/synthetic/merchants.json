@@ -1,0 +1,1802 @@
+[
+  {
+    "merchant_id": "merchant_28f72c9e",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 17,
+    "average_rating": 1.3223106306306738,
+    "reputation_score": 0.30558146060916064,
+    "created_at": "2025-05-15T02:53:18.161116",
+    "updated_at": "2025-12-12T02:53:18.161120"
+  },
+  {
+    "merchant_id": "merchant_140cd974",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 6,
+    "average_rating": 1.2569154028555123,
+    "reputation_score": 0.4853195587666107,
+    "created_at": "2025-02-23T02:53:18.161131",
+    "updated_at": "2025-12-12T02:53:18.161135"
+  },
+  {
+    "merchant_id": "merchant_88ad61a1",
+    "merchant_name": "Local Shop",
+    "total_reports": 13,
+    "average_rating": 1.2490628423343413,
+    "reputation_score": 0.7830238185383414,
+    "created_at": "2025-05-12T02:53:18.161143",
+    "updated_at": "2025-12-12T02:53:18.161146"
+  },
+  {
+    "merchant_id": "merchant_7d5e0661",
+    "merchant_name": "Business Solutions",
+    "total_reports": 0,
+    "average_rating": null,
+    "reputation_score": 0.7997124226127539,
+    "created_at": "2025-05-17T02:53:18.161154",
+    "updated_at": "2025-12-12T02:53:18.161157"
+  },
+  {
+    "merchant_id": "merchant_cb528cbb",
+    "merchant_name": "Local Shop",
+    "total_reports": 0,
+    "average_rating": null,
+    "reputation_score": 0.8599191602038678,
+    "created_at": "2025-06-28T02:53:18.161164",
+    "updated_at": "2025-12-12T02:53:18.161168"
+  },
+  {
+    "merchant_id": "merchant_04dd32ee",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 13,
+    "average_rating": 3.152882270440926,
+    "reputation_score": 0.7142438425294504,
+    "created_at": "2025-08-07T02:53:18.161179",
+    "updated_at": "2025-12-12T02:53:18.161183"
+  },
+  {
+    "merchant_id": "merchant_32c27cfa",
+    "merchant_name": "Local Shop",
+    "total_reports": 7,
+    "average_rating": 2.0917412470530263,
+    "reputation_score": 0.5399493956589503,
+    "created_at": "2025-05-12T02:53:18.161191",
+    "updated_at": "2025-12-12T02:53:18.161194"
+  },
+  {
+    "merchant_id": "merchant_6ddd3ff0",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 12,
+    "average_rating": 3.896725510509155,
+    "reputation_score": 0.7883539641437909,
+    "created_at": "2025-09-23T02:53:18.161201",
+    "updated_at": "2025-12-12T02:53:18.161205"
+  },
+  {
+    "merchant_id": "merchant_c861e9fc",
+    "merchant_name": "Business Solutions",
+    "total_reports": 17,
+    "average_rating": 1.1078658076205508,
+    "reputation_score": 0.4758141794377933,
+    "created_at": "2025-11-14T02:53:18.161211",
+    "updated_at": "2025-12-12T02:53:18.161215"
+  },
+  {
+    "merchant_id": "merchant_861a0076",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 20,
+    "average_rating": 2.7144510786443794,
+    "reputation_score": 0.806795948916591,
+    "created_at": "2025-08-26T02:53:18.161222",
+    "updated_at": "2025-12-12T02:53:18.161225"
+  },
+  {
+    "merchant_id": "merchant_503a9807",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 8,
+    "average_rating": 2.5164154567525583,
+    "reputation_score": 0.34816219894803707,
+    "created_at": "2025-06-13T02:53:18.161238",
+    "updated_at": "2025-12-12T02:53:18.161245"
+  },
+  {
+    "merchant_id": "merchant_db6cecd1",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 12,
+    "average_rating": 2.113026462555224,
+    "reputation_score": 0.8658428839023933,
+    "created_at": "2025-04-26T02:53:18.161261",
+    "updated_at": "2025-12-12T02:53:18.161268"
+  },
+  {
+    "merchant_id": "merchant_f9ef66cc",
+    "merchant_name": "Retail Express",
+    "total_reports": 2,
+    "average_rating": 2.8812273448521877,
+    "reputation_score": 0.7243169827579954,
+    "created_at": "2025-11-01T02:53:18.161284",
+    "updated_at": "2025-12-12T02:53:18.161291"
+  },
+  {
+    "merchant_id": "merchant_ef2c2fe2",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 7,
+    "average_rating": 3.6005763729995,
+    "reputation_score": 0.7468631347276264,
+    "created_at": "2025-11-07T02:53:18.161369",
+    "updated_at": "2025-12-12T02:53:18.161380"
+  },
+  {
+    "merchant_id": "merchant_c51889d5",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 7,
+    "average_rating": 1.7974427294501316,
+    "reputation_score": 0.21426601212423266,
+    "created_at": "2025-09-10T02:53:18.161402",
+    "updated_at": "2025-12-12T02:53:18.161415"
+  },
+  {
+    "merchant_id": "merchant_96533637",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 4,
+    "average_rating": 2.894244243784512,
+    "reputation_score": 0.2800726122765146,
+    "created_at": "2025-08-08T02:53:18.161431",
+    "updated_at": "2025-12-12T02:53:18.161439"
+  },
+  {
+    "merchant_id": "merchant_d7b0a360",
+    "merchant_name": "Local Shop",
+    "total_reports": 8,
+    "average_rating": 4.067592393424963,
+    "reputation_score": 0.3174524003574616,
+    "created_at": "2025-09-30T02:53:18.161454",
+    "updated_at": "2025-12-12T02:53:18.161463"
+  },
+  {
+    "merchant_id": "merchant_dd953837",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 9,
+    "average_rating": 1.4323949986304263,
+    "reputation_score": 0.2179748978482262,
+    "created_at": "2025-06-21T02:53:18.161501",
+    "updated_at": "2025-12-12T02:53:18.161509"
+  },
+  {
+    "merchant_id": "merchant_65114fe4",
+    "merchant_name": "Business Solutions",
+    "total_reports": 12,
+    "average_rating": 2.5866177660665093,
+    "reputation_score": 0.7005102935346279,
+    "created_at": "2025-10-20T02:53:18.161526",
+    "updated_at": "2025-12-12T02:53:18.161534"
+  },
+  {
+    "merchant_id": "merchant_629b8fd2",
+    "merchant_name": "Business Solutions",
+    "total_reports": 20,
+    "average_rating": 1.9713975221485285,
+    "reputation_score": 0.6880351017470405,
+    "created_at": "2025-06-26T02:53:18.161549",
+    "updated_at": "2025-12-12T02:53:18.161556"
+  },
+  {
+    "merchant_id": "merchant_0b8908dc",
+    "merchant_name": "Business Solutions",
+    "total_reports": 3,
+    "average_rating": 4.184908866400848,
+    "reputation_score": 0.5961527887571212,
+    "created_at": "2025-11-06T02:53:18.161572",
+    "updated_at": "2025-12-12T02:53:18.161580"
+  },
+  {
+    "merchant_id": "merchant_0ee0872d",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 17,
+    "average_rating": 2.713512052938978,
+    "reputation_score": 0.45939961335263935,
+    "created_at": "2025-03-13T02:53:18.161595",
+    "updated_at": "2025-12-12T02:53:18.161603"
+  },
+  {
+    "merchant_id": "merchant_b6104b3e",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 0,
+    "average_rating": null,
+    "reputation_score": 0.794702938899704,
+    "created_at": "2025-03-22T02:53:18.161618",
+    "updated_at": "2025-12-12T02:53:18.161625"
+  },
+  {
+    "merchant_id": "merchant_badee6b2",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 13,
+    "average_rating": 4.843150268858315,
+    "reputation_score": 0.6449095742710121,
+    "created_at": "2025-04-06T02:53:18.161640",
+    "updated_at": "2025-12-12T02:53:18.161648"
+  },
+  {
+    "merchant_id": "merchant_b84bb1a0",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 13,
+    "average_rating": 1.7045478443442375,
+    "reputation_score": 0.565222722856936,
+    "created_at": "2025-07-12T02:53:18.161664",
+    "updated_at": "2025-12-12T02:53:18.161671"
+  },
+  {
+    "merchant_id": "merchant_3b26c329",
+    "merchant_name": "Business Solutions",
+    "total_reports": 17,
+    "average_rating": 4.0985658014862985,
+    "reputation_score": 0.5254116401441555,
+    "created_at": "2025-07-13T02:53:18.161687",
+    "updated_at": "2025-12-12T02:53:18.161696"
+  },
+  {
+    "merchant_id": "merchant_27a59565",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 7,
+    "average_rating": 4.322924075562414,
+    "reputation_score": 0.2606640286389721,
+    "created_at": "2025-04-11T02:53:18.161711",
+    "updated_at": "2025-12-12T02:53:18.161718"
+  },
+  {
+    "merchant_id": "merchant_b5d35492",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 14,
+    "average_rating": 3.279398578713289,
+    "reputation_score": 0.6677319293118456,
+    "created_at": "2025-06-08T02:53:18.161737",
+    "updated_at": "2025-12-12T02:53:18.161742"
+  },
+  {
+    "merchant_id": "merchant_d374b39b",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 15,
+    "average_rating": 4.403811345249837,
+    "reputation_score": 0.32728790001038427,
+    "created_at": "2025-08-11T02:53:18.161750",
+    "updated_at": "2025-12-12T02:53:18.161754"
+  },
+  {
+    "merchant_id": "merchant_b0bb2b60",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 8,
+    "average_rating": 2.3613553726571346,
+    "reputation_score": 0.8162239858307578,
+    "created_at": "2025-07-09T02:53:18.161761",
+    "updated_at": "2025-12-12T02:53:18.161769"
+  },
+  {
+    "merchant_id": "merchant_763d5f19",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 0,
+    "average_rating": null,
+    "reputation_score": 0.561639076200454,
+    "created_at": "2025-08-22T02:53:18.161787",
+    "updated_at": "2025-12-12T02:53:18.161792"
+  },
+  {
+    "merchant_id": "merchant_292aad20",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 7,
+    "average_rating": 3.880298656416777,
+    "reputation_score": 0.5420044927941512,
+    "created_at": "2025-07-27T02:53:18.161800",
+    "updated_at": "2025-12-12T02:53:18.161803"
+  },
+  {
+    "merchant_id": "merchant_6256c8ef",
+    "merchant_name": "Local Shop",
+    "total_reports": 20,
+    "average_rating": 3.8473696258908907,
+    "reputation_score": 0.5137221847105995,
+    "created_at": "2025-11-19T02:53:18.161810",
+    "updated_at": "2025-12-12T02:53:18.161813"
+  },
+  {
+    "merchant_id": "merchant_c7637c4b",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 9,
+    "average_rating": 1.8863856018901206,
+    "reputation_score": 0.6842510087066414,
+    "created_at": "2025-06-24T02:53:18.161820",
+    "updated_at": "2025-12-12T02:53:18.161823"
+  },
+  {
+    "merchant_id": "merchant_a8e38265",
+    "merchant_name": "Business Solutions",
+    "total_reports": 11,
+    "average_rating": 2.893041955038099,
+    "reputation_score": 0.5716453518020375,
+    "created_at": "2025-04-24T02:53:18.161830",
+    "updated_at": "2025-12-12T02:53:18.161833"
+  },
+  {
+    "merchant_id": "merchant_820bacde",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 10,
+    "average_rating": 2.4072421104566732,
+    "reputation_score": 0.517621683997225,
+    "created_at": "2025-06-24T02:53:18.161839",
+    "updated_at": "2025-12-12T02:53:18.161843"
+  },
+  {
+    "merchant_id": "merchant_2f91e1e6",
+    "merchant_name": "Retail Express",
+    "total_reports": 7,
+    "average_rating": 1.4826235390092233,
+    "reputation_score": 0.3348090054160622,
+    "created_at": "2025-09-27T02:53:18.161852",
+    "updated_at": "2025-12-12T02:53:18.161856"
+  },
+  {
+    "merchant_id": "merchant_4b19c70d",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 5,
+    "average_rating": 1.766163892042179,
+    "reputation_score": 0.7170232574562654,
+    "created_at": "2025-07-09T02:53:18.161870",
+    "updated_at": "2025-12-12T02:53:18.161876"
+  },
+  {
+    "merchant_id": "merchant_1aa1b658",
+    "merchant_name": "Business Solutions",
+    "total_reports": 16,
+    "average_rating": 3.387162962049207,
+    "reputation_score": 0.8863574413237592,
+    "created_at": "2025-08-20T02:53:18.161895",
+    "updated_at": "2025-12-12T02:53:18.161901"
+  },
+  {
+    "merchant_id": "merchant_b7cdda06",
+    "merchant_name": "Retail Express",
+    "total_reports": 7,
+    "average_rating": 2.443524276597546,
+    "reputation_score": 0.4115873121463049,
+    "created_at": "2025-02-27T02:53:18.161910",
+    "updated_at": "2025-12-12T02:53:18.161914"
+  },
+  {
+    "merchant_id": "merchant_db332eec",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 8,
+    "average_rating": 1.1820628039328733,
+    "reputation_score": 0.23816821416729145,
+    "created_at": "2025-07-01T02:53:18.161921",
+    "updated_at": "2025-12-12T02:53:18.161924"
+  },
+  {
+    "merchant_id": "merchant_f2b1a5d6",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 20,
+    "average_rating": 4.4738447890517765,
+    "reputation_score": 0.5436150861666451,
+    "created_at": "2025-11-21T02:53:18.161931",
+    "updated_at": "2025-12-12T02:53:18.161934"
+  },
+  {
+    "merchant_id": "merchant_b43ebbfc",
+    "merchant_name": "Business Solutions",
+    "total_reports": 9,
+    "average_rating": 2.877587779722041,
+    "reputation_score": 0.5083281586952071,
+    "created_at": "2025-08-25T02:53:18.161941",
+    "updated_at": "2025-12-12T02:53:18.161944"
+  },
+  {
+    "merchant_id": "merchant_3c0a1a3b",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 8,
+    "average_rating": 4.7642543870724126,
+    "reputation_score": 0.5344104310859814,
+    "created_at": "2025-10-25T02:53:18.161951",
+    "updated_at": "2025-12-12T02:53:18.161954"
+  },
+  {
+    "merchant_id": "merchant_4b4cf466",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 15,
+    "average_rating": 1.2963286810225592,
+    "reputation_score": 0.6406119948663989,
+    "created_at": "2025-10-31T02:53:18.161960",
+    "updated_at": "2025-12-12T02:53:18.161964"
+  },
+  {
+    "merchant_id": "merchant_429c2dfb",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 4,
+    "average_rating": 4.24456830510019,
+    "reputation_score": 0.8643879496506217,
+    "created_at": "2025-10-15T02:53:18.161974",
+    "updated_at": "2025-12-12T02:53:18.161977"
+  },
+  {
+    "merchant_id": "merchant_3abd3284",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 3,
+    "average_rating": 3.232292138470514,
+    "reputation_score": 0.4913218149872299,
+    "created_at": "2025-08-04T02:53:18.161984",
+    "updated_at": "2025-12-12T02:53:18.161987"
+  },
+  {
+    "merchant_id": "merchant_d9e6ae9a",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 12,
+    "average_rating": 2.802057859555017,
+    "reputation_score": 0.5099047028135298,
+    "created_at": "2025-04-22T02:53:18.161994",
+    "updated_at": "2025-12-12T02:53:18.161997"
+  },
+  {
+    "merchant_id": "merchant_d027d957",
+    "merchant_name": "Retail Express",
+    "total_reports": 18,
+    "average_rating": 3.484109284288594,
+    "reputation_score": 0.6267416385715912,
+    "created_at": "2025-10-08T02:53:18.162004",
+    "updated_at": "2025-12-12T02:53:18.162008"
+  },
+  {
+    "merchant_id": "merchant_d9695ddc",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 20,
+    "average_rating": 1.844100781221572,
+    "reputation_score": 0.6622996960344256,
+    "created_at": "2025-09-08T02:53:18.162014",
+    "updated_at": "2025-12-12T02:53:18.162017"
+  },
+  {
+    "merchant_id": "merchant_55ae46a8",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 5,
+    "average_rating": 3.207968982311036,
+    "reputation_score": 0.3095728308101967,
+    "created_at": "2025-05-02T02:53:18.162024",
+    "updated_at": "2025-12-12T02:53:18.162027"
+  },
+  {
+    "merchant_id": "merchant_17a95691",
+    "merchant_name": "Local Shop",
+    "total_reports": 19,
+    "average_rating": 2.8796499160307434,
+    "reputation_score": 0.222847898766647,
+    "created_at": "2025-07-03T02:53:18.162033",
+    "updated_at": "2025-12-12T02:53:18.162037"
+  },
+  {
+    "merchant_id": "merchant_8902cd8d",
+    "merchant_name": "Retail Express",
+    "total_reports": 14,
+    "average_rating": 1.284719040613917,
+    "reputation_score": 0.3633966643120179,
+    "created_at": "2025-07-15T02:53:18.162043",
+    "updated_at": "2025-12-12T02:53:18.162046"
+  },
+  {
+    "merchant_id": "merchant_7e34bf00",
+    "merchant_name": "Business Solutions",
+    "total_reports": 6,
+    "average_rating": 2.7005558644168466,
+    "reputation_score": 0.581193665097405,
+    "created_at": "2025-09-12T02:53:18.162053",
+    "updated_at": "2025-12-12T02:53:18.162057"
+  },
+  {
+    "merchant_id": "merchant_11098c20",
+    "merchant_name": "Retail Express",
+    "total_reports": 4,
+    "average_rating": 1.2856393474232566,
+    "reputation_score": 0.3161459524545073,
+    "created_at": "2025-06-23T02:53:18.162063",
+    "updated_at": "2025-12-12T02:53:18.162067"
+  },
+  {
+    "merchant_id": "merchant_d4287400",
+    "merchant_name": "Business Solutions",
+    "total_reports": 18,
+    "average_rating": 4.684770115870553,
+    "reputation_score": 0.5074074140716162,
+    "created_at": "2025-04-02T02:53:18.162076",
+    "updated_at": "2025-12-12T02:53:18.162079"
+  },
+  {
+    "merchant_id": "merchant_7360b450",
+    "merchant_name": "Retail Express",
+    "total_reports": 12,
+    "average_rating": 4.770704962976163,
+    "reputation_score": 0.5503305239825479,
+    "created_at": "2025-03-20T02:53:18.162088",
+    "updated_at": "2025-12-12T02:53:18.162094"
+  },
+  {
+    "merchant_id": "merchant_da21eed9",
+    "merchant_name": "Local Shop",
+    "total_reports": 2,
+    "average_rating": 3.3921466481644145,
+    "reputation_score": 0.8225960225047175,
+    "created_at": "2025-06-15T02:53:18.162101",
+    "updated_at": "2025-12-12T02:53:18.162105"
+  },
+  {
+    "merchant_id": "merchant_3c52869a",
+    "merchant_name": "Business Solutions",
+    "total_reports": 8,
+    "average_rating": 1.1034595695533418,
+    "reputation_score": 0.36024709100527885,
+    "created_at": "2025-11-17T02:53:18.162111",
+    "updated_at": "2025-12-12T02:53:18.162115"
+  },
+  {
+    "merchant_id": "merchant_c10eb071",
+    "merchant_name": "Retail Express",
+    "total_reports": 18,
+    "average_rating": 1.1609266925784647,
+    "reputation_score": 0.7293881812887899,
+    "created_at": "2025-04-01T02:53:18.162122",
+    "updated_at": "2025-12-12T02:53:18.162125"
+  },
+  {
+    "merchant_id": "merchant_a886710c",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 20,
+    "average_rating": 2.7689176176808115,
+    "reputation_score": 0.39470960070969463,
+    "created_at": "2025-04-18T02:53:18.162131",
+    "updated_at": "2025-12-12T02:53:18.162135"
+  },
+  {
+    "merchant_id": "merchant_08eea63d",
+    "merchant_name": "Local Shop",
+    "total_reports": 2,
+    "average_rating": 2.8800415798414067,
+    "reputation_score": 0.4858436654010107,
+    "created_at": "2025-06-16T02:53:18.162142",
+    "updated_at": "2025-12-12T02:53:18.162145"
+  },
+  {
+    "merchant_id": "merchant_c5a59402",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 5,
+    "average_rating": 2.3192146543158616,
+    "reputation_score": 0.6855715717884028,
+    "created_at": "2025-07-03T02:53:18.162152",
+    "updated_at": "2025-12-12T02:53:18.162155"
+  },
+  {
+    "merchant_id": "merchant_54c6de28",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 17,
+    "average_rating": 1.1467885212548348,
+    "reputation_score": 0.26164185494305203,
+    "created_at": "2025-07-21T02:53:18.162161",
+    "updated_at": "2025-12-12T02:53:18.162164"
+  },
+  {
+    "merchant_id": "merchant_bd47737c",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 3,
+    "average_rating": 4.880738907234308,
+    "reputation_score": 0.4829225399005219,
+    "created_at": "2025-03-09T02:53:18.162171",
+    "updated_at": "2025-12-12T02:53:18.162174"
+  },
+  {
+    "merchant_id": "merchant_d600b285",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 17,
+    "average_rating": 2.847905379928576,
+    "reputation_score": 0.23794285976371005,
+    "created_at": "2025-03-07T02:53:18.162182",
+    "updated_at": "2025-12-12T02:53:18.162186"
+  },
+  {
+    "merchant_id": "merchant_8fa7a3d9",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 19,
+    "average_rating": 4.025772616222294,
+    "reputation_score": 0.6377861195015062,
+    "created_at": "2025-11-01T02:53:18.162193",
+    "updated_at": "2025-12-12T02:53:18.162196"
+  },
+  {
+    "merchant_id": "merchant_d724679f",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 8,
+    "average_rating": 3.1968785563413267,
+    "reputation_score": 0.8493709325911134,
+    "created_at": "2025-04-17T02:53:18.162203",
+    "updated_at": "2025-12-12T02:53:18.162206"
+  },
+  {
+    "merchant_id": "merchant_9da1a53d",
+    "merchant_name": "Local Shop",
+    "total_reports": 3,
+    "average_rating": 1.115477769766653,
+    "reputation_score": 0.6410155939028424,
+    "created_at": "2025-07-28T02:53:18.162212",
+    "updated_at": "2025-12-12T02:53:18.162216"
+  },
+  {
+    "merchant_id": "merchant_46cc7731",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 9,
+    "average_rating": 3.20335602801068,
+    "reputation_score": 0.5865759863376131,
+    "created_at": "2025-10-11T02:53:18.162222",
+    "updated_at": "2025-12-12T02:53:18.162225"
+  },
+  {
+    "merchant_id": "merchant_673df8dc",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 3,
+    "average_rating": 2.8457915767151336,
+    "reputation_score": 0.2822263043626903,
+    "created_at": "2025-09-10T02:53:18.162232",
+    "updated_at": "2025-12-12T02:53:18.162235"
+  },
+  {
+    "merchant_id": "merchant_23c5f26e",
+    "merchant_name": "Local Shop",
+    "total_reports": 9,
+    "average_rating": 3.035488060278047,
+    "reputation_score": 0.3913974276992919,
+    "created_at": "2025-03-25T02:53:18.162242",
+    "updated_at": "2025-12-12T02:53:18.162247"
+  },
+  {
+    "merchant_id": "merchant_f855ac6b",
+    "merchant_name": "Local Shop",
+    "total_reports": 7,
+    "average_rating": 2.827145890929254,
+    "reputation_score": 0.3012493779399261,
+    "created_at": "2025-08-22T02:53:18.162262",
+    "updated_at": "2025-12-12T02:53:18.162270"
+  },
+  {
+    "merchant_id": "merchant_bdb92aa4",
+    "merchant_name": "Business Solutions",
+    "total_reports": 16,
+    "average_rating": 3.9851701819695906,
+    "reputation_score": 0.29555584121360523,
+    "created_at": "2025-10-23T02:53:18.162287",
+    "updated_at": "2025-12-12T02:53:18.162291"
+  },
+  {
+    "merchant_id": "merchant_b8f129eb",
+    "merchant_name": "Retail Express",
+    "total_reports": 13,
+    "average_rating": 2.359500972457182,
+    "reputation_score": 0.7514021840350058,
+    "created_at": "2025-07-14T02:53:18.162299",
+    "updated_at": "2025-12-12T02:53:18.162302"
+  },
+  {
+    "merchant_id": "merchant_f32452b6",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 9,
+    "average_rating": 3.90420393045413,
+    "reputation_score": 0.7862331458244949,
+    "created_at": "2025-03-22T02:53:18.162312",
+    "updated_at": "2025-12-12T02:53:18.162316"
+  },
+  {
+    "merchant_id": "merchant_1c6cf1cc",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 14,
+    "average_rating": 3.1543223108154947,
+    "reputation_score": 0.44158675918510526,
+    "created_at": "2025-02-18T02:53:18.162323",
+    "updated_at": "2025-12-12T02:53:18.162326"
+  },
+  {
+    "merchant_id": "merchant_63e8262f",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 12,
+    "average_rating": 2.8213784674660043,
+    "reputation_score": 0.42524414516032616,
+    "created_at": "2025-08-23T02:53:18.162336",
+    "updated_at": "2025-12-12T02:53:18.162340"
+  },
+  {
+    "merchant_id": "merchant_98b63453",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 18,
+    "average_rating": 2.531883395718409,
+    "reputation_score": 0.7992090831911647,
+    "created_at": "2025-05-01T02:53:18.162356",
+    "updated_at": "2025-12-12T02:53:18.162365"
+  },
+  {
+    "merchant_id": "merchant_2c50981c",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 10,
+    "average_rating": 3.9788206062607836,
+    "reputation_score": 0.6936595167175017,
+    "created_at": "2025-05-16T02:53:18.162379",
+    "updated_at": "2025-12-12T02:53:18.162384"
+  },
+  {
+    "merchant_id": "merchant_53079179",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 20,
+    "average_rating": 4.923272554639141,
+    "reputation_score": 0.5467300547314964,
+    "created_at": "2025-11-09T02:53:18.162391",
+    "updated_at": "2025-12-12T02:53:18.162394"
+  },
+  {
+    "merchant_id": "merchant_0f0f91a1",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 16,
+    "average_rating": 4.861414360707415,
+    "reputation_score": 0.4323962927519546,
+    "created_at": "2025-10-07T02:53:18.162409",
+    "updated_at": "2025-12-12T02:53:18.162413"
+  },
+  {
+    "merchant_id": "merchant_221fd4c1",
+    "merchant_name": "Local Shop",
+    "total_reports": 3,
+    "average_rating": 3.1038043472302457,
+    "reputation_score": 0.5198496521319695,
+    "created_at": "2025-09-15T02:53:18.162420",
+    "updated_at": "2025-12-12T02:53:18.162423"
+  },
+  {
+    "merchant_id": "merchant_f79b8e87",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 20,
+    "average_rating": 4.879827176164425,
+    "reputation_score": 0.25237977377059617,
+    "created_at": "2025-07-15T02:53:18.162430",
+    "updated_at": "2025-12-12T02:53:18.162433"
+  },
+  {
+    "merchant_id": "merchant_3a928097",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 19,
+    "average_rating": 3.770818394347528,
+    "reputation_score": 0.6548856568054908,
+    "created_at": "2025-06-12T02:53:18.162440",
+    "updated_at": "2025-12-12T02:53:18.162443"
+  },
+  {
+    "merchant_id": "merchant_e13a3223",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 12,
+    "average_rating": 4.8165583704907045,
+    "reputation_score": 0.6387594253055915,
+    "created_at": "2025-03-23T02:53:18.162450",
+    "updated_at": "2025-12-12T02:53:18.162454"
+  },
+  {
+    "merchant_id": "merchant_5d9aa66c",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 1,
+    "average_rating": 3.4698378464108925,
+    "reputation_score": 0.3643391701714151,
+    "created_at": "2025-07-03T02:53:18.162460",
+    "updated_at": "2025-12-12T02:53:18.162464"
+  },
+  {
+    "merchant_id": "merchant_d18cffdc",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 2,
+    "average_rating": 2.7358858876925027,
+    "reputation_score": 0.26891018846823855,
+    "created_at": "2025-10-07T02:53:18.162470",
+    "updated_at": "2025-12-12T02:53:18.162474"
+  },
+  {
+    "merchant_id": "merchant_80b0bf68",
+    "merchant_name": "Local Shop",
+    "total_reports": 5,
+    "average_rating": 3.776004651172938,
+    "reputation_score": 0.8323968434353402,
+    "created_at": "2025-11-04T02:53:18.162480",
+    "updated_at": "2025-12-12T02:53:18.162484"
+  },
+  {
+    "merchant_id": "merchant_85aba06c",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 1,
+    "average_rating": 2.173471103860835,
+    "reputation_score": 0.4623887628427204,
+    "created_at": "2025-09-14T02:53:18.162490",
+    "updated_at": "2025-12-12T02:53:18.162493"
+  },
+  {
+    "merchant_id": "merchant_479c18bc",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 16,
+    "average_rating": 2.6482069959023016,
+    "reputation_score": 0.6772602599469097,
+    "created_at": "2025-08-27T02:53:18.162500",
+    "updated_at": "2025-12-12T02:53:18.162503"
+  },
+  {
+    "merchant_id": "merchant_8d0dac15",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 5,
+    "average_rating": 1.3158734026399785,
+    "reputation_score": 0.8095877190513983,
+    "created_at": "2025-07-27T02:53:18.162510",
+    "updated_at": "2025-12-12T02:53:18.162513"
+  },
+  {
+    "merchant_id": "merchant_027f350f",
+    "merchant_name": "Local Shop",
+    "total_reports": 18,
+    "average_rating": 1.5724708805140386,
+    "reputation_score": 0.5228049393484983,
+    "created_at": "2025-07-20T02:53:18.162520",
+    "updated_at": "2025-12-12T02:53:18.162523"
+  },
+  {
+    "merchant_id": "merchant_f272532a",
+    "merchant_name": "Local Shop",
+    "total_reports": 8,
+    "average_rating": 3.667362869065923,
+    "reputation_score": 0.8292359721902247,
+    "created_at": "2025-04-03T02:53:18.162530",
+    "updated_at": "2025-12-12T02:53:18.162533"
+  },
+  {
+    "merchant_id": "merchant_69db10c1",
+    "merchant_name": "Retail Express",
+    "total_reports": 17,
+    "average_rating": 1.6319024882871478,
+    "reputation_score": 0.5092108485226701,
+    "created_at": "2025-06-04T02:53:18.162540",
+    "updated_at": "2025-12-12T02:53:18.162543"
+  },
+  {
+    "merchant_id": "merchant_7f876b69",
+    "merchant_name": "Business Solutions",
+    "total_reports": 9,
+    "average_rating": 3.5557548094400486,
+    "reputation_score": 0.49701625692262835,
+    "created_at": "2025-07-22T02:53:18.162559",
+    "updated_at": "2025-12-12T02:53:18.162563"
+  },
+  {
+    "merchant_id": "merchant_5d68d54b",
+    "merchant_name": "Local Shop",
+    "total_reports": 9,
+    "average_rating": 1.7968679964355694,
+    "reputation_score": 0.46928527427714184,
+    "created_at": "2025-03-25T02:53:18.162570",
+    "updated_at": "2025-12-12T02:53:18.162573"
+  },
+  {
+    "merchant_id": "merchant_24b219bb",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 7,
+    "average_rating": 2.525457190630516,
+    "reputation_score": 0.4512714103040721,
+    "created_at": "2025-06-29T02:53:18.162580",
+    "updated_at": "2025-12-12T02:53:18.162583"
+  },
+  {
+    "merchant_id": "merchant_6dfca5c1",
+    "merchant_name": "Retail Express",
+    "total_reports": 0,
+    "average_rating": null,
+    "reputation_score": 0.8845611392038037,
+    "created_at": "2025-05-09T02:53:18.162589",
+    "updated_at": "2025-12-12T02:53:18.162593"
+  },
+  {
+    "merchant_id": "merchant_c91823ad",
+    "merchant_name": "Retail Express",
+    "total_reports": 0,
+    "average_rating": null,
+    "reputation_score": 0.5961503118689893,
+    "created_at": "2025-11-02T02:53:18.162599",
+    "updated_at": "2025-12-12T02:53:18.162603"
+  },
+  {
+    "merchant_id": "merchant_3178014f",
+    "merchant_name": "Business Solutions",
+    "total_reports": 15,
+    "average_rating": 4.331355598692753,
+    "reputation_score": 0.8320544429148429,
+    "created_at": "2025-08-02T02:53:18.162609",
+    "updated_at": "2025-12-12T02:53:18.162613"
+  },
+  {
+    "merchant_id": "merchant_2b081f26",
+    "merchant_name": "Business Solutions",
+    "total_reports": 11,
+    "average_rating": 1.8760181557124218,
+    "reputation_score": 0.33309239249396183,
+    "created_at": "2025-07-22T02:53:18.162619",
+    "updated_at": "2025-12-12T02:53:18.162623"
+  },
+  {
+    "merchant_id": "merchant_9a3bcf80",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 20,
+    "average_rating": 1.3886557192624718,
+    "reputation_score": 0.6392206754717114,
+    "created_at": "2025-11-07T02:53:18.162629",
+    "updated_at": "2025-12-12T02:53:18.162633"
+  },
+  {
+    "merchant_id": "merchant_a8de3b33",
+    "merchant_name": "Retail Express",
+    "total_reports": 14,
+    "average_rating": 1.1334581249825297,
+    "reputation_score": 0.45540286311992884,
+    "created_at": "2025-09-21T02:53:18.162639",
+    "updated_at": "2025-12-12T02:53:18.162642"
+  },
+  {
+    "merchant_id": "merchant_f2218bf4",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 9,
+    "average_rating": 2.3068765028560416,
+    "reputation_score": 0.4908521653931442,
+    "created_at": "2025-08-17T02:53:18.162649",
+    "updated_at": "2025-12-12T02:53:18.162652"
+  },
+  {
+    "merchant_id": "merchant_0867e020",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 17,
+    "average_rating": 4.505842386826562,
+    "reputation_score": 0.4561002714305867,
+    "created_at": "2025-03-16T02:53:18.162659",
+    "updated_at": "2025-12-12T02:53:18.162662"
+  },
+  {
+    "merchant_id": "merchant_4b4f73a2",
+    "merchant_name": "Retail Express",
+    "total_reports": 5,
+    "average_rating": 2.0278803382530493,
+    "reputation_score": 0.7772828687796851,
+    "created_at": "2025-03-26T02:53:18.162669",
+    "updated_at": "2025-12-12T02:53:18.162672"
+  },
+  {
+    "merchant_id": "merchant_6b276429",
+    "merchant_name": "Retail Express",
+    "total_reports": 10,
+    "average_rating": 4.216930154418042,
+    "reputation_score": 0.5278319721968867,
+    "created_at": "2025-10-20T02:53:18.162683",
+    "updated_at": "2025-12-12T02:53:18.162686"
+  },
+  {
+    "merchant_id": "merchant_112892b1",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 7,
+    "average_rating": 4.440562387595287,
+    "reputation_score": 0.7069516984528628,
+    "created_at": "2025-05-08T02:53:18.162694",
+    "updated_at": "2025-12-12T02:53:18.162697"
+  },
+  {
+    "merchant_id": "merchant_5942dae1",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 11,
+    "average_rating": 1.3612115022743332,
+    "reputation_score": 0.47620219223009835,
+    "created_at": "2025-07-15T02:53:18.162707",
+    "updated_at": "2025-12-12T02:53:18.162711"
+  },
+  {
+    "merchant_id": "merchant_da8e449d",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 3,
+    "average_rating": 2.8191441109354987,
+    "reputation_score": 0.6709798673116275,
+    "created_at": "2025-07-16T02:53:18.162717",
+    "updated_at": "2025-12-12T02:53:18.162721"
+  },
+  {
+    "merchant_id": "merchant_bd18f767",
+    "merchant_name": "Business Solutions",
+    "total_reports": 12,
+    "average_rating": 4.2896692049070975,
+    "reputation_score": 0.8582043242456878,
+    "created_at": "2025-10-03T02:53:18.162727",
+    "updated_at": "2025-12-12T02:53:18.162730"
+  },
+  {
+    "merchant_id": "merchant_031a83a0",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 15,
+    "average_rating": 1.1000985985859293,
+    "reputation_score": 0.8189643916503966,
+    "created_at": "2025-06-13T02:53:18.162737",
+    "updated_at": "2025-12-12T02:53:18.162741"
+  },
+  {
+    "merchant_id": "merchant_3c55e7af",
+    "merchant_name": "Business Solutions",
+    "total_reports": 7,
+    "average_rating": 3.590609522557766,
+    "reputation_score": 0.6447827456645574,
+    "created_at": "2025-04-04T02:53:18.163045",
+    "updated_at": "2025-12-12T02:53:18.163051"
+  },
+  {
+    "merchant_id": "merchant_f23d205e",
+    "merchant_name": "Retail Express",
+    "total_reports": 20,
+    "average_rating": 2.633183423181651,
+    "reputation_score": 0.29784390875505473,
+    "created_at": "2025-11-08T02:53:18.163064",
+    "updated_at": "2025-12-12T02:53:18.163069"
+  },
+  {
+    "merchant_id": "merchant_4aed89b9",
+    "merchant_name": "Retail Express",
+    "total_reports": 15,
+    "average_rating": 1.464481922900438,
+    "reputation_score": 0.36436002270193035,
+    "created_at": "2025-02-25T02:53:18.163076",
+    "updated_at": "2025-12-12T02:53:18.163080"
+  },
+  {
+    "merchant_id": "merchant_8a030117",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 12,
+    "average_rating": 2.8145750275555703,
+    "reputation_score": 0.6693403531951199,
+    "created_at": "2025-02-24T02:53:18.163087",
+    "updated_at": "2025-12-12T02:53:18.163091"
+  },
+  {
+    "merchant_id": "merchant_e1d58b49",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 18,
+    "average_rating": 3.9690760590612633,
+    "reputation_score": 0.3081660316868845,
+    "created_at": "2025-04-29T02:53:18.163098",
+    "updated_at": "2025-12-12T02:53:18.163101"
+  },
+  {
+    "merchant_id": "merchant_bbb47910",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 15,
+    "average_rating": 3.4626088562046253,
+    "reputation_score": 0.8573371459995587,
+    "created_at": "2025-07-07T02:53:18.163108",
+    "updated_at": "2025-12-12T02:53:18.163111"
+  },
+  {
+    "merchant_id": "merchant_417226f8",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 11,
+    "average_rating": 1.8690787387902463,
+    "reputation_score": 0.5112871018453584,
+    "created_at": "2025-07-30T02:53:18.163118",
+    "updated_at": "2025-12-12T02:53:18.163121"
+  },
+  {
+    "merchant_id": "merchant_55bd3077",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 3,
+    "average_rating": 4.923710873296269,
+    "reputation_score": 0.45713447094802634,
+    "created_at": "2025-05-28T02:53:18.163128",
+    "updated_at": "2025-12-12T02:53:18.163132"
+  },
+  {
+    "merchant_id": "merchant_b78b5357",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 12,
+    "average_rating": 2.1035257634463473,
+    "reputation_score": 0.8777448131554708,
+    "created_at": "2025-04-09T02:53:18.163138",
+    "updated_at": "2025-12-12T02:53:18.163145"
+  },
+  {
+    "merchant_id": "merchant_a006f2b0",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 6,
+    "average_rating": 3.5668178689328705,
+    "reputation_score": 0.6180021716636815,
+    "created_at": "2025-11-17T02:53:18.163153",
+    "updated_at": "2025-12-12T02:53:18.163156"
+  },
+  {
+    "merchant_id": "merchant_1bccc81c",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 10,
+    "average_rating": 1.9742755886560945,
+    "reputation_score": 0.28814671971563,
+    "created_at": "2025-08-14T02:53:18.163163",
+    "updated_at": "2025-12-12T02:53:18.163167"
+  },
+  {
+    "merchant_id": "merchant_19c22f7b",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 17,
+    "average_rating": 1.828629481386634,
+    "reputation_score": 0.3511659463430723,
+    "created_at": "2025-07-31T02:53:18.163173",
+    "updated_at": "2025-12-12T02:53:18.163177"
+  },
+  {
+    "merchant_id": "merchant_0fae9dff",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 4,
+    "average_rating": 4.154575017110438,
+    "reputation_score": 0.617187144622094,
+    "created_at": "2025-07-09T02:53:18.163184",
+    "updated_at": "2025-12-12T02:53:18.163187"
+  },
+  {
+    "merchant_id": "merchant_c1c29c2a",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 4,
+    "average_rating": 3.1608618274526057,
+    "reputation_score": 0.7589596764903366,
+    "created_at": "2025-10-02T02:53:18.163194",
+    "updated_at": "2025-12-12T02:53:18.163197"
+  },
+  {
+    "merchant_id": "merchant_dc44e141",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 4,
+    "average_rating": 1.0594413089228354,
+    "reputation_score": 0.7529892649643277,
+    "created_at": "2025-07-29T02:53:18.163204",
+    "updated_at": "2025-12-12T02:53:18.163207"
+  },
+  {
+    "merchant_id": "merchant_538d640c",
+    "merchant_name": "Business Solutions",
+    "total_reports": 10,
+    "average_rating": 1.063124334044641,
+    "reputation_score": 0.3857572558274813,
+    "created_at": "2025-09-24T02:53:18.163214",
+    "updated_at": "2025-12-12T02:53:18.163217"
+  },
+  {
+    "merchant_id": "merchant_4cb774fa",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 16,
+    "average_rating": 1.4545972271461864,
+    "reputation_score": 0.24449062670299537,
+    "created_at": "2025-04-12T02:53:18.163224",
+    "updated_at": "2025-12-12T02:53:18.163227"
+  },
+  {
+    "merchant_id": "merchant_672dab0e",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 16,
+    "average_rating": 3.3746640714721083,
+    "reputation_score": 0.5164037939361266,
+    "created_at": "2025-08-06T02:53:18.163234",
+    "updated_at": "2025-12-12T02:53:18.163237"
+  },
+  {
+    "merchant_id": "merchant_82687a50",
+    "merchant_name": "Business Solutions",
+    "total_reports": 1,
+    "average_rating": 3.9089719886549408,
+    "reputation_score": 0.8361261815345782,
+    "created_at": "2025-03-06T02:53:18.163243",
+    "updated_at": "2025-12-12T02:53:18.163247"
+  },
+  {
+    "merchant_id": "merchant_f77802d7",
+    "merchant_name": "Retail Express",
+    "total_reports": 14,
+    "average_rating": 3.573362736821955,
+    "reputation_score": 0.22180544765724075,
+    "created_at": "2025-03-27T02:53:18.163256",
+    "updated_at": "2025-12-12T02:53:18.163260"
+  },
+  {
+    "merchant_id": "merchant_f5b96810",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 13,
+    "average_rating": 3.7443899842489308,
+    "reputation_score": 0.5431881979009576,
+    "created_at": "2025-04-14T02:53:18.163266",
+    "updated_at": "2025-12-12T02:53:18.163270"
+  },
+  {
+    "merchant_id": "merchant_05af1389",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 2,
+    "average_rating": 2.2884472789853043,
+    "reputation_score": 0.3038336779622552,
+    "created_at": "2025-09-24T02:53:18.163279",
+    "updated_at": "2025-12-12T02:53:18.163283"
+  },
+  {
+    "merchant_id": "merchant_b1a270a2",
+    "merchant_name": "Retail Express",
+    "total_reports": 19,
+    "average_rating": 3.532306897204062,
+    "reputation_score": 0.5838495038338524,
+    "created_at": "2025-06-14T02:53:18.163289",
+    "updated_at": "2025-12-12T02:53:18.163292"
+  },
+  {
+    "merchant_id": "merchant_ebd71d06",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 19,
+    "average_rating": 3.122227349725298,
+    "reputation_score": 0.5176007923028301,
+    "created_at": "2025-04-21T02:53:18.163298",
+    "updated_at": "2025-12-12T02:53:18.163302"
+  },
+  {
+    "merchant_id": "merchant_98881101",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 3,
+    "average_rating": 4.4111709491823,
+    "reputation_score": 0.6556416654169137,
+    "created_at": "2025-02-18T02:53:18.163308",
+    "updated_at": "2025-12-12T02:53:18.163312"
+  },
+  {
+    "merchant_id": "merchant_5167c4ef",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 13,
+    "average_rating": 2.806219663861126,
+    "reputation_score": 0.3599455020552091,
+    "created_at": "2025-06-07T02:53:18.163318",
+    "updated_at": "2025-12-12T02:53:18.163322"
+  },
+  {
+    "merchant_id": "merchant_74071beb",
+    "merchant_name": "Local Shop",
+    "total_reports": 12,
+    "average_rating": 2.663958601045981,
+    "reputation_score": 0.2665600874929416,
+    "created_at": "2025-04-23T02:53:18.163328",
+    "updated_at": "2025-12-12T02:53:18.163331"
+  },
+  {
+    "merchant_id": "merchant_8dd5d55e",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 8,
+    "average_rating": 2.4972040937421474,
+    "reputation_score": 0.30684724733810664,
+    "created_at": "2025-03-30T02:53:18.163338",
+    "updated_at": "2025-12-12T02:53:18.163341"
+  },
+  {
+    "merchant_id": "merchant_f92edfd5",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 2,
+    "average_rating": 4.327087553899418,
+    "reputation_score": 0.2652610711925742,
+    "created_at": "2025-10-09T02:53:18.163347",
+    "updated_at": "2025-12-12T02:53:18.163351"
+  },
+  {
+    "merchant_id": "merchant_c6ad3e3b",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 4,
+    "average_rating": 3.2254829424614004,
+    "reputation_score": 0.6105255579176339,
+    "created_at": "2025-06-12T02:53:18.163360",
+    "updated_at": "2025-12-12T02:53:18.163364"
+  },
+  {
+    "merchant_id": "merchant_015ae45f",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 13,
+    "average_rating": 2.4143923185350706,
+    "reputation_score": 0.6657383640020408,
+    "created_at": "2025-04-25T02:53:18.163370",
+    "updated_at": "2025-12-12T02:53:18.163374"
+  },
+  {
+    "merchant_id": "merchant_7bdd8347",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 9,
+    "average_rating": 3.401640364898708,
+    "reputation_score": 0.44615232998520427,
+    "created_at": "2025-03-13T02:53:18.163381",
+    "updated_at": "2025-12-12T02:53:18.163384"
+  },
+  {
+    "merchant_id": "merchant_ae92ddda",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 4,
+    "average_rating": 3.6269452119526084,
+    "reputation_score": 0.3569714083752959,
+    "created_at": "2025-10-03T02:53:18.163390",
+    "updated_at": "2025-12-12T02:53:18.163393"
+  },
+  {
+    "merchant_id": "merchant_4340b12d",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 17,
+    "average_rating": 2.4702442024614006,
+    "reputation_score": 0.7338239423557948,
+    "created_at": "2025-08-04T02:53:18.163400",
+    "updated_at": "2025-12-12T02:53:18.163403"
+  },
+  {
+    "merchant_id": "merchant_8f77f633",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 17,
+    "average_rating": 4.898186408502832,
+    "reputation_score": 0.7728988016784688,
+    "created_at": "2025-02-15T02:53:18.163410",
+    "updated_at": "2025-12-12T02:53:18.163413"
+  },
+  {
+    "merchant_id": "merchant_7163c5c5",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 19,
+    "average_rating": 4.716337163979746,
+    "reputation_score": 0.7806225529717641,
+    "created_at": "2025-07-14T02:53:18.163420",
+    "updated_at": "2025-12-12T02:53:18.163423"
+  },
+  {
+    "merchant_id": "merchant_6e31795f",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 5,
+    "average_rating": 2.093081554850899,
+    "reputation_score": 0.7336866625866985,
+    "created_at": "2025-06-07T02:53:18.163430",
+    "updated_at": "2025-12-12T02:53:18.163433"
+  },
+  {
+    "merchant_id": "merchant_e1da38a5",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 0,
+    "average_rating": null,
+    "reputation_score": 0.3269838907487981,
+    "created_at": "2025-09-15T02:53:18.163439",
+    "updated_at": "2025-12-12T02:53:18.163443"
+  },
+  {
+    "merchant_id": "merchant_d96c56a0",
+    "merchant_name": "Business Solutions",
+    "total_reports": 12,
+    "average_rating": 1.2783416849933458,
+    "reputation_score": 0.7186783413828939,
+    "created_at": "2025-11-12T02:53:18.163449",
+    "updated_at": "2025-12-12T02:53:18.163453"
+  },
+  {
+    "merchant_id": "merchant_52b17e75",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 16,
+    "average_rating": 1.8605315201340438,
+    "reputation_score": 0.4938827456351522,
+    "created_at": "2025-06-06T02:53:18.163459",
+    "updated_at": "2025-12-12T02:53:18.163462"
+  },
+  {
+    "merchant_id": "merchant_fb0ff8a0",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 11,
+    "average_rating": 2.2465494788168656,
+    "reputation_score": 0.42706802445489855,
+    "created_at": "2025-10-15T02:53:18.163471",
+    "updated_at": "2025-12-12T02:53:18.163475"
+  },
+  {
+    "merchant_id": "merchant_e5b35e35",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 4,
+    "average_rating": 1.6296395884286126,
+    "reputation_score": 0.6324867273482213,
+    "created_at": "2025-10-17T02:53:18.163482",
+    "updated_at": "2025-12-12T02:53:18.163485"
+  },
+  {
+    "merchant_id": "merchant_2f134426",
+    "merchant_name": "Retail Express",
+    "total_reports": 14,
+    "average_rating": 3.647754771233045,
+    "reputation_score": 0.5399631934236974,
+    "created_at": "2025-04-15T02:53:18.163491",
+    "updated_at": "2025-12-12T02:53:18.163495"
+  },
+  {
+    "merchant_id": "merchant_69c2cf2d",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 8,
+    "average_rating": 1.8622758613509873,
+    "reputation_score": 0.5586424140607733,
+    "created_at": "2025-06-04T02:53:18.163501",
+    "updated_at": "2025-12-12T02:53:18.163504"
+  },
+  {
+    "merchant_id": "merchant_ade8181f",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 3,
+    "average_rating": 2.1329858803217974,
+    "reputation_score": 0.6749403783320931,
+    "created_at": "2025-03-23T02:53:18.163511",
+    "updated_at": "2025-12-12T02:53:18.163514"
+  },
+  {
+    "merchant_id": "merchant_b60fd287",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 9,
+    "average_rating": 1.18166945041771,
+    "reputation_score": 0.4766843772613403,
+    "created_at": "2025-10-30T02:53:18.163529",
+    "updated_at": "2025-12-12T02:53:18.163539"
+  },
+  {
+    "merchant_id": "merchant_285f8f4d",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 6,
+    "average_rating": 2.205677448073747,
+    "reputation_score": 0.3478637854542186,
+    "created_at": "2025-09-18T02:53:18.163555",
+    "updated_at": "2025-12-12T02:53:18.163559"
+  },
+  {
+    "merchant_id": "merchant_a4171479",
+    "merchant_name": "Retail Express",
+    "total_reports": 9,
+    "average_rating": 2.3124894237513645,
+    "reputation_score": 0.20541093459851836,
+    "created_at": "2025-04-21T02:53:18.163566",
+    "updated_at": "2025-12-12T02:53:18.163570"
+  },
+  {
+    "merchant_id": "merchant_d3e631eb",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 4,
+    "average_rating": 2.520829782860945,
+    "reputation_score": 0.6925698843678645,
+    "created_at": "2025-03-16T02:53:18.163577",
+    "updated_at": "2025-12-12T02:53:18.163580"
+  },
+  {
+    "merchant_id": "merchant_fda6b0f6",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 11,
+    "average_rating": 1.2883019863686314,
+    "reputation_score": 0.8032350534158119,
+    "created_at": "2025-11-06T02:53:18.163587",
+    "updated_at": "2025-12-12T02:53:18.163590"
+  },
+  {
+    "merchant_id": "merchant_a250f1b6",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 0,
+    "average_rating": null,
+    "reputation_score": 0.5218279752493925,
+    "created_at": "2025-10-19T02:53:18.163597",
+    "updated_at": "2025-12-12T02:53:18.163600"
+  },
+  {
+    "merchant_id": "merchant_994cd93e",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 18,
+    "average_rating": 2.7171371452033424,
+    "reputation_score": 0.483096019153664,
+    "created_at": "2025-04-28T02:53:18.163607",
+    "updated_at": "2025-12-12T02:53:18.163610"
+  },
+  {
+    "merchant_id": "merchant_c090305d",
+    "merchant_name": "Retail Express",
+    "total_reports": 3,
+    "average_rating": 2.620129228259818,
+    "reputation_score": 0.8763397837231883,
+    "created_at": "2025-09-01T02:53:18.163616",
+    "updated_at": "2025-12-12T02:53:18.163619"
+  },
+  {
+    "merchant_id": "merchant_dd10c06c",
+    "merchant_name": "Business Solutions",
+    "total_reports": 14,
+    "average_rating": 4.328103652286829,
+    "reputation_score": 0.8438388262189693,
+    "created_at": "2025-10-13T02:53:18.163626",
+    "updated_at": "2025-12-12T02:53:18.163629"
+  },
+  {
+    "merchant_id": "merchant_5ab528ea",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 3,
+    "average_rating": 1.9732658992909347,
+    "reputation_score": 0.6122099018120384,
+    "created_at": "2025-03-04T02:53:18.163636",
+    "updated_at": "2025-12-12T02:53:18.163639"
+  },
+  {
+    "merchant_id": "merchant_276ac029",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 12,
+    "average_rating": 4.482097664781646,
+    "reputation_score": 0.722063378525222,
+    "created_at": "2025-08-06T02:53:18.163646",
+    "updated_at": "2025-12-12T02:53:18.163649"
+  },
+  {
+    "merchant_id": "merchant_e700acbc",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 5,
+    "average_rating": 1.3055175098920846,
+    "reputation_score": 0.6432572668777305,
+    "created_at": "2025-03-01T02:53:18.163655",
+    "updated_at": "2025-12-12T02:53:18.163658"
+  },
+  {
+    "merchant_id": "merchant_1a027acf",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 6,
+    "average_rating": 4.623690926320202,
+    "reputation_score": 0.44456268583066616,
+    "created_at": "2025-09-13T02:53:18.163665",
+    "updated_at": "2025-12-12T02:53:18.163668"
+  },
+  {
+    "merchant_id": "merchant_f67a8215",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 3,
+    "average_rating": 1.5857768731107775,
+    "reputation_score": 0.33809026197678826,
+    "created_at": "2025-09-10T02:53:18.163675",
+    "updated_at": "2025-12-12T02:53:18.163678"
+  },
+  {
+    "merchant_id": "merchant_9a8308f2",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 5,
+    "average_rating": 4.805168562318327,
+    "reputation_score": 0.6395641404828571,
+    "created_at": "2025-04-04T02:53:18.163684",
+    "updated_at": "2025-12-12T02:53:18.163688"
+  },
+  {
+    "merchant_id": "merchant_58f8166a",
+    "merchant_name": "Business Solutions",
+    "total_reports": 18,
+    "average_rating": 2.795621027980252,
+    "reputation_score": 0.8469079808699616,
+    "created_at": "2025-06-15T02:53:18.163698",
+    "updated_at": "2025-12-12T02:53:18.163702"
+  },
+  {
+    "merchant_id": "merchant_6e103844",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 4,
+    "average_rating": 2.759051265367456,
+    "reputation_score": 0.5282447584684613,
+    "created_at": "2025-06-25T02:53:18.163712",
+    "updated_at": "2025-12-12T02:53:18.163716"
+  },
+  {
+    "merchant_id": "merchant_f7d21f0c",
+    "merchant_name": "Retail Express",
+    "total_reports": 18,
+    "average_rating": 1.2246884808523122,
+    "reputation_score": 0.5551358197028446,
+    "created_at": "2025-06-22T02:53:18.163722",
+    "updated_at": "2025-12-12T02:53:18.163725"
+  },
+  {
+    "merchant_id": "merchant_8aac3853",
+    "merchant_name": "Local Shop",
+    "total_reports": 14,
+    "average_rating": 1.1504289822843683,
+    "reputation_score": 0.4581163196428689,
+    "created_at": "2025-07-04T02:53:18.163741",
+    "updated_at": "2025-12-12T02:53:18.163748"
+  },
+  {
+    "merchant_id": "merchant_1cfc5c2d",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 20,
+    "average_rating": 4.457000135700957,
+    "reputation_score": 0.7987053600192633,
+    "created_at": "2025-03-13T02:53:18.163764",
+    "updated_at": "2025-12-12T02:53:18.163776"
+  },
+  {
+    "merchant_id": "merchant_fa4bcf89",
+    "merchant_name": "Wholesale Distributors",
+    "total_reports": 14,
+    "average_rating": 3.321317629644762,
+    "reputation_score": 0.867962033705953,
+    "created_at": "2025-11-06T02:53:18.163786",
+    "updated_at": "2025-12-12T02:53:18.163790"
+  },
+  {
+    "merchant_id": "merchant_c6f0572a",
+    "merchant_name": "Local Shop",
+    "total_reports": 18,
+    "average_rating": 3.6073498185944395,
+    "reputation_score": 0.42506873401629985,
+    "created_at": "2025-03-29T02:53:18.163797",
+    "updated_at": "2025-12-12T02:53:18.163802"
+  },
+  {
+    "merchant_id": "merchant_111d5623",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 4,
+    "average_rating": 4.830889435466339,
+    "reputation_score": 0.5153661763105639,
+    "created_at": "2025-06-05T02:53:18.163820",
+    "updated_at": "2025-12-12T02:53:18.163831"
+  },
+  {
+    "merchant_id": "merchant_a4702e5e",
+    "merchant_name": "Digital Solutions Inc",
+    "total_reports": 16,
+    "average_rating": 3.5845083645748765,
+    "reputation_score": 0.2273994883404717,
+    "created_at": "2025-04-17T02:53:18.163845",
+    "updated_at": "2025-12-12T02:53:18.163851"
+  },
+  {
+    "merchant_id": "merchant_7c7f61bc",
+    "merchant_name": "Local Shop",
+    "total_reports": 16,
+    "average_rating": 3.0909921410621823,
+    "reputation_score": 0.31112234558707896,
+    "created_at": "2025-05-21T02:53:18.163866",
+    "updated_at": "2025-12-12T02:53:18.163871"
+  },
+  {
+    "merchant_id": "merchant_03bee830",
+    "merchant_name": "Retail Express",
+    "total_reports": 12,
+    "average_rating": 2.6350775889892812,
+    "reputation_score": 0.43685700278899364,
+    "created_at": "2025-11-01T02:53:18.163891",
+    "updated_at": "2025-12-12T02:53:18.163896"
+  },
+  {
+    "merchant_id": "merchant_4aa7b765",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 2,
+    "average_rating": 2.3187630204709153,
+    "reputation_score": 0.5905742486928816,
+    "created_at": "2025-05-14T02:53:18.163904",
+    "updated_at": "2025-12-12T02:53:18.163907"
+  },
+  {
+    "merchant_id": "merchant_58e7ab90",
+    "merchant_name": "Retail Express",
+    "total_reports": 8,
+    "average_rating": 3.894934620009847,
+    "reputation_score": 0.6595948604873345,
+    "created_at": "2025-09-12T02:53:18.163914",
+    "updated_at": "2025-12-12T02:53:18.163920"
+  },
+  {
+    "merchant_id": "merchant_5bbdfad7",
+    "merchant_name": "Online Marketplace",
+    "total_reports": 2,
+    "average_rating": 3.3309580583456784,
+    "reputation_score": 0.2989998664090225,
+    "created_at": "2025-06-01T02:53:18.163928",
+    "updated_at": "2025-12-12T02:53:18.163931"
+  },
+  {
+    "merchant_id": "merchant_b950579b",
+    "merchant_name": "Retail Express",
+    "total_reports": 20,
+    "average_rating": 3.793919851247524,
+    "reputation_score": 0.4743705890347522,
+    "created_at": "2025-10-15T02:53:18.163938",
+    "updated_at": "2025-12-12T02:53:18.163941"
+  },
+  {
+    "merchant_id": "merchant_5f178713",
+    "merchant_name": "Retail Express",
+    "total_reports": 17,
+    "average_rating": 2.5067172242252007,
+    "reputation_score": 0.7541633705044803,
+    "created_at": "2025-09-23T02:53:18.163948",
+    "updated_at": "2025-12-12T02:53:18.163951"
+  },
+  {
+    "merchant_id": "merchant_063dc946",
+    "merchant_name": "E-Commerce Hub",
+    "total_reports": 2,
+    "average_rating": 3.5840992829339515,
+    "reputation_score": 0.4963844564254726,
+    "created_at": "2025-05-26T02:53:18.163958",
+    "updated_at": "2025-12-12T02:53:18.163962"
+  },
+  {
+    "merchant_id": "merchant_5688d5f2",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 11,
+    "average_rating": 2.2354642802555236,
+    "reputation_score": 0.865818519517294,
+    "created_at": "2025-06-06T02:53:18.163968",
+    "updated_at": "2025-12-12T02:53:18.163972"
+  },
+  {
+    "merchant_id": "merchant_2cd0f1f2",
+    "merchant_name": "Local Shop",
+    "total_reports": 6,
+    "average_rating": 1.906172186135549,
+    "reputation_score": 0.2962957472239555,
+    "created_at": "2025-10-19T02:53:18.163978",
+    "updated_at": "2025-12-12T02:53:18.163981"
+  },
+  {
+    "merchant_id": "merchant_4b84854e",
+    "merchant_name": "Retail Express",
+    "total_reports": 3,
+    "average_rating": 3.030758850898585,
+    "reputation_score": 0.5778395308895697,
+    "created_at": "2025-03-03T02:53:18.163991",
+    "updated_at": "2025-12-12T02:53:18.163995"
+  },
+  {
+    "merchant_id": "merchant_55f8da73",
+    "merchant_name": "QuickMart Store",
+    "total_reports": 10,
+    "average_rating": 4.505571090170967,
+    "reputation_score": 0.6326220258454556,
+    "created_at": "2025-05-19T02:53:18.164003",
+    "updated_at": "2025-12-12T02:53:18.164006"
+  },
+  {
+    "merchant_id": "merchant_a9951152",
+    "merchant_name": "Global Trading Co",
+    "total_reports": 5,
+    "average_rating": 1.7233838686747864,
+    "reputation_score": 0.6849919486028586,
+    "created_at": "2025-09-04T02:53:18.164013",
+    "updated_at": "2025-12-12T02:53:18.164016"
+  },
+  {
+    "merchant_id": "merchant_6a11d508",
+    "merchant_name": "Local Shop",
+    "total_reports": 1,
+    "average_rating": 2.643434445986134,
+    "reputation_score": 0.6734540455319731,
+    "created_at": "2025-07-29T02:53:18.164022",
+    "updated_at": "2025-12-12T02:53:18.164026"
+  },
+  {
+    "merchant_id": "merchant_f2580585",
+    "merchant_name": "Local Shop",
+    "total_reports": 19,
+    "average_rating": 2.139711730253433,
+    "reputation_score": 0.7239755626668054,
+    "created_at": "2025-04-12T02:53:18.164032",
+    "updated_at": "2025-12-12T02:53:18.164035"
+  },
+  {
+    "merchant_id": "merchant_b73891ec",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 17,
+    "average_rating": 1.956673988982078,
+    "reputation_score": 0.8759176460358256,
+    "created_at": "2025-04-01T02:53:18.164042",
+    "updated_at": "2025-12-12T02:53:18.164046"
+  },
+  {
+    "merchant_id": "merchant_792b7868",
+    "merchant_name": "Tech Services Ltd",
+    "total_reports": 11,
+    "average_rating": 3.7132273002603697,
+    "reputation_score": 0.5992935753547239,
+    "created_at": "2025-04-16T02:53:18.164053",
+    "updated_at": "2025-12-12T02:53:18.164056"
+  },
+  {
+    "merchant_id": "merchant_7608ca2e",
+    "merchant_name": "Local Shop",
+    "total_reports": 9,
+    "average_rating": 4.112496148999703,
+    "reputation_score": 0.5520346840413053,
+    "created_at": "2025-04-27T02:53:18.164062",
+    "updated_at": "2025-12-12T02:53:18.164066"
+  }
+]
