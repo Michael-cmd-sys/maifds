@@ -215,8 +215,8 @@ Edit `config/settings.py` to customize:
 
 - **Feature 1**: Report Ingestion ✅ (Complete)
 - **Feature 2**: Text Analysis & Classification (NLP with MindSpore) ✅ (Complete)
-- **Feature 3**: Reporter Credibility System (Planned)
-- **Feature 4**: Merchant Reputation Scoring (Planned)
+- **Feature 3**: Reporter Credibility System ✅ (Complete)
+- **Feature 4**: Merchant Reputation Scoring ✅ (Complete)
 - **Feature 5**: Anti-Gaming & Fraud Detection (Planned)
 - **Feature 6**: Reporting Dashboard (Planned)
 
@@ -238,6 +238,49 @@ python train.py
 
 # Test NLP analysis
 python test_inference.py
+```
+
+### Feature 3: Reporter Credibility System
+
+The system now automatically calculates and maintains credibility scores for all reporters:
+
+- **Multi-Factor Scoring**: Combines NLP credibility, consistency, verification, and time decay
+- **Automatic Updates**: Credibility recalculated on every report submission
+- **Integration**: Uses NLP credibility scores from Feature 2
+- **Time-Weighted**: Recent reports weighted more heavily
+
+See `src/credibility/README.md` for detailed documentation.
+
+**Quick Start:**
+```bash
+# Get reporter credibility
+python -c "from src.ingestion.report_handler import ReportHandler; h = ReportHandler(); print(h.get_reporter_credibility('user_123'))"
+
+# Recalculate all credibilities
+cd src/credibility
+python recalculate.py
+```
+
+### Feature 4: Merchant Reputation Scoring
+
+The system now automatically calculates and maintains reputation scores for all merchants:
+
+- **Credibility-Weighted Ratings**: Ratings weighted by reporter credibility (high-credibility reporters have more influence)
+- **Multi-Factor Scoring**: Combines ratings, sentiment, fraud risk, volume, and time decay
+- **Automatic Updates**: Reputation recalculated on every report submission
+- **Integration**: Uses NLP sentiment (Feature 2) and reporter credibility (Feature 3)
+- **Trend Analysis**: Detects trending_up, trending_down, or stable trends
+
+See `src/reputation/README.md` for detailed documentation.
+
+**Quick Start:**
+```bash
+# Get merchant reputation
+python -c "from src.ingestion.report_handler import ReportHandler; h = ReportHandler(); print(h.get_merchant_reputation('merchant_abc'))"
+
+# Recalculate all reputations
+cd src/reputation
+python recalculate.py
 ```
 
 ## 🤝 Contributing
