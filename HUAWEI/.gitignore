@@ -20,10 +20,7 @@ phishing_detector_mindspore.log
 # =============================
 
 # Ignore raw datasets inside data/raw/
-data/raw/*
-
-# BUT allow the raw folder itself
-!data/raw/
+*/data/raw/
 
 # Ignore large dataset files anywhere
 *.csv
@@ -34,12 +31,21 @@ data/raw/*
 !config.json
 !*/config.json
 
-# Model files you WANT to push
-!data/mindspore_models/*.ckpt
-!data/processed/models/*.ckpt
+# Explicitly exclude large database files
+*/data/blacklist_db.json
 
-# Block large unneeded model checkpoints
+# Block model checkpoints by default
 *.ckpt
+
+# Allow small processed data files
+!*/data/bloom_filters/*.bloom
+!*/data/watchlist.json
+
+# Then ALLOW specific model files you WANT to push
+!*/data/mindspore_models/*.ckpt
+!*/data/mindspore_models/*.pkl
+!*/data/processed/models/*.ckpt
+!*/data/processed/models/*.pkl
 
 # =============================
 # IDE specific
@@ -67,9 +73,20 @@ models/
 *.pt
 *.pth
 
+# AFTER blocking models/, un-ignore specific data model folders
+!*/data/processed/
+!*/data/processed/models/
+!*/data/bloom_filters/
+!*/data/mindspore_models/
+!*/data/mindspore_models/*.ckpt
+!*/data/mindspore_models/*.pkl
+!*/data/processed/models/*.ckpt
+!*/data/processed/models/*.pkl
+
 # Temporary files
 *.tmp
 temp/
 
 # Not needed on GitHub
 PERSONAL_USAGE_GUIDE.md
+   
