@@ -7,7 +7,6 @@ ENV/
 __pycache__/
 
 # MindSpore specific
-*.ckpt
 *.meta
 *.mindrecord
 *.db
@@ -16,13 +15,41 @@ __pycache__/
 *.log
 phishing_detector_mindspore.log
 
-# Data files (if they're large or sensitive)
-data/
+# =============================
+# DATA FOLDER RULES
+# =============================
+
+# Ignore raw datasets inside data/raw/
+*/data/raw/
+
+# Ignore large dataset files anywhere
 *.csv
 *.json
-!config.json
+*.pkl
 
+# Allow config files anywhere
+!config.json
+!*/config.json
+
+# Explicitly exclude large database files
+*/data/blacklist_db.json
+
+# Block model checkpoints by default
+*.ckpt
+
+# Allow small processed data files
+!*/data/bloom_filters/*.bloom
+!*/data/watchlist.json
+
+# Then ALLOW specific model files you WANT to push
+!*/data/mindspore_models/*.ckpt
+!*/data/mindspore_models/*.pkl
+!*/data/processed/models/*.ckpt
+!*/data/processed/models/*.pkl
+
+# =============================
 # IDE specific
+# =============================
 .vscode/
 .idea/
 *.swp
@@ -39,16 +66,27 @@ Thumbs.db
 .env
 secrets.json
 
-# Model checkpoints (can be large)
+# Model checkpoints (general)
 checkpoints/
 models/
 *.h5
 *.pt
 *.pth
 
+# AFTER blocking models/, un-ignore specific data model folders
+!*/data/processed/
+!*/data/processed/models/
+!*/data/bloom_filters/
+!*/data/mindspore_models/
+!*/data/mindspore_models/*.ckpt
+!*/data/mindspore_models/*.pkl
+!*/data/processed/models/*.ckpt
+!*/data/processed/models/*.pkl
+
 # Temporary files
 *.tmp
 temp/
 
-# Personal usage guide (not for GitHub)
+# Not needed on GitHub
 PERSONAL_USAGE_GUIDE.md
+   

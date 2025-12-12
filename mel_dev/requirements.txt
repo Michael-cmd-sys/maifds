@@ -1,3 +1,10 @@
+mindspore-gpu==2.2.14
+pandas
+numpy
+pyarrow
+scikit-learn
+matplotlib
+requests
 # ⚠️ DEPRECATED: Use root requirements.txt instead
 # This file is kept for backward compatibility only.
 #

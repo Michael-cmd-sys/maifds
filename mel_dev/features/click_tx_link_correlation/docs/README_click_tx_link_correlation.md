@@ -1,3 +1,5 @@
+README – Click → Transaction Link Correlation & Blocker
+
 **Transaction Link Correlation & Blocker**
 ```
 click_tx_link_correlation/
@@ -25,6 +27,8 @@ click_tx_link_correlation/
     ├── rules.py
     ├── inference.py
     └── test_inference.py
+
+1. Overview
 ```
 **1. Overview**
 
@@ -52,6 +56,8 @@ Escalated to telco/ops
 This feature follows the same architecture as the Call Triggered Defense engine:
 Data Pipeline → ML Model → Rule Engine → Ensemble → Risk Output & Actions.
 
+2. Core Logic (How Detection Works)
+2.1 Click → Transaction Correlation
 **2. Core Logic (How Detection Works)**
 **2.1 Click → Transaction Correlation**
 
@@ -72,6 +78,9 @@ time_between_click_and_tx = tx_timestamp – click_timestamp
 
 If this number is small, the risk sharply increases.
 
+2.2 URL Risk Scoring
+
+From url_risk.csv + phishing_blacklist.csv, we generate:
 **2.2 URL Risk Scoring**
 
 ```From url_risk.csv + phishing_blacklist.csv, we generate:
@@ -81,6 +90,16 @@ url_hash_numeric → SHA-256 → 64-bit integer
 url_risk_score → 0 (benign) to 1 (phishing/malicious)
 
 url_reported_flag → 1 if URL appears in known phishing lists
+
+The pipeline automatically detects the URL column, even if it is named differently in the dataset.
+
+2.3 Rule Engine (High Precision)
+
+A transaction is classified HIGH RISK if all conditions are met:
+
+clicked_recently == 1
+AND (url_risk_score >= 0.7 OR url_reported_flag == 1)
+AND amount >= 2 × median_transaction_amount
 ```
 
 The pipeline automatically detects the URL column, even if it is named differently in the dataset.
@@ -102,6 +121,9 @@ If user clicked a malicious link within 5 minutes
 AND is now sending a large payment
 → Block or hold the transaction regardless of ML score.
 
+2.4 Machine Learning Model (MindSpore MLP)
+
+Model: ClickTxLinkModel
 **2.4 Machine Learning Model (MindSpore MLP)**
 
 ```Model: ClickTxLinkModel
@@ -124,6 +146,11 @@ Users who click dangerous links tend to transact quickly
 High URL risk correlates with high fraud
 
 Abnormal behaviour in user click frequency
+
+2.5 Ensemble Logic
+
+The final risk outcome is:
+
 ```
 
 **2.5 Ensemble Logic**
@@ -134,6 +161,15 @@ If rule_flag == True → HIGH RISK
 Else if fraud_probability ≥ 0.8 → HIGH RISK
 Else if fraud_probability ≥ 0.4 → MEDIUM RISK
 Else → LOW RISK
+
+
+Recommended actions:
+
+Risk Level	Actions
+HIGH	High-risk hold, SMS warning, notify telco ops
+MEDIUM	SMS warning
+LOW	Allow transaction
+3. Dataset Requirements & Download Instructions
 ```
 
 **Recommended actions:**
@@ -148,6 +184,8 @@ Place all raw CSV files under:
 
 mel_dev/features/click_tx_link_correlation/data/raw/
 
+3.1 Required Datasets
+A) Transactions Dataset
 **3.1 Required Datasets**
 **A) Transactions Dataset**
 
@@ -164,6 +202,10 @@ Rename your file as:
 
 transactions.csv
 
+B) URL Risk Dataset (Malicious vs Benign)
+
+Kaggle (verified):
+https://www.kaggle.com/datasets/samahsadiq/benign-and-malicious-urls
 **B) URL Risk Dataset (Malicious vs Benign)**
 
 Kaggle (verified):
@@ -182,6 +224,10 @@ URL risk score
 
 Domain-level phishing risk
 
+C) Phishing Blacklist (Optional)
+
+Kaggle (verified):
+https://www.kaggle.com/datasets/ndarvind/phiusiil-phishing-url-dataset
 **C) Phishing Blacklist (Optional)**
 Kaggle (verified):
 ```https://www.kaggle.com/datasets/ndarvind/phiusiil-phishing-url-dataset```
@@ -200,6 +246,15 @@ Forcing rule_flag = True for known dangerous links
 4. Feature Folder Structure
 
 
+5. How to Run
+Step 1 — Build Training Table
+cd mel_dev/features/click_tx_link_correlation/src
+python data_pipeline.py
+
+
+Generates:
+
+data/processed/click_tx_training_table.parquet
 **5. How to Run**
 ```Step 1 — Build Training Table
 cd mel_dev/features/click_tx_link_correlation/src
@@ -217,6 +272,14 @@ python train.py
 
 Saves:
 
+click_tx_link_model.ckpt
+
+Step 3 — Test Inference
+python test_inference.py
+
+
+Example output:
+
 ```click_tx_link_model.ckpt```
 
 Step 3 — Test Inference
@@ -232,6 +295,8 @@ Example output:
   'reason': 'Recent click on high-risk / reported URL with large transaction.',
   'actions': ['HIGH_RISK_HOLD', 'SMS_USER_WARNING', 'NOTIFY_TELCO_OPS']
 }
+
+6. Key Files Explained
 ```
 **6. Key Files Explained**
 ```
@@ -242,6 +307,7 @@ train.py	Training loop, normalization, checkpoint saving
 rules.py	High-precision rule logic
 inference.py	Ensemble of rule + ML → risk level
 test_inference.py	Sample inference script
+7. Why This Feature Is Powerful
 ```
 **8. Why This Feature Is Powerful**
 
@@ -255,4 +321,5 @@ ML model captures subtle behaviour patterns.
 
 Ensemble balances precision + recall.
 
+This creates a telecom-grade defense layer that is suitable for banks, mobile money providers, and telcos.
 This creates a telecom-grade defense layer that is suitable for banks, mobile money providers, and telcos.
