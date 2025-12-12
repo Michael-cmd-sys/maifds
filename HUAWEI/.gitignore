@@ -7,7 +7,6 @@ ENV/
 __pycache__/
 
 # MindSpore specific
-*.ckpt
 *.meta
 *.mindrecord
 *.db
@@ -16,12 +15,35 @@ __pycache__/
 *.log
 phishing_detector_mindspore.log
 
-# Data files (if they're large or sensitive)
+# =============================
+# DATA FOLDER RULES
+# =============================
+
+# Ignore raw datasets inside data/raw/
+data/raw/*
+
+# BUT allow the raw folder itself
+!data/raw/
+
+# Ignore large dataset files anywhere
 *.csv
 *.json
-!config.json
+*.pkl
 
+# Allow config files anywhere
+!config.json
+!*/config.json
+
+# Model files you WANT to push
+!data/mindspore_models/*.ckpt
+!data/processed/models/*.ckpt
+
+# Block large unneeded model checkpoints
+*.ckpt
+
+# =============================
 # IDE specific
+# =============================
 .vscode/
 .idea/
 *.swp
@@ -38,7 +60,7 @@ Thumbs.db
 .env
 secrets.json
 
-# Model checkpoints (can be large)
+# Model checkpoints (general)
 checkpoints/
 models/
 *.h5
@@ -49,5 +71,5 @@ models/
 *.tmp
 temp/
 
-# Personal usage guide (not for GitHub)
+# Not needed on GitHub
 PERSONAL_USAGE_GUIDE.md
