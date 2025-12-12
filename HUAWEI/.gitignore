@@ -1,0 +1,54 @@
+# Virtual Environments
+venv/
+mindenv/
+env/
+ENV/
+*.pyc
+__pycache__/
+
+# MindSpore specific
+*.ckpt
+*.meta
+*.mindrecord
+*.db
+
+# Log files
+*.log
+phishing_detector_mindspore.log
+
+# Data files (if they're large or sensitive)
+data/
+*.csv
+*.json
+!config.json
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Credentials and sensitive files
+*.key
+*.pem
+.env
+secrets.json
+
+# Model checkpoints (can be large)
+checkpoints/
+models/
+*.h5
+*.pt
+*.pth
+
+# Temporary files
+*.tmp
+temp/
+
+# Personal usage guide (not for GitHub)
+PERSONAL_USAGE_GUIDE.md

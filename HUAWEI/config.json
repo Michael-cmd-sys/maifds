@@ -1,0 +1,26 @@
+
+{
+  "model": {
+    "hidden_sizes": [128, 64, 32],
+    "dropout_rate": 0.3,
+    "learning_rate": 0.001,
+    "epochs": 50,
+    "batch_size": 32
+  },
+  "risk_thresholds": {
+    "high_risk_probability": 0.8,
+    "medium_risk_probability": 0.5,
+    "domain_age_days": 90,
+    "entropy_threshold": 3.5
+  },
+  "notifications": {
+    "sms_enabled": true,
+    "webhook_enabled": true,
+    "webhook_url": "https://your-webhook-url.com/alert"
+  },
+  "storage": {
+    "watchlist_file": "data/watchlist.json",
+    "models_dir": "data/mindspore_models/",
+    "checkpoint_prefix": "phishing_detector"
+  }
+}

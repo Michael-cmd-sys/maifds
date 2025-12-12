@@ -1,0 +1,54 @@
+# MindSpore Phishing Detector - Requirements
+
+# MindSpore Framework (choose based on your hardware)
+# For CPU (development/testing)
+# mindspore>=2.2.0
+
+# For GPU (CUDA 11.6)
+# mindspore-gpu>=2.2.0
+
+# For Ascend (Huawei hardware)
+# mindspore>=2.2.0
+
+# Note: Install MindSpore separately based on your hardware
+# Visit: https://www.mindspore.cn/install/en
+# Example for CPU: pip install mindspore==2.2.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Web scraping and HTTP
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# NLP (for text preprocessing before feeding to neural network)
+transformers>=4.30.0  # For BERT tokenization
+jieba>=0.42.1  # Chinese text segmentation (if needed)
+
+# WHOIS lookups
+python-whois>=0.8.0
+
+# Flask API
+Flask>=2.3.0
+Flask-CORS>=4.0.0
+
+# Additional utilities
+python-dotenv>=1.0.0
+tqdm>=4.65.0  # Progress bars
+scikit-learn>=1.3.0  # Machine learning utilities
+
+# Blacklist/Watchlist Service dependencies
+redis>=5.0.0  # Redis client for caching
+bitarray>=2.8.0  # For Bloom filters
+
+# Visualization (optional)
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# For production deployment (optional)
+gunicorn>=21.2.0
+
+# SMS integration (choose based on your provider)
+# twilio>=8.5.0  # Uncomment if using Twilio
+# africastalking>=1.2.7  # Uncomment if using Africa's Talking
