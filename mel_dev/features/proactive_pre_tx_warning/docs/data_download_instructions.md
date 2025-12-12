@@ -1,23 +1,29 @@
-# Data Download & Preparation Instructions  
+# Data Download Instructions  
 ### Proactive Pre-Transaction Warning & User Prompting Feature
 
-This feature relies on **user-level behavioral signals**, **click/call indicators**, and **campaign-level phishing activity**.  
-Because no public dataset directly matches this problem, we combine multiple real datasets and build synthetic signals on top of them.
+This feature requires several publicly available datasets.  
+We combine them to simulate:
 
-Below are the required datasets and how to prepare them.
+- User transaction behavior  
+- Device and call-related risk indicators  
+- Exposure to phishing URLs  
+- Scam campaign intensity
+
+All datasets must be placed in the folder:
+
+mel_dev/features/proactive_pre_tx_warning/data/raw/
+
+yaml
+Copy code
 
 ---
 
-## 1. Required Datasets
-
-### **A) PaySim Mobile Money Transactions**
-Used for:
-- user activity baseline  
-- transaction count & spending patterns  
-- historical fraud labeling (isFraud)
+## 1. PaySim – Mobile Money Transactions  
+**Purpose:**  
+Baseline user behavior, spending patterns, fraud history.
 
 **Download:**  
-https://www.kaggle.com/datasets/ealaxi/paysim1
+https://www.kaggle.com/datasets/ealaxi/paysim1  
 
 **Save as:**  
 data/raw/paysim.csv
@@ -27,14 +33,15 @@ Copy code
 
 ---
 
-### **B) Telco Call Behaviour (Proxy for device age & scam call exposure)**
-Used for:
-- device_age_days  
-- new device identification  
-- simulated scam call frequency
+## 2. Telco Customer Churn Dataset  
+**Purpose:**  
+Used as a proxy for:  
+- Device age (“tenure”)  
+- New device detection  
+- Simulated scam call exposure  
 
 **Download:**  
-https://www.kaggle.com/datasets/blastchar/telco-customer-churn
+https://www.kaggle.com/datasets/blastchar/telco-customer-churn  
 
 **Save as:**  
 data/raw/cdr.csv
@@ -44,25 +51,29 @@ Copy code
 
 ---
 
-### **C) URL Activity & Phishing Indicators**
-Used for:
-- URL risk score  
-- recent risky clicks  
-- campaign intensity estimation
+## 3. Malicious vs Benign URL Dataset  
+**Purpose:**  
+Detect risky URLs, measure phishing exposure, build campaign-intensity signals.
 
-**1. Malicious + Benign URL Dataset**  
+**Download:**  
 https://www.kaggle.com/datasets/samahsadiq/benign-and-malicious-urls  
 
-Save as:
+**Save as:**  
 data/raw/url_risk.csv
 
-csharp
+yaml
 Copy code
 
-**2. Phishing Blacklist (Optional but recommended)**  
+---
+
+## 4. Phishing URL Blacklist (Optional but Recommended)  
+**Purpose:**  
+Additional source for URL blacklisting and scam-campaign estimation.
+
+**Download:**  
 https://www.kaggle.com/datasets/ndarvind/phiusiil-phishing-url-dataset  
 
-Save as:
+**Save as:**  
 data/raw/phishing_blacklist.csv
 
 yaml
@@ -70,25 +81,25 @@ Copy code
 
 ---
 
-## 2. Folder Structure
+## 5. After Downloading  
+Your folder structure MUST look like this:
 
-Place all raw files here:
-
-mel_dev/features/proactive_pre_tx_warning/data/raw/
-│
-├─ paysim.csv
-├─ cdr.csv
-├─ url_risk.csv
-└─ phishing_blacklist.csv (optional)
+proactive_pre_tx_warning/
+└── data/
+└── raw/
+├── paysim.csv
+├── cdr.csv
+├── url_risk.csv
+└── phishing_blacklist.csv (optional)
 
 yaml
 Copy code
 
 ---
 
-## 3. Running the Data Pipeline
+## 6. Build the Training Table
 
-From within the feature folder:
+From the `src` directory:
 
 ```bash
 cd mel_dev/features/proactive_pre_tx_warning/src
@@ -98,3 +109,4 @@ This generates:
 bash
 Copy code
 data/processed/proactive_warning_training_table.parquet
+This file is used to train the Proactive Warning Model.
