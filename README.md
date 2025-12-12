@@ -22,12 +22,17 @@ That's it! See [SETUP.md](SETUP.md) for detailed instructions.
 
 MAIFDS is a comprehensive fraud detection and cyber protection system designed for mobile money (MoMo) ecosystems. It combines multiple AI-powered features to protect users from:
 
-- 📞 **Call-triggered fraud** - Detects suspicious transactions after phone calls
-- 🔗 **Click-to-transaction fraud** - Identifies fraud from malicious link clicks
-- ⚠️ **Proactive warnings** - Warns users before they fall victim to scams
-- 📝 **Customer reputation** - Crowd-sourced merchant and service quality tracking
-- 🎣 **Phishing detection** - AI-powered phishing and ad fraud detection
-- 📋 **Blacklist management** - Real-time blacklist and watchlist services
+- 📞➡️💸 **Call Triggered Defense (Call → Tx Mitigation)**
+- 🎣🛑 **Phishing Ad & Referral Channel Detector**
+- 🔗📉 **Click to Transaction Link Correlation & Blocker**
+- 🧑‍🤝‍🧑📢 **Customer Reporting & Crowd-Sourced Reputation System**
+- ⚡🕵️ **Real-Time Blacklist / Watchlist Service (with Bloom Filters)**
+- 🏧🔍 **Agent / Merchant Risk Profiling & Mule Network Detection**
+- 🧑‍💼🔔 **Human-in-the-Loop Alerting & Verification Portal**
+- 🛑💳 **Proactive Pre-Transaction Warning & User Prompting**
+- 📡📨 **Automated Telco Notification & Triage Webhook**
+- 🧠🔍 **Explainability, Audit Trail & Legal/Privacy Controls**
+
 
 ## 🏗️ Project Structure
 
@@ -170,12 +175,17 @@ pytest customer-reputation-system/tests/
 
 ## 📝 License
 
-[Add your license here]
+A Product built for Huawei Innovation Competition and to help solve the mobile money fraud in Ghana and Africa as a whole.
 
 ## 🙏 Acknowledgments
 
 - MindSpore team for the AI framework
 - All contributors to the project
+
+## 👥 Development Team
+- Sackey Melchizedek Gbine (Leader)
+- Cyril Senanu (https://github.com/cysenanu123-oss)
+- Michael Awuni (https://github.com/Michael-cmd-sys)
 
 ---
 
