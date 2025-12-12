@@ -1,0 +1,19 @@
+{
+  "model": {
+    "hidden_sizes": [128, 64, 32],
+    "dropout_rate": 0.3,
+    "learning_rate": 0.001,
+    "epochs": 50,
+    "batch_size": 32
+  },
+  "storage": {
+    "models_dir": "data/mindspore_models/",
+    "checkpoint_prefix": "phishing_detector",
+    "watchlist_file": "data/watchlist.json"
+  },
+  "api": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "debug": false
+  }
+}

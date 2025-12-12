@@ -197,7 +197,10 @@ def main():
     
     # Load configuration
     import json
-    config_path = "../config.json"
+    # Get the script's directory for all relative paths
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    config_path = os.path.join(script_dir, "..", "config.json")
     if os.path.exists(config_path):
         with open(config_path, 'r') as f:
             config = json.load(f)
@@ -212,13 +215,13 @@ def main():
                 'batch_size': 32
             },
             'storage': {
-                'models_dir': '../data/processed/models/',
+                'models_dir': os.path.join(script_dir, "..", "data", "processed", "models"),
                 'checkpoint_prefix': 'phishing_detector'
             }
         }
-    
+
     # Load dataset
-    csv_path = "../data/raw/dataset.csv"
+    csv_path = os.path.join(script_dir, "..", "data", "raw", "dataset.csv")
     X, y = load_dataset(csv_path)
     
     # Prepare data
