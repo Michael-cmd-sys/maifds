@@ -23,6 +23,22 @@ except ImportError:
     NLP_AVAILABLE = False
     logger.warning("NLP module not available. Text analysis will be skipped.")
 
+# Credibility system import
+try:
+    from src.credibility.calculator import CredibilityCalculator
+    CREDIBILITY_AVAILABLE = True
+except ImportError:
+    CREDIBILITY_AVAILABLE = False
+    logger.warning("Credibility module not available. Credibility scoring will be skipped.")
+
+# Reputation system import
+try:
+    from src.reputation.calculator import ReputationCalculator
+    REPUTATION_AVAILABLE = True
+except ImportError:
+    REPUTATION_AVAILABLE = False
+    logger.warning("Reputation module not available. Reputation scoring will be skipped.")
+
 
 class ReportHandler:
     """Handles report submission and ingestion"""
@@ -47,6 +63,26 @@ class ReportHandler:
             except Exception as e:
                 logger.warning(f"Failed to initialize NLP analyzer: {e}. Continuing without NLP.")
                 self.enable_nlp = False
+
+        # Initialize credibility calculator if available
+        self.credibility_calculator = None
+        if CREDIBILITY_AVAILABLE:
+            try:
+                self.credibility_calculator = CredibilityCalculator(self.db_manager)
+                logger.info("Credibility calculator initialized")
+            except Exception as e:
+                logger.warning(f"Failed to initialize credibility calculator: {e}. Continuing without credibility updates.")
+
+        # Initialize reputation calculator if available
+        self.reputation_calculator = None
+        if REPUTATION_AVAILABLE:
+            try:
+                self.reputation_calculator = ReputationCalculator(
+                    self.db_manager, self.credibility_calculator
+                )
+                logger.info("Reputation calculator initialized")
+            except Exception as e:
+                logger.warning(f"Failed to initialize reputation calculator: {e}. Continuing without reputation updates.")
         
         logger.info("ReportHandler initialized")
 
@@ -97,8 +133,37 @@ class ReportHandler:
                 metadata_dict = json.loads(report_dict.get("metadata_json", "{}")) if report_dict.get("metadata_json") else {}
                 metadata_dict["nlp_analysis"] = nlp_analysis
                 report_dict["metadata_json"] = json.dumps(metadata_dict)
+
+            # Prepare report data with NLP for credibility calculation
+            report_data_for_credibility = report_dict.copy()
+            if nlp_analysis:
+                report_data_for_credibility["nlp_analysis"] = nlp_analysis
             
             success = self.db_manager.insert_report(report_dict)
+
+            # Step 5: Update reporter credibility (if enabled)
+            if success and self.credibility_calculator:
+                try:
+                    self.credibility_calculator.update_reporter_credibility(
+                        reporter_id=report.reporter_id,
+                        report_data=report_data_for_credibility
+                    )
+                    logger.debug(f"Updated credibility for reporter {report.reporter_id}")
+                except Exception as e:
+                    logger.warning(f"Failed to update reporter credibility: {e}")
+                    # Don't fail the report submission if credibility update fails
+
+            # Step 6: Update merchant reputation (if enabled)
+            if success and self.reputation_calculator:
+                try:
+                    self.reputation_calculator.update_merchant_reputation(
+                        merchant_id=report.merchant_id,
+                        report_data=report_data_for_credibility
+                    )
+                    logger.debug(f"Updated reputation for merchant {report.merchant_id}")
+                except Exception as e:
+                    logger.warning(f"Failed to update merchant reputation: {e}")
+                    # Don't fail the report submission if reputation update fails
 
             if success:
                 logger.info(f"Report {report.report_id} processed successfully")
@@ -292,3 +357,87 @@ class ReportHandler:
             result["nlp_analysis"] = nlp_analysis
 
         return result
+
+    def get_reporter_credibility(self, reporter_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get reporter credibility information
+
+        Args:
+            reporter_id: Reporter identifier
+
+        Returns:
+            Dictionary with credibility information or None if not found
+        """
+        if not self.credibility_calculator:
+            logger.warning("Credibility calculator not available")
+            return None
+
+        try:
+            credibility = self.credibility_calculator.calculate_credibility(reporter_id)
+            return credibility.to_dict()
+        except Exception as e:
+            logger.error(f"Failed to get reporter credibility: {e}")
+            return None
+
+    def update_reporter_credibility(self, reporter_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Manually trigger credibility update for a reporter
+
+        Args:
+            reporter_id: Reporter identifier
+
+        Returns:
+            Updated credibility information or None if failed
+        """
+        if not self.credibility_calculator:
+            logger.warning("Credibility calculator not available")
+            return None
+
+        try:
+            credibility = self.credibility_calculator.update_reporter_credibility(reporter_id)
+            return credibility.to_dict()
+        except Exception as e:
+            logger.error(f"Failed to update reporter credibility: {e}")
+            return None
+
+    def get_merchant_reputation(self, merchant_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get merchant reputation information
+
+        Args:
+            merchant_id: Merchant identifier
+
+        Returns:
+            Dictionary with reputation information or None if not found
+        """
+        if not self.reputation_calculator:
+            logger.warning("Reputation calculator not available")
+            return None
+
+        try:
+            reputation = self.reputation_calculator.calculate_reputation(merchant_id)
+            return reputation.to_dict()
+        except Exception as e:
+            logger.error(f"Failed to get merchant reputation: {e}")
+            return None
+
+    def update_merchant_reputation(self, merchant_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Manually trigger reputation update for a merchant
+
+        Args:
+            merchant_id: Merchant identifier
+
+        Returns:
+            Updated reputation information or None if failed
+        """
+        if not self.reputation_calculator:
+            logger.warning("Reputation calculator not available")
+            return None
+
+        try:
+            reputation = self.reputation_calculator.update_merchant_reputation(merchant_id)
+            return reputation.to_dict()
+        except Exception as e:
+            logger.error(f"Failed to update merchant reputation: {e}")
+            return None

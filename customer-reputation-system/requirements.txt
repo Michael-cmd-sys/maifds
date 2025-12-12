@@ -1,6 +1,20 @@
-mindspore>=2.3.0
-pydantic>=2.5.0
-numpy>=1.24.0
-pandas>=2.0.0
-python-dateutil>=2.8.0
-pytest>=7.4.0
+# ⚠️ DEPRECATED: Use root requirements.txt instead
+# This file is kept for backward compatibility only.
+# 
+# To install dependencies, use the centralized requirements.txt at the project root:
+#   cd ../../
+#   uv pip install -r requirements.txt
+#
+# Or use the setup script:
+#   ./setup.sh  # Linux/macOS
+#   .\setup.ps1  # Windows
+#
+# See SETUP.md for complete instructions.
+
+# Original dependencies (for reference):
+# mindspore>=2.3.0
+# pydantic>=2.5.0
+# numpy>=1.24.0
+# pandas>=2.0.0
+# python-dateutil>=2.8.0
+# pytest>=7.4.0

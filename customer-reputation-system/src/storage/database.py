@@ -269,11 +269,41 @@ class DatabaseManager:
                 cursor.execute("SELECT COUNT(*) as total FROM merchants")
                 total_merchants = cursor.fetchone()["total"]
 
+                # Get average credibility
+                cursor.execute("SELECT AVG(credibility_score) as avg_credibility FROM reporters")
+                avg_credibility_row = cursor.fetchone()
+                avg_credibility = avg_credibility_row["avg_credibility"] if avg_credibility_row["avg_credibility"] else 0.0
+
                 return {
                     "total_reports": total_reports,
                     "total_reporters": total_reporters,
                     "total_merchants": total_merchants,
+                    "average_credibility": round(avg_credibility, 3),
                 }
         except Exception as e:
             logger.error(f"Failed to get stats: {e}")
             return {}
+
+    def get_reporter_by_id(self, reporter_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get reporter information by ID
+
+        Args:
+            reporter_id: Reporter identifier
+
+        Returns:
+            Reporter data as dictionary or None if not found
+        """
+        try:
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    "SELECT * FROM reporters WHERE reporter_id = ?", (reporter_id,)
+                )
+                row = cursor.fetchone()
+                if row:
+                    return dict(row)
+                return None
+        except Exception as e:
+            logger.error(f"Failed to retrieve reporter {reporter_id}: {e}")
+            return None
