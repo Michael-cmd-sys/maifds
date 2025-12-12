@@ -307,3 +307,44 @@ class DatabaseManager:
         except Exception as e:
             logger.error(f"Failed to retrieve reporter {reporter_id}: {e}")
             return None
+
+    def execute_query(self, query: str, params: tuple = ()) -> List[Dict[str, Any]]:
+        """
+        Execute a SELECT query and return results
+        
+        Args:
+            query: SQL query string
+            params: Query parameters
+            
+        Returns:
+            List of result dictionaries
+        """
+        try:
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute(query, params)
+                return [dict(row) for row in cursor.fetchall()]
+        except Exception as e:
+            logger.error(f"Failed to execute query: {e}")
+            return []
+
+    def execute_update(self, query: str, params: tuple = ()) -> bool:
+        """
+        Execute an INSERT/UPDATE/DELETE query
+        
+        Args:
+            query: SQL query string
+            params: Query parameters
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute(query, params)
+                conn.commit()
+                return True
+        except Exception as e:
+            logger.error(f"Failed to execute update: {e}")
+            return False
