@@ -1,0 +1,17 @@
+{
+  "report_id": "60f45223-fcca-4382-b357-bea040555d32",
+  "timestamp": "2025-12-12T01:36:48.844540",
+  "reporter_id": "user_003",
+  "merchant_id": "merchant_xyz",
+  "report_type": "fraud",
+  "rating": 1,
+  "title": "Fake product received",
+  "description": "Ordered an authentic product but received a counterfeit item. The quality is terrible and does not match description.",
+  "transaction_id": null,
+  "amount": null,
+  "metadata": {
+    "platform": "mobile",
+    "location": "Chicago, USA",
+    "device_info": null
+  }
+}

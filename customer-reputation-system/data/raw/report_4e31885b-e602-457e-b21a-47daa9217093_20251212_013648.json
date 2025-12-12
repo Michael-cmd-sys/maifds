@@ -1,0 +1,17 @@
+{
+  "report_id": "4e31885b-e602-457e-b21a-47daa9217093",
+  "timestamp": "2025-12-12T01:36:48.907527",
+  "reporter_id": "user_001",
+  "merchant_id": "merchant_xyz",
+  "report_type": "technical",
+  "rating": 3,
+  "title": "Payment processing error",
+  "description": "Encountered multiple errors while trying to complete payment. Had to try 5 times before it went through.",
+  "transaction_id": "txn_11111",
+  "amount": 200.0,
+  "metadata": {
+    "platform": "web",
+    "location": null,
+    "device_info": null
+  }
+}

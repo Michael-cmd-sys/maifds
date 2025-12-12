@@ -1,8 +1,21 @@
-# Requirements for Phishing Ad & Referral Channel Detector AI
-scikit-learn
-pandas
-numpy
-requests
-beautifulsoup4 # For parsing HTML if needed
-spacy # For advanced NLP on ad_text
-whois # For WHOIS lookups
+# ⚠️ DEPRECATED: Use root requirements.txt instead
+# This file is kept for backward compatibility only.
+#
+# To install dependencies, use the centralized requirements.txt at the project root:
+#   cd ../../
+#   uv pip install -r requirements.txt
+#
+# Or use the setup script:
+#   ./setup.sh  # Linux/macOS
+#   .\setup.ps1  # Windows
+#
+# See SETUP.md for complete instructions.
+
+# Original dependencies (for reference):
+# scikit-learn
+# pandas
+# numpy
+# requests
+# beautifulsoup4
+# spacy
+# whois
