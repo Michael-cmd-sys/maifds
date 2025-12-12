@@ -1,0 +1,35 @@
+{
+  "service_name": "MoMo Fraud Prevention",
+  "thresholds": {
+    "cohort_vulnerability_score": 0.7,
+    "risk_uplift_threshold": 0.6,
+    "campaign_anomaly_score": 0.8,
+    "min_campaign_volume": 50
+  },
+  "sms_limits": {
+    "max_per_user_per_day": 3,
+    "max_per_user_per_week": 10,
+    "cooldown_hours": 6
+  },
+  "stricter_verification": {
+    "enabled": true,
+    "duration_hours": 24,
+    "verification_level": "high"
+  },
+  "models": {
+    "cohort_model_path": "data/models/cohort_model.ckpt",
+    "risk_uplift_model_path": "data/models/risk_uplift_model.ckpt",
+    "campaign_model_path": "data/models/campaign_model.ckpt"
+  },
+  "training": {
+    "batch_size": 32,
+    "epochs": 50,
+    "learning_rate": 0.001,
+    "validation_split": 0.2,
+    "models": {
+      "cohort_model_path": "../data/models/cohort_model.ckpt",
+      "risk_uplift_model_path": "../data/models/risk_uplift_model.ckpt",
+      "campaign_model_path": "../data/models/campaign_model.ckpt"
+    }
+  }
+}

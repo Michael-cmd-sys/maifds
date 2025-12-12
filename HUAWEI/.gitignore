@@ -16,11 +16,7 @@ __pycache__/
 *.log
 phishing_detector_mindspore.log
 
-# Data files (if they're large or sensitive)
-data/
-*.csv
-*.json
-!config.json
+
 
 # IDE specific
 .vscode/
