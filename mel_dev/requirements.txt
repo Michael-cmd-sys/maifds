@@ -5,3 +5,24 @@ pyarrow
 scikit-learn
 matplotlib
 requests
+# ⚠️ DEPRECATED: Use root requirements.txt instead
+# This file is kept for backward compatibility only.
+#
+# To install dependencies, use the centralized requirements.txt at the project root:
+#   cd ../../
+#   uv pip install -r requirements.txt
+#
+# Or use the setup script:
+#   ./setup.sh  # Linux/macOS
+#   .\setup.ps1  # Windows
+#
+# See SETUP.md for complete instructions.
+
+# Original dependencies (for reference):
+# mindspore-gpu==2.2.14
+# pandas
+# numpy
+# pyarrow
+# scikit-learn
+# matplotlib
+# requests

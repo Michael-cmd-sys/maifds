@@ -1,6 +1,8 @@
 Call Triggered Defense – Model Documentation (v2)
 1. Model Name
 
+**📘 Call Triggered Defense – Model Documentation (v2)**
+**🔹 1. Model Name**
 Model: CallTriggeredDefenseModel
 Type: Tabular MLP classifier (MindSpore) + Rule-Based High-Precision Layer
 Purpose: Detect suspicious transactions occurring shortly after social-engineering phone calls.
@@ -9,6 +11,11 @@ Purpose: Detect suspicious transactions occurring shortly after social-engineeri
 Primary Dataset – PaySim Transactions (Kaggle)
 
 Sampled at 200,000 rows, with 50,000 rows used for training.
+**🔹 2. Datasets Used**
+📌 Primary Dataset – PaySim Transactions (Kaggle)
+
+Sampled at 200,000 rows, with 50,000 for training
+
 Provides realistic mobile-money behavior, including:
 
 transaction amounts
@@ -31,6 +38,7 @@ recipient_first_time
 
 Telco Call/Churn Dataset (Kaggle)
 
+**📞 Telco Call/Churn Dataset (Kaggle)**
 Used as a proxy for call behavior to generate synthetic call context:
 
 recent-call flag
@@ -50,6 +58,17 @@ Used to generate a synthetic NLP suspicion score (0–1) indicating possible sca
 Final Training Table – call_tx_training_table.parquet
 
 All datasets contribute to a unified training table combining:
+device_age_days (from tenure)
+
+contact_list_flag
+
+**💬 SMS Spam Dataset (Kaggle)**
+
+Used to generate a synthetic NLP suspicion score (0–1) for possible scam/spam call patterns.
+
+**🗂️ Final Training Table – call_tx_training_table.parquet**
+
+Combines:
 
 transaction features
 
@@ -61,12 +80,17 @@ This table is used for both rule-based detection and MindSpore ML training.
 
 3. Model Implementation, Training, Inference & Deployment
 Model Implementation (MindSpore)
+Used for both rule-based detection and MindSpore ML training.
+
+**🔹 3. Model Implementation, Training, Inference & Deployment**
+**🏗️ Model Implementation (MindSpore)**
 
 Architecture:
 
 Input: 17 features (transaction + call context)
 
 Hidden layers:
+Hidden Layers:
 
 Dense(64) → ReLU → Dropout
 
@@ -171,6 +195,100 @@ def engineer_paysim_features(paysim: pd.DataFrame) -> pd.DataFrame:
     df["is_large_amount"] = df["amount"] > 200_000
 
     # First time this sender pays this recipient
+Output: Dense(1) → Sigmoid → fraud probability [0,1]
+
+**🎯 Training Setup**
+
+Data: call_tx_training_table.parquet
+
+Loss: BCELoss
+
+Optimizer: Adam (lr=1e-3)
+
+Split: 85% Train / 15% Validation
+
+Batch size: 256
+
+Epochs: 20
+
+Manual loop: uses value_and_grad
+
+Checkpoint: call_triggered_defense_mlp.ckpt
+
+**⚙️ Inference Engine**
+
+The pipeline integrates rules + MLP:
+
+Load MindSpore checkpoint
+
+Prepare feature vector
+
+Compute:
+
+fraud_probability (model)
+
+rule_flag (rules)
+
+Determine risk_level: {LOW, MEDIUM, HIGH}
+
+Return recommended actions:
+
+Risk	Actions
+HIGH	SMS alert, temporary hold, notify telco
+MEDIUM	SMS alert
+LOW	allow
+**🌐 Deployment Concept**
+
+Designed as a microservice:
+
+Exposed via FastAPI / Flask
+
+Accepts live transaction + call metadata
+
+Returns real-time score + action
+
+Integrates with telco CDR streams or app-side call events
+
+🔹 4. Metrics & Expected Impact (v1 – Transaction + Synthetic Call Features)
+**📉 Training Behavior**
+Training loss: 0.51 → 0.02
+
+Validation loss: ~0.0108
+
+Model effectively learns PaySim fraud patterns
+
+**📈 Expected Impact (with real call metadata)**
+
+Accuracy & Recall:
+High recall on fraud; rule layer increases precision for risky call patterns.
+
+Inference Throughput:
+Lightweight MLP suitable for high TPS.
+
+Operational Cost Reduction:
+Lower:
+
+fraudulent transfers
+
+manual reviews
+
+customer support load
+
+financial loss
+
+**🔹 5. Key Code Snippets & Explanations**
+**🧩 5.1 Feature Engineering – Transaction + Call Context**
+def engineer_paysim_features(paysim: pd.DataFrame) -> pd.DataFrame:
+    df = paysim.copy()
+
+    df["transaction_day"] = df["step"] // 24
+    df["transaction_hour"] = df["step"] % 24
+
+    df["origin_balance_delta"] = df["newbalanceOrig"] - df["oldbalanceOrg"]
+    df["dest_balance_delta"] = df["newbalanceDest"] - df["oldbalanceDest"]
+
+    df["is_large_amount"] = df["amount"] > 200_000
+
     df = df.sort_values(["nameOrig", "step"])
     df["recipient_first_time"] = (
         df.groupby(["nameOrig", "nameDest"]).cumcount() == 0
@@ -186,6 +304,9 @@ We transform raw PaySim logs into behavioral signals: time-of-day, money movemen
 recipient_first_time is critical for social engineering: fraudsters often convince users to send to a new recipient.
 
 This function converts raw transaction history to a feature space suitable for ML.
+Explanation:
+Transforms raw logs into behavioral features like time-of-day & money movement.
+recipient_first_time captures new recipient fraud risk, a common social-engineering pattern.
 
 def add_synthetic_call_features(df: pd.DataFrame, cdr: pd.DataFrame | None = None,
                                 random_seed: int = 42) -> pd.DataFrame:
@@ -198,6 +319,9 @@ def add_synthetic_call_features(df: pd.DataFrame, cdr: pd.DataFrame | None = Non
     out["has_recent_call"] = has_recent_call.astype(int)
 
     # 2) Time from call to transaction
+    has_recent_call = rng.random(n) < 0.3
+    out["has_recent_call"] = has_recent_call.astype(int)
+
     deltas = rng.exponential(scale=120.0, size=n)
     deltas = np.clip(deltas, 0.0, 900.0)
     out["call_to_tx_delta_seconds"] = np.where(
@@ -214,6 +338,9 @@ def add_synthetic_call_features(df: pd.DataFrame, cdr: pd.DataFrame | None = Non
     out["contact_list_flag"] = contact_flags.astype(int)
 
     # 5) Device age (from churn tenure, if available)
+    contact_flags = rng.random(n) < 0.7
+    out["contact_list_flag"] = contact_flags.astype(int)
+
     if cdr is not None and "tenure" in cdr.columns:
         tenure_values = cdr["tenure"].dropna().values
         if len(tenure_values) > 0:
@@ -246,6 +373,11 @@ nlp_suspicion_score simulates an upstream NLP model output (to be replaced by a 
 This shows we understand real telco constraints and design around them with synthetic but realistic features.
 
 5.2. MindSpore Model – CallTriggeredDefenseModel
+Simulates call context realistically due to lack of public telco+transaction datasets.
+call_to_tx_delta_seconds is essential for call → fraud patterns.
+nlp_suspicion_score approximates a future NLP model.
+
+**🧠 5.2 MindSpore Model – CallTriggeredDefenseModel**
 class CallTriggeredDefenseModel(nn.Cell):
     """
     Simple MLP for fraud probability prediction on tabular features.
@@ -265,6 +397,7 @@ class CallTriggeredDefenseModel(nn.Cell):
 
         layers.append(nn.Dense(in_dim, 1))
         layers.append(nn.Sigmoid())  # output: fraud probability in [0, 1]
+        layers.append(nn.Sigmoid())
 
         self.net = nn.SequentialCell(layers)
 
@@ -297,6 +430,16 @@ def run_inference(event_dict):
     model_score = predict_proba(model, x)
 
     # 4. Rule engine input
+Compact, deployment-ready MLP.
+Uses dropout to avoid overfitting on synthetic features.
+Runs efficiently for high-throughput fraud detection.
+
+**🔀 5.3 Inference + Ensemble Logic – Rules + Model**
+def run_inference(event_dict):
+    x = prepare_features(event_dict)
+    model = load_model()
+    model_score = predict_proba(model, x)
+
     rule_event = CallTxEvent(
         call_to_tx_delta_seconds=event_dict.get("call_to_tx_delta_seconds", None),
         recipient_first_time=event_dict.get("recipient_first_time", 0),
@@ -345,3 +488,6 @@ The MLP model refines the decision for all other cases.
 The function returns everything needed by an API/UI: score, risk level, reason, and recommended actions.
 
 This demonstrates an ensemble architecture, which is standard in production fraud systems.
+Core of the ensemble fraud detection logic.
+Rules catch high-precision scam patterns; MLP refines the rest.
+Returns score + risk + reason + recommended actions, ideal for API/UI integration.
