@@ -4,6 +4,12 @@ Diagnostic script to check if model files exist and are loadable
 
 import os
 import sys
+import json
+import pickle
+
+# Get script directory for relative paths
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_dir = os.path.join(script_dir, "..")
 
 print("=" * 70)
 print("MindSpore Model Diagnostic Tool")
@@ -11,7 +17,10 @@ print("=" * 70)
 
 # Check directory structure
 print("\n1. Checking directory structure...")
-dirs_to_check = ['data', 'data/mindspore_models']
+dirs_to_check = [
+    os.path.join(base_dir, 'data'),
+    os.path.join(base_dir, 'data', 'mindspore_models')
+]
 
 for dir_path in dirs_to_check:
     if os.path.exists(dir_path):
@@ -23,7 +32,7 @@ for dir_path in dirs_to_check:
 
 # Check model files
 print("\n2. Checking model files...")
-models_dir = 'data/mindspore_models'
+models_dir = os.path.join(base_dir, 'data', 'mindspore_models')
 
 if os.path.exists(models_dir):
     files = os.listdir(models_dir)
@@ -43,7 +52,6 @@ if os.path.exists(models_dir):
         
         # Try to load it
         try:
-            import pickle
             with open(feature_config, 'rb') as f:
                 config = pickle.load(f)
             print(f"     • Features: {len(config['feature_names'])}")
@@ -66,11 +74,11 @@ else:
 
 # Check config.json
 print("\n4. Checking config.json...")
-if os.path.exists('config.json'):
+config_file = os.path.join(base_dir, 'config.json')
+if os.path.exists(config_file):
     print("   ✓ config.json exists")
     try:
-        import json
-        with open('config.json', 'r') as f:
+        with open(config_file, 'r') as f:
             config = json.load(f)
         print(f"     • Models directory: {config['storage']['models_dir']}")
         print(f"     • Checkpoint prefix: {config['storage']['checkpoint_prefix']}")
@@ -81,11 +89,10 @@ else:
 
 # Check watchlist
 print("\n5. Checking watchlist...")
-watchlist_file = 'data/watchlist.json'
+watchlist_file = os.path.join(base_dir, 'data', 'watchlist.json')
 if os.path.exists(watchlist_file):
     print("   ✓ watchlist.json exists")
     try:
-        import json
         with open(watchlist_file, 'r') as f:
             watchlist = json.load(f)
         print(f"     • Watchlist size: {len(watchlist)}")
@@ -101,7 +108,7 @@ else:
 # Try to load the detector
 print("\n6. Testing detector initialization...")
 try:
-    sys.path.append('.')
+    sys.path.append(script_dir)
     from mindspore_detector import MindSporePhishingDetector
     
     detector = MindSporePhishingDetector()
