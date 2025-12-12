@@ -211,15 +211,34 @@ Edit `config/settings.py` to customize:
 - Text length constraints
 - Logging settings
 
-## 📈 Next Steps
+## 📈 Features Status
 
-This is Feature 1 of the Customer Reputation System. Upcoming features:
+- **Feature 1**: Report Ingestion ✅ (Complete)
+- **Feature 2**: Text Analysis & Classification (NLP with MindSpore) ✅ (Complete)
+- **Feature 3**: Reporter Credibility System (Planned)
+- **Feature 4**: Merchant Reputation Scoring (Planned)
+- **Feature 5**: Anti-Gaming & Fraud Detection (Planned)
+- **Feature 6**: Reporting Dashboard (Planned)
 
-- **Feature 2**: Text Analysis & Classification (NLP with MindSpore)
-- **Feature 3**: Reporter Credibility System
-- **Feature 4**: Merchant Reputation Scoring
-- **Feature 5**: Anti-Gaming & Fraud Detection
-- **Feature 6**: Reporting Dashboard
+### Feature 2: NLP Text Analysis
+
+The system now includes automatic NLP-powered text analysis for all reports:
+
+- **Sentiment Detection**: Classifies reports as positive, negative, or neutral
+- **Urgency Classification**: Identifies urgency levels (low, medium, high, critical)
+- **Credibility Scoring**: Calculates text quality and reliability scores (0-1)
+
+See `src/nlp/README.md` for detailed documentation on the NLP module.
+
+**Quick Start:**
+```bash
+# Train the NLP model (requires reports in database)
+cd src/nlp
+python train.py
+
+# Test NLP analysis
+python test_inference.py
+```
 
 ## 🤝 Contributing
 

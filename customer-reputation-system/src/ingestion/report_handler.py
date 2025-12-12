@@ -15,18 +15,39 @@ from config.settings import RAW_DATA_DIR
 
 logger = setup_logger(__name__)
 
+# Optional NLP import (graceful degradation if not available)
+try:
+    from src.nlp.text_analyzer import TextAnalyzer
+    NLP_AVAILABLE = True
+except ImportError:
+    NLP_AVAILABLE = False
+    logger.warning("NLP module not available. Text analysis will be skipped.")
+
 
 class ReportHandler:
     """Handles report submission and ingestion"""
 
-    def __init__(self, db_manager: Optional[DatabaseManager] = None):
+    def __init__(self, db_manager: Optional[DatabaseManager] = None, enable_nlp: bool = True):
         """
         Initialize report handler
 
         Args:
             db_manager: Database manager instance (creates new one if None)
+            enable_nlp: Enable NLP text analysis (default: True)
         """
         self.db_manager = db_manager or DatabaseManager()
+        self.enable_nlp = enable_nlp and NLP_AVAILABLE
+        
+        # Initialize NLP analyzer if available
+        self.text_analyzer = None
+        if self.enable_nlp:
+            try:
+                self.text_analyzer = TextAnalyzer()
+                logger.info("NLP text analyzer initialized")
+            except Exception as e:
+                logger.warning(f"Failed to initialize NLP analyzer: {e}. Continuing without NLP.")
+                self.enable_nlp = False
+        
         logger.info("ReportHandler initialized")
 
     def submit_report(self, report_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -53,11 +74,31 @@ class ReportHandler:
                     "report_id": None,
                 }
 
-            # Step 2: Save to backup (raw JSON)
+            # Step 2: Perform NLP analysis (if enabled)
+            nlp_analysis = None
+            if self.enable_nlp and self.text_analyzer:
+                try:
+                    nlp_analysis = self.text_analyzer.analyze_report(
+                        title=report.title,
+                        description=report.description
+                    )
+                    logger.debug(f"NLP analysis completed for report {report.report_id}")
+                except Exception as e:
+                    logger.warning(f"NLP analysis failed: {e}. Continuing without NLP results.")
+
+            # Step 3: Save to backup (raw JSON)
             self._save_raw_backup(report)
 
-            # Step 3: Store in database
-            success = self.db_manager.insert_report(report.to_dict())
+            # Step 4: Store in database (with NLP analysis if available)
+            report_dict = report.to_dict()
+            if nlp_analysis:
+                # Add NLP results to metadata JSON
+                import json
+                metadata_dict = json.loads(report_dict.get("metadata_json", "{}")) if report_dict.get("metadata_json") else {}
+                metadata_dict["nlp_analysis"] = nlp_analysis
+                report_dict["metadata_json"] = json.dumps(metadata_dict)
+            
+            success = self.db_manager.insert_report(report_dict)
 
             if success:
                 logger.info(f"Report {report.report_id} processed successfully")
@@ -201,3 +242,53 @@ class ReportHandler:
             Dictionary with statistics
         """
         return self.db_manager.get_stats()
+
+    def analyze_report_text(self, report_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get NLP analysis for a specific report
+
+        Args:
+            report_id: Report identifier
+
+        Returns:
+            NLP analysis dictionary or None if not available
+        """
+        if not self.enable_nlp or not self.text_analyzer:
+            logger.warning("NLP analysis not available")
+            return None
+
+        report = self.get_report(report_id)
+        if not report:
+            return None
+
+        try:
+            analysis = self.text_analyzer.analyze_report(
+                title=report.title,
+                description=report.description
+            )
+            return analysis
+        except Exception as e:
+            logger.error(f"Failed to analyze report text: {e}")
+            return None
+
+    def get_report_with_analysis(self, report_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get report with NLP analysis included
+
+        Args:
+            report_id: Report identifier
+
+        Returns:
+            Dictionary with report data and NLP analysis, or None if not found
+        """
+        report = self.get_report(report_id)
+        if not report:
+            return None
+
+        result = report.model_dump()
+        nlp_analysis = self.analyze_report_text(report_id)
+        
+        if nlp_analysis:
+            result["nlp_analysis"] = nlp_analysis
+
+        return result
