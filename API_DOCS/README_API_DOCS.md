@@ -34,7 +34,6 @@ These are canonical action codes returned by feature engines.
 
 ### Response Wrapper
 All feature endpoints follow this structure:
-```
 ```json
 {
   "feature": "<feature_name>",
