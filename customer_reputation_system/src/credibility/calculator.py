@@ -72,6 +72,11 @@ class CredibilityCalculator:
                 credibility_score=INITIAL_CREDIBILITY,
                 total_reports=0,
                 verified_reports=0,
+                average_text_credibility=None,
+                consistency_score=None,
+                recent_activity_score=None,
+                created_at=datetime.utcnow(),
+                updated_at=datetime.utcnow(),
             )
 
         # Calculate factors
@@ -175,7 +180,7 @@ class CredibilityCalculator:
                     cred_score = nlp_analysis.get("credibility_score")
                     if cred_score is not None:
                         credibility_scores.append(float(cred_score))
-                except (json.JSONDecodeError, (ValueError, TypeError)):
+                except (json.JSONDecodeError, ValueError, TypeError):
                     continue
 
         # Process new report if provided
@@ -210,7 +215,15 @@ class CredibilityCalculator:
         consistency = max_type_count / total_reports
 
         # Also consider rating consistency
-        ratings = [r.get("rating") for r in reports if r.get("rating") is not None]
+        ratings = []
+        for r in reports:
+            rating = r.get("rating")
+            if rating is not None:
+                try:
+                    ratings.append(float(rating))
+                except (ValueError, TypeError):
+                    continue
+        
         if len(ratings) >= 2:
             rating_variance = self._calculate_variance(ratings)
             # Lower variance = higher consistency

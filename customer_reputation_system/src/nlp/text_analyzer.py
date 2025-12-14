@@ -9,9 +9,9 @@ from pathlib import Path
 import mindspore as ms
 from mindspore import Tensor, ops
 
-from src.nlp.preprocessor import TextPreprocessor
-from src.nlp.model import SimpleTextClassifier
-from src.nlp.config import (
+from .preprocessor import TextPreprocessor
+from .model import SimpleTextClassifier
+from .config import (
     CHECKPOINT_PATH,
     VOCAB_PATH,
     MAX_SEQUENCE_LENGTH,

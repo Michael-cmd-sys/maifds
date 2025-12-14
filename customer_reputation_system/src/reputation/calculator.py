@@ -88,6 +88,14 @@ class ReputationCalculator:
                 merchant_id=merchant_id,
                 reputation_score=INITIAL_REPUTATION,
                 total_reports=0,
+                average_rating=None,
+                credibility_weighted_rating=None,
+                positive_reports_ratio=None,
+                negative_reports_ratio=None,
+                fraud_reports_ratio=None,
+                recent_trend=None,
+                created_at=datetime.utcnow(),
+                updated_at=datetime.utcnow(),
             )
 
         # Calculate factors
@@ -207,6 +215,8 @@ class ReputationCalculator:
                 continue
 
             reporter_id = report.get("reporter_id")
+            if reporter_id is None:
+                continue
             credibility = self._get_reporter_credibility(reporter_id)
 
             # Only count if credibility meets minimum threshold
@@ -260,7 +270,7 @@ class ReputationCalculator:
                             sentiment_values.append(NEUTRAL_SENTIMENT_VALUE)
                         elif sentiment == "negative":
                             sentiment_values.append(NEGATIVE_SENTIMENT_VALUE)
-                except (json.JSONDecodeError, (ValueError, TypeError)):
+                except (json.JSONDecodeError, ValueError, TypeError):
                     continue
 
         # Process new report if provided
@@ -277,7 +287,14 @@ class ReputationCalculator:
 
         if not sentiment_values:
             # No NLP analysis - use rating as proxy
-            ratings = [r.get("rating") for r in reports if r.get("rating")]
+            ratings = []
+            for r in reports:
+                rating = r.get("rating")
+                if rating is not None:
+                    try:
+                        ratings.append(float(rating))
+                    except (ValueError, TypeError):
+                        continue
             if ratings:
                 avg_rating = sum(ratings) / len(ratings)
                 # Convert rating to sentiment (1-2 = negative, 3 = neutral, 4-5 = positive)
@@ -379,7 +396,14 @@ class ReputationCalculator:
         metrics = {}
 
         # Average rating
-        ratings = [r.get("rating") for r in reports if r.get("rating")]
+        ratings = []
+        for r in reports:
+            rating = r.get("rating")
+            if rating is not None:
+                try:
+                    ratings.append(float(rating))
+                except (ValueError, TypeError):
+                    continue
         if ratings:
             metrics["average_rating"] = sum(ratings) / len(ratings)
 
@@ -391,6 +415,8 @@ class ReputationCalculator:
             if rating is None:
                 continue
             reporter_id = report.get("reporter_id")
+            if reporter_id is None:
+                continue
             credibility = self._get_reporter_credibility(reporter_id)
             if credibility >= MIN_CREDIBILITY_FOR_WEIGHT:
                 weight = credibility
@@ -420,7 +446,7 @@ class ReputationCalculator:
                             positive += 1
                         elif sentiment == "negative":
                             negative += 1
-                except (json.JSONDecodeError, (ValueError, TypeError)):
+                except (json.JSONDecodeError, ValueError, TypeError):
                     pass
 
             if report.get("report_type") == "fraud":
