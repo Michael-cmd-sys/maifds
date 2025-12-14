@@ -113,7 +113,7 @@ result.actions	string[]	Action codes to execute
 ```
 
 **Example response:**
-```
+```json
 {
   "feature": "call_triggered_defense",
   "result": {
