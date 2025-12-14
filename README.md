@@ -162,6 +162,7 @@ pytest customer-reputation-system/tests/
 - **[customer-reputation-system/README.md](customer-reputation-system/README.md)** - Customer reputation system docs
 - **[mel_dev/features/](mel_dev/features/)** - Individual feature documentation
 - **[HUAWEI/SERVICES_OVERVIEW.md](HUAWEI/SERVICES_OVERVIEW.md)** - HUAWEI services overview
+- **[API_DOCS/API_DOCS.md](API_DOCS/API_DOCS.md)** - Documentation for Our API
 
 ## 🤝 Contributing
 
