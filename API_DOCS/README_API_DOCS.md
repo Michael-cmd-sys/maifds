@@ -158,7 +158,7 @@ If ML always returns ~0.0, verify:
 
 - `feature order matches **FEATURE_COLUMNS**`
 
-- ``Logging (recommended)``
+### Logging (recommended)
 
 **Log at minimum:**
 
