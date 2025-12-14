@@ -150,30 +150,29 @@ Ensure feature scaling/normalization in inference matches training.
 
 If ML always returns ~0.0, verify:
 
-correct model checkpoint path
+- `correct model checkpoint path`
 
-model is in eval mode
+- `model is in eval mode`
 
-inputs are normalized
+- `inputs are normalized`
 
-feature order matches FEATURE_COLUMNS
+- `feature order matches **FEATURE_COLUMNS**`
 
-Logging (recommended)
+- ``Logging (recommended)``
 
-Log at minimum:
+**Log at minimum:**
 
-request ID
+- `request ID`
 
-selected rules triggered
+- `selected rules triggered`
 
-model score
+- `model score`
 
-final risk level
+- `final risk level`
 
-actions
+- `actions`
 
-Feature Registry (to be expanded)
-
+**Feature Registry (to be expanded)**
 Append new features below as they are implemented:
 
 Feature 1: Call-Triggered Defense ✅
