@@ -53,7 +53,7 @@ Purpose: confirm API is running.
 
 Response (example):
 
-```
+```json
 { "status": "ok" }
 ```
 
