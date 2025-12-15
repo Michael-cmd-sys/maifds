@@ -1,0 +1,30 @@
+{
+  "bloom_filter": {
+    "expected_elements": 1000000,
+    "false_positive_rate": 0.01
+  },
+  "redis": {
+    "host": "localhost",
+    "port": 6379,
+    "db": 0,
+    "cache_expiry": 86400
+  },
+  "storage": {
+    "database_path": "data/blacklist_db.json",
+    "bloom_filters_dir": "data/bloom_filters/",
+    "checkpoint_prefix": "blacklist"
+  },
+  "actions": {
+    "auto_block": true,
+    "enforce_high_verification": true,
+    "send_notifications": true
+  },
+  "notifications": {
+    "webhook_url": "https://your-webhook-url.com/fraud-alert",
+    "sms_enabled": true,
+    "email_enabled": true
+  },
+  "thresholds": {
+    "max_severity_for_auto_block": "high"
+  }
+}

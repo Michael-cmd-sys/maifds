@@ -43,12 +43,15 @@ except ImportError:
 class ReportHandler:
     """Handles report submission and ingestion"""
 
+    def __init__(self, db_manager: Optional[DatabaseManager] = None):
     def __init__(self, db_manager: Optional[DatabaseManager] = None, enable_nlp: bool = True):
         """
         Initialize report handler
 
         Args:
             db_manager: Database manager instance (creates new one if None)
+        """
+        self.db_manager = db_manager or DatabaseManager()
             enable_nlp: Enable NLP text analysis (default: True)
         """
         self.db_manager = db_manager or DatabaseManager()
@@ -110,6 +113,11 @@ class ReportHandler:
                     "report_id": None,
                 }
 
+            # Step 2: Save to backup (raw JSON)
+            self._save_raw_backup(report)
+
+            # Step 3: Store in database
+            success = self.db_manager.insert_report(report.to_dict())
             # Step 2: Perform NLP analysis (if enabled)
             nlp_analysis = None
             if self.enable_nlp and self.text_analyzer:
