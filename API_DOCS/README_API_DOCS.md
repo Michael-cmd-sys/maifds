@@ -95,7 +95,7 @@ Example:
   "nlp_suspicion_score": 0.7
 }
 
-Response Schema
+### Response Schema
 
 **Success: HTTP 200**
 
