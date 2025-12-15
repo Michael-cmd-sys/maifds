@@ -1,9 +1,21 @@
-##Test all endpoints (copy/paste)
+**Test all endpoints (copy/paste)**
 **1) Call Triggered Defense**
 ```
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{"tx_amount": 5000, "recipient_first_time": 1, "call_to_tx_delta_seconds": 25}'
+```
+```
+curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tx_amount": 5000,
+    "recipient_first_time": 1,
+    "call_to_tx_delta_seconds": 25,
+    "contact_list_flag": 0,
+    "nlp_suspicion_score": 0.7
+  }'
+
 ```
 
 **2) Click → Tx Correlation (low risk)**

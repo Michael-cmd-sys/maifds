@@ -3,12 +3,12 @@ import pandas as pd
 import mindspore as ms
 from mindspore import Tensor
 
-from config import (
+from .config import (
     TRAINING_TABLE_PATH,
     FEATURE_COLUMNS,
 )
-from model import ProactiveWarningModel
-from rules import UserRiskProfile, must_warn_user, build_warning_message
+from .model import ProactiveWarningModel
+from .rules import UserRiskProfile, must_warn_user, build_warning_message
 
 
 def load_training_stats():

@@ -3,7 +3,7 @@ import pandas as pd
 import mindspore as ms
 from mindspore import Tensor, nn, ops, dataset as ds
 
-from config import (
+from .config import (
     TRAINING_TABLE_PATH,
     FEATURE_COLUMNS,
     LABEL_COLUMN,
@@ -12,7 +12,7 @@ from config import (
     LEARNING_RATE,
     RANDOM_SEED,
 )
-from model import ProactiveWarningModel
+from .model import ProactiveWarningModel
 
 
 def load_training_data():

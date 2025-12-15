@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Root folder for THIS feature
 FEATURE_ROOT = Path(__file__).resolve().parents[1]
@@ -7,6 +8,12 @@ FEATURE_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = FEATURE_ROOT / "data"
 RAW_DATA_DIR = DATA_DIR / "raw"
 PROCESSED_DATA_DIR = DATA_DIR / "processed"
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_CKPT_PATH = os.path.join(BASE_DIR, "proactive_warning_mlp.ckpt")
+MEAN_PATH = os.path.join(BASE_DIR, "feature_mean.npy")
+STD_PATH  = os.path.join(BASE_DIR, "feature_std.npy")
 
 # Raw data paths (reusing files from previous features)
 PAYSIM_PATH = RAW_DATA_DIR / "paysim.csv"                 # PaySim transactions
