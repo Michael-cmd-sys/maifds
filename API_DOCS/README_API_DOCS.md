@@ -34,7 +34,6 @@ These are canonical action codes returned by feature engines.
 
 ### Response Wrapper
 All feature endpoints follow this structure:
-```
 ```json
 {
   "feature": "<feature_name>",
@@ -53,7 +52,7 @@ Purpose: confirm API is running.
 
 Response (example):
 
-```
+```json
 { "status": "ok" }
 ```
 
@@ -96,24 +95,23 @@ Example:
   "nlp_suspicion_score": 0.7
 }
 
-Response Schema
+### Response Schema
 
 **Success: HTTP 200**
 
-```
 Body fields:
 
-Field	Type	Description
-feature	string	Always "call_triggered_defense"
-result.fraud_probability	number	ML model probability (0.0–1.0)
-result.rule_flag	boolean	true if a high-precision rule triggered
-result.risk_level	string	LOW / MEDIUM / HIGH
-result.reason	string	Human-readable explanation
-result.actions	string[]	Action codes to execute
-```
+| Field                     | Type      | Description                                |
+|---------------------------|-----------|--------------------------------------------|
+| feature                   | string    | Always "call_triggered_defense"            |
+| result.fraud_probability  | number    | ML model probability (0.0–1.0)             |
+| result.rule_flag          | boolean   | true if a high-precision rule triggered    |
+| result.risk_level         | string    | LOW / MEDIUM / HIGH                        |
+| result.reason             | string    | Human-readable explanation                 |
+| result.actions            | string[]  | Action codes to execute                    |
 
 **Example response:**
-```
+```json
 {
   "feature": "call_triggered_defense",
   "result": {
@@ -126,7 +124,7 @@ result.actions	string[]	Action codes to execute
 }
 ```
 
-How Final Risk Is Determined (High-Level)
+## How Final Risk Is Determined (High-Level)
 
 The engine combines:
 
@@ -143,8 +141,8 @@ If no rule triggers → risk may be based on ML thresholding.
 This design protects against cold-start ML models and ensures obvious scam patterns are caught.
 
 
-Notes for Developers
-Common Gotchas
+## Notes for Developers
+### Common Gotchas
 
 Ensure feature scaling/normalization in inference matches training.
 
