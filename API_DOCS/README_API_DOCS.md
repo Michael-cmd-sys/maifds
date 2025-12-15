@@ -99,17 +99,16 @@ Example:
 
 **Success: HTTP 200**
 
-```
 Body fields:
 
-Field	Type	Description
-feature	string	Always "call_triggered_defense"
-result.fraud_probability	number	ML model probability (0.0–1.0)
-result.rule_flag	boolean	true if a high-precision rule triggered
-result.risk_level	string	LOW / MEDIUM / HIGH
-result.reason	string	Human-readable explanation
-result.actions	string[]	Action codes to execute
-```
+| Field                     | Type      | Description                                |
+|---------------------------|-----------|--------------------------------------------|
+| feature                   | string    | Always "call_triggered_defense"            |
+| result.fraud_probability  | number    | ML model probability (0.0–1.0)             |
+| result.rule_flag          | boolean   | true if a high-precision rule triggered    |
+| result.risk_level         | string    | LOW / MEDIUM / HIGH                        |
+| result.reason             | string    | Human-readable explanation                 |
+| result.actions            | string[]  | Action codes to execute                    |
 
 **Example response:**
 ```json
