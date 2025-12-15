@@ -1,4 +1,4 @@
-# HUAWEI Fraud Detection Services
+# maifds_services Fraud Detection Services
 
 This repository contains three integrated fraud detection services built with MindSpore for mobile money platforms.
 

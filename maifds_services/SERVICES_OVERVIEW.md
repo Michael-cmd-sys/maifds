@@ -1,4 +1,4 @@
-# HUAWEI Fraud Detection Services - Complete Overview
+# maifds_services Fraud Detection Services - Complete Overview
 
 This document provides an overview of all three fraud detection services.
 
@@ -39,7 +39,7 @@ This document provides an overview of all three fraud detection services.
 ## 📁 Folder Structure
 
 ```
-HUAWEI/
+maifds_services/
 ├── Phishing_Ad_Referral_Channel_Detector/     (Port 5000)
 │   ├── src/
 │   │   ├── train_csv.py
@@ -78,7 +78,7 @@ HUAWEI/
 ### Service 1: Phishing Detector (Port 5000)
 
 ```bash
-cd ~/projet/maifds/HUAWEI/Phishing_Ad_Referral_Channel_Detector
+cd ~/projet/maifds/maifds_services/Phishing_Ad_Referral_Channel_Detector
 
 # Train (first time)
 ~/mindspore311_env/bin/python src/train_csv.py
@@ -99,7 +99,7 @@ curl -X POST http://localhost:5000/detect \
 ### Service 2: Blacklist (Port 5001)
 
 ```bash
-cd ~/projet/maifds/HUAWEI/Blacklist_Watchlist_Service
+cd ~/projet/maifds/maifds_services/Blacklist_Watchlist_Service
 
 # Check stats
 ~/mindspore311_env/bin/python src/manage_blacklist.py stats
@@ -120,7 +120,7 @@ curl -X POST http://localhost:5001/check \
 ### Service 3: Proactive Warning (Port 5002)
 
 ```bash
-cd ~/projet/maifds/HUAWEI/Proactive_Warning_Service
+cd ~/projet/maifds/maifds_services/Proactive_Warning_Service
 
 # Test
 ~/mindspore311_env/bin/python src/proactive_warning_service.py
@@ -244,19 +244,19 @@ def process_transaction(transaction):
 
 **Terminal 1:**
 ```bash
-cd ~/projet/maifds/HUAWEI/Phishing_Ad_Referral_Channel_Detector
+cd ~/projet/maifds/maifds_services/Phishing_Ad_Referral_Channel_Detector
 ~/mindspore311_env/bin/python src/api_mindspore.py
 ```
 
 **Terminal 2:**
 ```bash
-cd ~/projet/maifds/HUAWEI/Blacklist_Watchlist_Service
+cd ~/projet/maifds/maifds_services/Blacklist_Watchlist_Service
 ~/mindspore311_env/bin/python src/api_blacklist.py --port 5001
 ```
 
 **Terminal 3:**
 ```bash
-cd ~/projet/maifds/HUAWEI/Proactive_Warning_Service
+cd ~/projet/maifds/maifds_services/Proactive_Warning_Service
 ~/mindspore311_env/bin/python src/api_warning.py --port 5002
 ```
 

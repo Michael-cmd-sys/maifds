@@ -112,7 +112,7 @@ Edit `config/warning_config.json`:
 ### Running the Service
 
 ```bash
-cd ~/projet/maifds/HUAWEI/Proactive_Warning_Service
+cd ~/projet/maifds/maifds_services/Proactive_Warning_Service
 
 # Test the service
 ~/mindspore311_env/bin/python src/proactive_warning_service.py

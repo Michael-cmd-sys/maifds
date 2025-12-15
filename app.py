@@ -144,12 +144,18 @@ class ClickTxCorrelationRequest(BaseModel):
 
 
 class ProactiveWarningRequest(BaseModel):
-    user_id: Optional[str] = None
-    tx_amount: confloat(ge=0) = 0
-    recently_clicked: conint(ge=0, le=1) = 0
-    recently_called: conint(ge=0, le=1) = 0
-    active_campaign_indicator: conint(ge=0, le=1) = 0
-    new_device_flag: conint(ge=0, le=1) = 0
+    recent_risky_clicks_7d: conint(ge=0) = 0
+    recent_scam_calls_7d: conint(ge=0) = 0
+    scam_campaign_intensity: confloat(ge=0.0, le=1.0) = 0.0
+    device_age_days: confloat(ge=0.0) = 180.0
+    is_new_device: conint(ge=0, le=1) = 0
+    tx_count_total: conint(ge=0) = 0
+    avg_tx_amount: confloat(ge=0.0) = 0.0
+    max_tx_amount: confloat(ge=0.0) = 0.0
+    historical_fraud_flag: conint(ge=0, le=1) = 0
+    is_in_campaign_cohort: conint(ge=0, le=1) = 0
+    user_risk_score: confloat(ge=0.0, le=1.0) = 0.0
+
 
 
 class TelcoNotifyRequest(BaseModel):
@@ -230,14 +236,16 @@ def click_tx_correlation(
         out["debug"] = {"payload_sent_to_engine": payload}
     return out
 
-
-
 @app.post("/v1/proactive-pre-tx-warning")
-def proactive_pre_tx_warning(req: ProactiveWarningRequest) -> Dict[str, Any]:
+def proactive_pre_tx_warning(req: ProactiveWarningRequest, debug: bool = Query(False)):
     mod = _import_module("mel_dev.features.proactive_pre_tx_warning.src.inference")
     payload = req.model_dump()
-    result = _call_fn_or_class_method(mod, ["run_inference", "predict", "infer", "score", "select_cohort"], payload)
-    return {"feature": "proactive_pre_tx_warning", "result": _safe_jsonable(result)}
+    result = _call_fn_or_class_method(mod, ["run_inference"], payload, debug=debug)
+    out = {"feature": "proactive_pre_tx_warning", "result": _safe_jsonable(result)}
+    if debug:
+        out["debug"] = {"payload_sent_to_engine": payload}
+    return out
+
 
 
 @app.post("/v1/telco-notify")

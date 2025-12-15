@@ -2,6 +2,18 @@ import numpy as np
 import pandas as pd
 import mindspore as ms
 from mindspore import Tensor, nn, ops, dataset as ds
+import os
+
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+ckpt_path = os.path.join(BASE_DIR, "proactive_warning_mlp.ckpt")
+ms.save_checkpoint(model, ckpt_path)
+
+np.save(os.path.join(BASE_DIR, "feature_mean.npy"), mean)
+np.save(os.path.join(BASE_DIR, "feature_std.npy"), std)
+
 
 from .config import (
     TRAINING_TABLE_PATH,
@@ -139,15 +151,17 @@ def main():
             f"train_loss={train_loss:.4f} - val_loss={val_loss:.4f} - val_acc={val_acc:.4f}"
         )
 
-    # Save model + normalization stats
-    ckpt_name = "proactive_warning_mlp.ckpt"
-    ms.save_checkpoint(model, ckpt_name)
-    print(f"Model checkpoint saved as {ckpt_name}")
+    # Save model + normalization stats into THIS src directory
+    base_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # Save normalization statistics for inference
-    np.save("feature_mean.npy", mean)
-    np.save("feature_std.npy", std)
-    print("Saved feature normalization stats (feature_mean.npy, feature_std.npy)")
+    ckpt_path = os.path.join(base_dir, "proactive_warning_mlp.ckpt")
+    ms.save_checkpoint(model, ckpt_path)
+    print(f"Model checkpoint saved: {ckpt_path}")
+
+    np.save(os.path.join(base_dir, "feature_mean.npy"), mean)
+    np.save(os.path.join(base_dir, "feature_std.npy"), std)
+    print("Saved feature normalization stats in src/ (feature_mean.npy, feature_std.npy)")
+
 
 
 if __name__ == "__main__":

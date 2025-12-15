@@ -6,7 +6,7 @@ Get your phishing detector running in **5 minutes**!
 
 ```bash
 # 1. Clone/navigate to your project directory
-cd HUAWEI/
+cd maifds_services/
 
 # 2. Run the setup script (does everything automatically)
 chmod +x setup_mindspore.sh
