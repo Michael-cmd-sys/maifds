@@ -142,8 +142,8 @@ If no rule triggers → risk may be based on ML thresholding.
 This design protects against cold-start ML models and ensures obvious scam patterns are caught.
 
 
-Notes for Developers
-Common Gotchas
+## Notes for Developers
+### Common Gotchas
 
 Ensure feature scaling/normalization in inference matches training.
 
