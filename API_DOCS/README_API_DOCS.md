@@ -125,7 +125,7 @@ result.actions	string[]	Action codes to execute
 }
 ```
 
-How Final Risk Is Determined (High-Level)
+## How Final Risk Is Determined (High-Level)
 
 The engine combines:
 
