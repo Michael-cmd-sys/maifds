@@ -3,7 +3,7 @@ import pandas as pd
 import mindspore as ms
 from mindspore import nn, Tensor, ops
 
-from config import (
+from .config import (
     TRAINING_TABLE_PATH,
     FEATURE_COLUMNS,
     LABEL_COLUMN,
@@ -12,7 +12,7 @@ from config import (
     LEARNING_RATE,
     RANDOM_SEED,
 )
-from model import CallTriggeredDefenseModel
+from .model import CallTriggeredDefenseModel
 
 
 def load_training_data():

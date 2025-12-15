@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any
 
-from config import INCIDENT_LOG_PATH, ERROR_LOG_PATH, LOG_DIR
+from .config import INCIDENT_LOG_PATH, ERROR_LOG_PATH, LOG_DIR
 
 
 def _ensure_log_dir():

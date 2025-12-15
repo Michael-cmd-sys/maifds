@@ -1,4 +1,4 @@
-from rules import CallTxEvent, high_precision_rule
+from .rules import CallTxEvent, high_precision_rule
 
 event = CallTxEvent(
     call_to_tx_delta_seconds=120,

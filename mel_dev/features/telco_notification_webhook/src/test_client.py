@@ -1,6 +1,6 @@
-from schemas import IncidentEvidence, TelcoIncidentPayload
+from .schemas import IncidentEvidence, TelcoIncidentPayload
 from client import TelcoNotificationClient
-from config import SYSTEM_NAME, ENVIRONMENT
+from .config import SYSTEM_NAME, ENVIRONMENT
 
 
 def main():

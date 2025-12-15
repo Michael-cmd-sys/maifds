@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from config import (
+from .config import (
     PAYSIM_PATH,
     CDR_PATH,
     URL_RISK_PATH,

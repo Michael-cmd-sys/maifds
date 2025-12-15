@@ -4,7 +4,7 @@ from typing import Optional, List
 import numpy as np
 import pandas as pd
 
-from config import (
+from .config import (
     TRANSACTIONS_PATH,
     URL_RISK_PATH,
     PHISHING_BLACKLIST_PATH,

@@ -1,4 +1,12 @@
 from pathlib import Path
+import os
+
+
+# Model checkpoint path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_CKPT_PATH = os.path.join(BASE_DIR, "click_tx_link_model.ckpt")
+
 
 # Root folder for THIS feature (click_tx_link_correlation)
 FEATURE_ROOT = Path(__file__).resolve().parents[1]

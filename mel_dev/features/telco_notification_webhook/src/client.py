@@ -4,7 +4,7 @@ from datetime import datetime
 
 import requests
 
-from config import (
+from .config import (
     TELCO_WEBHOOK_URL,
     TELCO_WEBHOOK_API_KEY,
     VERIFY_SSL,
@@ -13,8 +13,8 @@ from config import (
     SYSTEM_NAME,
     ENVIRONMENT,
 )
-from schemas import TelcoIncidentPayload, TelcoWebhookResponse
-from storage import log_incident, log_error
+from .schemas import TelcoIncidentPayload, TelcoWebhookResponse
+from .storage import log_incident, log_error
 
 
 class TelcoNotificationClient:
