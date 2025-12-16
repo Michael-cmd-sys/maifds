@@ -6,7 +6,7 @@ import mindspore as ms
 from mindspore import nn, Tensor
 import numpy as np
 
-from src.nlp.config import (
+from maifds_governance.nlp.config import (
     EMBEDDING_DIM,
     HIDDEN_UNITS,
     DROPOUT_RATE,

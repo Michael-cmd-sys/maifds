@@ -29,6 +29,10 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
+from dotenv import load_dotenv
+load_dotenv()
+
+
 
 # -----------------------------------------------------------------------------
 # App
@@ -108,6 +112,8 @@ def _safe_jsonable(x: Any) -> Any:
 # -----------------------------------------------------------------------------
 # Request models
 # -----------------------------------------------------------------------------
+
+# mel_dev call_triggered_defense feature request models
 class CallTriggeredDefenseRequest(BaseModel):
     tx_amount: confloat(ge=0) = Field(..., description="Transaction amount (e.g., GHS)")
     recipient_first_time: conint(ge=0, le=1) = Field(..., description="1 if first time sending to recipient else 0")
@@ -115,7 +121,7 @@ class CallTriggeredDefenseRequest(BaseModel):
     contact_list_flag: conint(ge=0, le=1) = Field(..., description="1 if recipient is in contacts else 0")
     nlp_suspicion_score: confloat(ge=0.0, le=1.0) = Field(..., description="0.0–1.0 suspicion score")
 
-
+# mel_dev click_tx_link_correlation feature request models
 class ClickTxCorrelationRequest(BaseModel):
     tx_amount: Optional[confloat(ge=0)] = Field(None, description="Transaction amount")
     amount: Optional[confloat(ge=0)] = Field(None, description="Alias for tx_amount")
@@ -142,7 +148,7 @@ class ClickTxCorrelationRequest(BaseModel):
         return self
 
 
-
+# mel_dev proactive_pre_tx_warning feature request models
 class ProactiveWarningRequest(BaseModel):
     recent_risky_clicks_7d: conint(ge=0) = 0
     recent_scam_calls_7d: conint(ge=0) = 0
@@ -156,8 +162,7 @@ class ProactiveWarningRequest(BaseModel):
     is_in_campaign_cohort: conint(ge=0, le=1) = 0
     user_risk_score: confloat(ge=0.0, le=1.0) = 0.0
 
-
-
+# mel_dev telco_notification_webhook feature request models
 class TelcoNotifyRequest(BaseModel):
     incident_id: str = Field(..., min_length=1)
     suspected_number: str = Field(..., min_length=1)
@@ -165,6 +170,29 @@ class TelcoNotifyRequest(BaseModel):
     observed_evidence: Dict[str, Any] = Field(default_factory=dict)
     timestamps: Dict[str, Any] = Field(default_factory=dict)
     recommended_action: str = Field(..., min_length=1)
+
+# mel_dev user_sms_alert feature request models
+class UserSmsAlertRequest(BaseModel):
+    phone: str = Field(..., min_length=5, description="Recipient phone (055... or +233...)")
+    threat_type: str = Field("GENERAL", min_length=3)
+    suspected_number: Optional[str] = None
+    message: Optional[str] = None  # if provided, overrides template
+    ref: Optional[str] = None
+    context: Dict[str, Any] = Field(default_factory=dict)
+
+# mel_dev orchestrator request model
+class OrchestratorRequest(BaseModel):
+    user_phone: Optional[str] = None
+    suspected_number: Optional[str] = None
+    incident_id: Optional[str] = None
+    affected_accounts: List[str] = Field(default_factory=list)
+    timestamps: Dict[str, Any] = Field(default_factory=dict)
+    ref: Optional[str] = None
+
+    call_triggered_defense: Optional[Dict[str, Any]] = None
+    click_tx_correlation: Optional[Dict[str, Any]] = None
+    proactive_pre_tx_warning: Optional[Dict[str, Any]] = None
+
 
 
 class BlacklistCheckRequest(BaseModel):
@@ -174,6 +202,7 @@ class BlacklistCheckRequest(BaseModel):
 
 class PhishingScoreRequest(BaseModel):
     url: str = Field(..., min_length=1)
+
 
 
 # -----------------------------------------------------------------------------
@@ -252,15 +281,15 @@ def proactive_pre_tx_warning(req: ProactiveWarningRequest, debug: bool = Query(F
 def telco_notify(req: TelcoNotifyRequest) -> Dict[str, Any]:
     client_mod = _import_module("mel_dev.features.telco_notification_webhook.src.client")
 
-    incident_obj: Any = req.model_dump()
+    incident_obj = req.model_dump()
 
-    # build TelcoIncidentPayload if available
     try:
         schemas_mod = _import_module("mel_dev.features.telco_notification_webhook.src.schemas")
         TelcoIncidentPayload = getattr(schemas_mod, "TelcoIncidentPayload", None)
         if TelcoIncidentPayload is not None:
-            incident_obj = TelcoIncidentPayload(**req.model_dump())
-    except Exception:
+            incident_obj = TelcoIncidentPayload(**incident_obj)  # <-- force schema object
+    except Exception as e:
+        # keep dict fallback
         pass
 
     client_cls = getattr(client_mod, "TelcoNotificationClient", None)
@@ -274,18 +303,57 @@ def telco_notify(req: TelcoNotifyRequest) -> Dict[str, Any]:
     return {"feature": "telco_notification_webhook", "result": _safe_jsonable(resp)}
 
 
+
+@app.post("/v1/user-sms-alert")
+def user_sms_alert(req: UserSmsAlertRequest) -> Dict[str, Any]:
+    from mel_dev.features.user_sms_alert.src.phone import normalize_gh_number
+    from mel_dev.features.user_sms_alert.src.client import MoolreSmsClient
+    from mel_dev.features.user_sms_alert.src.message_builder import build_user_sms
+
+    # normalize to digits-only 233...
+    recipient = normalize_gh_number(req.phone)
+
+    # build message
+    ctx = dict(req.context or {})
+    if req.suspected_number:
+        ctx["suspected_number"] = req.suspected_number
+
+    sms_text = req.message or build_user_sms(req.threat_type, ctx)
+
+    client = MoolreSmsClient()
+    result = client.send_sms(recipient=recipient, message=sms_text, ref=req.ref)
+
+    return {
+        "feature": "user_sms_alert",
+        "result": _safe_jsonable({
+            "recipient_normalized": recipient,
+            "sms_text": sms_text,
+            "provider": result.to_dict(),
+        })
+    }
+
+
+@app.post("/v1/orchestrate")
+def orchestrate(req: OrchestratorRequest, debug: bool = Query(False)):
+    from mel_dev.features.orchestrator.src.orchestrator import run_orchestrator
+    payload = req.model_dump()
+    return {"feature": "orchestrator", "result": _safe_jsonable(run_orchestrator(payload, debug=debug))}
+
+
+
+
 # -----------------------------------------------------------------------------
-# HUAWEI endpoints (ignore Proactive_Warning_Service)
+# maifds_services endpoints (ignore Proactive_Warning_Service)
 # -----------------------------------------------------------------------------
 @app.post("/v1/blacklist/check")
 def blacklist_check(req: BlacklistCheckRequest) -> Dict[str, Any]:
-    mod = _import_module("HUAWEI.Blacklist_Watchlist_Service.src.blacklist_watchlist_service")
+    mod = _import_module("maifds_services.Blacklist_Watchlist_Service.src.blacklist_watchlist_service")
     result = _call_fn_or_class_method(mod, ["check_value", "check", "is_blacklisted", "lookup"], req.value, req.list_type)
     return {"feature": "blacklist_watchlist_service", "result": _safe_jsonable(result)}
 
 
 @app.post("/v1/phishing-ad-referral/score")
 def phishing_ad_referral_score(req: PhishingScoreRequest) -> Dict[str, Any]:
-    mod = _import_module("HUAWEI.Phishing_Ad_Referral_Channel_Detector.src.mindspore_detector")
+    mod = _import_module("maifds_services.Phishing_Ad_Referral_Channel_Detector.src.mindspore_detector")
     result = _call_fn_or_class_method(mod, ["predict_url", "predict", "score_url", "detect", "score"], req.url)
     return {"feature": "phishing_ad_referral_channel_detector", "result": _safe_jsonable(result)}

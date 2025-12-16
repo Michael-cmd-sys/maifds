@@ -4,7 +4,7 @@
 
 **1) Baseline low risk: old click, low URL risk, small amount**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
   -H "Content-Type: application/json" \
   -d '{
@@ -24,7 +24,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
 
 **2) Recent click but low URL risk (should stay LOW unless model says otherwise)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
   -H "Content-Type: application/json" \
   -d '{
@@ -44,7 +44,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
 
 **3) Reported URL but click was long ago (rule should NOT fire)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
   -H "Content-Type: application/json" \
   -d '{
@@ -64,7 +64,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
 
 **4) High-risk + recent + large amount (rule should fire HIGH)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
   -H "Content-Type: application/json" \
   -d '{
@@ -84,7 +84,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
 
 **5) High-risk + recent + borderline amount (see if rule fires based on median)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
   -H "Content-Type: application/json" \
   -d '{
@@ -104,7 +104,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
 
 **6) Many clicks on device/user but URL risk moderate (model-driven test)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
   -H "Content-Type: application/json" \
   -d '{
@@ -124,7 +124,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
 
 **7) Extremely short click→tx time (stress test)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
   -H "Content-Type: application/json" \
   -d '{
@@ -144,7 +144,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
 
 **8) Valid full payload (your “dashboard-style” payload)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
   -H "Content-Type: application/json" \
   -d '{
@@ -164,7 +164,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
 
 **9) Zero amount (edge case, should not crash)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
   -H "Content-Type: application/json" \
   -d '{
@@ -184,7 +184,7 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
 
 **10) Validation failure test (should 422)**
 
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
   -H "Content-Type: application/json" \
   -d '{
@@ -195,7 +195,8 @@ curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation" \
 ```
 
 **Confirming Fruad Probability**
-```
+
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/click-tx-correlation?debug=true" \
   -H "Content-Type: application/json" \
   -d '{

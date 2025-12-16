@@ -9,9 +9,9 @@ from mindspore import nn, Tensor, ops
 from pathlib import Path
 from typing import Tuple
 
-from src.nlp.preprocessor import TextPreprocessor
-from src.nlp.model import SimpleTextClassifier
-from src.nlp.config import (
+from maifds_governance.nlp.preprocessor import TextPreprocessor
+from maifds_governance.nlp.model import SimpleTextClassifier
+from maifds_governance.nlp.config import (
     BATCH_SIZE,
     EPOCHS,
     LEARNING_RATE,

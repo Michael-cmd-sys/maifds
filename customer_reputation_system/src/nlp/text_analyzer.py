@@ -86,7 +86,7 @@ class TextAnalyzer:
                     dropout_rate=DROPOUT_RATE,
                 )
             else:
-                from src.nlp.model import ReportTextClassifier
+                from maifds_governance.nlp.model import ReportTextClassifier
                 self.model = ReportTextClassifier(
                     vocab_size=self.vocab_size,
                     embedding_dim=EMBEDDING_DIM,

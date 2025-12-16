@@ -8,8 +8,8 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 import json
-from src.storage.database import DatabaseManager
-from src.synthetic_data.generator import SyntheticDataGenerator
+from maifds_governance.storage.database import DatabaseManager
+from maifds_governance.synthetic_data.generator import SyntheticDataGenerator
 from pathlib import Path
 
 def test_cross_entity_correlation():
@@ -104,7 +104,7 @@ def test_cross_entity_correlation():
     print("\nTesting cross-entity correlation...")
     
     # Import here to avoid path issues
-    from src.correlation.engine import CrossEntityCorrelationEngine
+    from maifds_governance.correlation.engine import CrossEntityCorrelationEngine
     
     correlation_engine = CrossEntityCorrelationEngine(db)
     

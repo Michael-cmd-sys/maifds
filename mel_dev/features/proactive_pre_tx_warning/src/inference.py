@@ -26,14 +26,18 @@ def load_training_stats() -> Tuple[np.ndarray, np.ndarray]:
         return _CACHE["mean"], _CACHE["std"]
 
     if not os.path.exists(MEAN_PATH) or not os.path.exists(STD_PATH):
-        # fallback: no normalization (still works)
         mean = np.zeros((1, len(FEATURE_COLUMNS)), dtype=np.float32)
         std = np.ones((1, len(FEATURE_COLUMNS)), dtype=np.float32)
         _CACHE["mean"], _CACHE["std"] = mean, std
         return mean, std
 
     mean = np.load(MEAN_PATH).astype(np.float32)
-    std = np.load(STD_PATH).astype(np.float32)
+    std  = np.load(STD_PATH).astype(np.float32)
+
+    if mean.ndim == 1:
+        mean = mean.reshape(1, -1)
+    if std.ndim == 1:
+        std = std.reshape(1, -1)
 
     std = np.nan_to_num(std, nan=1.0, posinf=1.0, neginf=1.0)
     std[std == 0] = 1.0
@@ -41,6 +45,7 @@ def load_training_stats() -> Tuple[np.ndarray, np.ndarray]:
 
     _CACHE["mean"], _CACHE["std"] = mean, std
     return mean, std
+
 
 
 def load_model() -> ProactiveWarningModel:

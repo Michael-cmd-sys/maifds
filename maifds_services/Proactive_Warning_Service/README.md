@@ -371,7 +371,7 @@ gunicorn -w 4 -b 0.0.0.0:5002 src.api_warning:app
 ### Integration with Transaction System
 
 ```python
-from src.proactive_warning_service import ProactiveWarningService
+from maifds_governance.proactive_warning_service import ProactiveWarningService
 
 service = ProactiveWarningService()
 

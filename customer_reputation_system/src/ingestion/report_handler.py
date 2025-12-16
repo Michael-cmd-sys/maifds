@@ -8,8 +8,8 @@ from datetime import datetime
 
 from pydantic import ValidationError
 
-from src.models.report_model import Report, ReportMetadata
-from src.storage.database import DatabaseManager
+from maifds_governance.models.report_model import Report, ReportMetadata
+from maifds_governance.storage.database import DatabaseManager
 from config.logging_config import setup_logger
 from config.settings import RAW_DATA_DIR
 
@@ -17,7 +17,7 @@ logger = setup_logger(__name__)
 
 # Optional NLP import (graceful degradation if not available)
 try:
-    from src.nlp.text_analyzer import TextAnalyzer
+    from maifds_governance.nlp.text_analyzer import TextAnalyzer
     NLP_AVAILABLE = True
 except ImportError:
     NLP_AVAILABLE = False
@@ -25,7 +25,7 @@ except ImportError:
 
 # Credibility system import
 try:
-    from src.credibility.calculator import CredibilityCalculator
+    from maifds_governance.credibility.calculator import CredibilityCalculator
     CREDIBILITY_AVAILABLE = True
 except ImportError:
     CREDIBILITY_AVAILABLE = False
@@ -33,7 +33,7 @@ except ImportError:
 
 # Reputation system import
 try:
-    from src.reputation.calculator import ReputationCalculator
+    from maifds_governance.reputation.calculator import ReputationCalculator
     REPUTATION_AVAILABLE = True
 except ImportError:
     REPUTATION_AVAILABLE = False

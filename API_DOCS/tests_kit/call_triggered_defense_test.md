@@ -2,7 +2,7 @@
 
 **Test 1: Safe baseline (trusted contact, long delay)**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -18,7 +18,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 
 **Test 2: First-time recipient, but no call proximity**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -34,7 +34,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 
 **Test 3: Suspicious NLP only**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -50,7 +50,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 
 **Test 4: Large amount but trusted contact**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -66,7 +66,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 
 **Test 5: Near-call scam pattern (classic)**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -82,7 +82,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 
 **Test 6: Near-call but small amount**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -98,7 +98,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 
 **Test 7: Large amount, no call, unknown recipient**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -113,8 +113,8 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 - `Expected: LOW or MEDIUM`
 
 **Test 8: Extremely suspicious NLP + near call**
-
-```
+bash
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -130,7 +130,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 
 **Test 9: Edge case — zero amount**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -147,7 +147,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 
 **Test 10: Validation error (should fail)**
 
-```
+```bash
 curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
   -H "Content-Type: application/json" \
   -d '{
@@ -163,7 +163,7 @@ curl -X POST http://127.0.0.1:8000/v1/call-triggered-defense \
 - `Expected: HTTP 422`
 
 **Extras (Debug)**
-```
+```bash
 curl -X POST "http://127.0.0.1:8000/v1/call-triggered-defense?debug=true" \
   -H "Content-Type: application/json" \
   -d '{
