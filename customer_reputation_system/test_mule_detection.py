@@ -8,8 +8,8 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 import json
-from src.storage.database import DatabaseManager
-from src.synthetic_data.generator import SyntheticDataGenerator
+from maifds_governance.storage.database import DatabaseManager
+from maifds_governance.synthetic_data.generator import SyntheticDataGenerator
 from pathlib import Path
 
 def test_mule_network_detection():
@@ -127,7 +127,7 @@ def test_mule_network_detection():
     print("\nTesting mule network detection...")
     
     # Import here to avoid path issues
-    from src.mule_network.detector import MuleNetworkDetector
+    from maifds_governance.mule_network.detector import MuleNetworkDetector
     
     detector = MuleNetworkDetector(db)
     

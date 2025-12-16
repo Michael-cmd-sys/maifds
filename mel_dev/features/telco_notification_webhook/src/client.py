@@ -45,13 +45,19 @@ class TelcoNotificationClient:
             "X-Environment": ENVIRONMENT,
         }
 
-    def send_incident(self, incident: TelcoIncidentPayload) -> TelcoWebhookResponse:
+    def send_incident(self, incident) -> TelcoWebhookResponse:
         """
         Sends a single incident to the telco webhook.
         Retries on network errors or 5xx responses.
         Logs both incident and final response for auditing.
         """
-        payload_dict = incident.to_dict()
+
+        # 🔐 Accept schema object OR dict
+        if isinstance(incident, dict):
+            payload_dict = incident
+        else:
+            payload_dict = incident.to_dict()
+
         attempt = 0
         last_error: Optional[str] = None
 

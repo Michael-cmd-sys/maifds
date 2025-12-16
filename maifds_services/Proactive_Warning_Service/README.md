@@ -112,7 +112,7 @@ Edit `config/warning_config.json`:
 ### Running the Service
 
 ```bash
-cd ~/projet/maifds/HUAWEI/Proactive_Warning_Service
+cd ~/projet/maifds/maifds_services/Proactive_Warning_Service
 
 # Test the service
 ~/mindspore311_env/bin/python src/proactive_warning_service.py
@@ -371,7 +371,7 @@ gunicorn -w 4 -b 0.0.0.0:5002 src.api_warning:app
 ### Integration with Transaction System
 
 ```python
-from src.proactive_warning_service import ProactiveWarningService
+from maifds_governance.proactive_warning_service import ProactiveWarningService
 
 service = ProactiveWarningService()
 

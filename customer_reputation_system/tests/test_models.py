@@ -6,7 +6,7 @@ import pytest
 from pydantic import ValidationError
 from datetime import datetime
 
-from src.models.report_model import Report, ReportMetadata
+from maifds_governance.models.report_model import Report, ReportMetadata
 
 
 class TestReportMetadata:

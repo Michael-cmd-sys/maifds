@@ -45,7 +45,7 @@ Text Input → Preprocessing → Tokenization → MindSpore Model → Classifica
 ### Basic Usage
 
 ```python
-from src.nlp.text_analyzer import TextAnalyzer
+from maifds_governance.nlp.text_analyzer import TextAnalyzer
 
 # Initialize analyzer
 analyzer = TextAnalyzer()
@@ -66,7 +66,7 @@ print(analysis['credibility_score'])  # 0.75
 The NLP module is automatically integrated into `ReportHandler`:
 
 ```python
-from src.ingestion.report_handler import ReportHandler
+from maifds_governance.ingestion.report_handler import ReportHandler
 
 handler = ReportHandler(enable_nlp=True)  # NLP enabled by default
 

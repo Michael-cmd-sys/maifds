@@ -14,8 +14,8 @@ from datetime import datetime, timedelta
 import json
 import math
 
-from src.reputation.models import MerchantReputation, ReputationFactors
-from src.reputation.config import (
+from maifds_governance.reputation.models import MerchantReputation, ReputationFactors
+from maifds_governance.reputation.config import (
     RATING_WEIGHT,
     SENTIMENT_WEIGHT,
     FRAUD_RISK_WEIGHT,

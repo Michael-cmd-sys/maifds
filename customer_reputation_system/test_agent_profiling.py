@@ -8,8 +8,8 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 import json
-from src.storage.database import DatabaseManager
-from src.synthetic_data.generator import SyntheticDataGenerator
+from maifds_governance.storage.database import DatabaseManager
+from maifds_governance.synthetic_data.generator import SyntheticDataGenerator
 from pathlib import Path
 
 def test_agent_risk_profiling():
@@ -127,7 +127,7 @@ def test_agent_risk_profiling():
     print("\nTesting agent risk calculation...")
     
     # Import here to avoid path issues
-    from src.agents.calculator import AgentRiskCalculator
+    from maifds_governance.agents.calculator import AgentRiskCalculator
     
     calculator = AgentRiskCalculator(db)
     

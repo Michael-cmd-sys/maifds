@@ -97,7 +97,7 @@ The centralized `requirements.txt` includes all dependencies for:
 
 - ✅ **Customer Reputation System** (with NLP Feature 2)
 - ✅ **MEL Dev Features** (Call Triggered Defense, Click-TX Correlation, etc.)
-- ✅ **HUAWEI Services** (Phishing Detector, Blacklist Service, Proactive Warning)
+- ✅ **maifds_services Services** (Phishing Detector, Blacklist Service, Proactive Warning)
 - ✅ **MindSpore** (AI framework) - Version 2.4.1+ (Python 3.9-3.11 only)
 - ✅ **All supporting libraries** (pandas, numpy, Flask, etc.)
 
@@ -140,7 +140,7 @@ maifds/
 │   └── requirements.txt     # (deprecated - use root requirements.txt)
 ├── mel_dev/
 │   └── requirements.txt     # (deprecated - use root requirements.txt)
-└── HUAWEI/
+└── maifds_services/
     └── requirements.txt     # (deprecated - use root requirements.txt)
 ```
 

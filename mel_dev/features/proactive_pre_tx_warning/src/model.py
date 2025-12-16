@@ -1,4 +1,12 @@
 import mindspore.nn as nn
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_CKPT_PATH = os.path.join(BASE_DIR, "proactive_warning_mlp.ckpt")
+MEAN_PATH = os.path.join(BASE_DIR, "feature_mean.npy")
+STD_PATH  = os.path.join(BASE_DIR, "feature_std.npy")
+
 
 
 class ProactiveWarningModel(nn.Cell):

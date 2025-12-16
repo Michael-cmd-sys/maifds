@@ -36,7 +36,7 @@
 
 ### Check a URL
 ```bash
-cd ~/projet/maifds/HUAWEI/Blacklist_Watchlist_Service
+cd ~/projet/maifds/maifds_services/Blacklist_Watchlist_Service
 ~/mindspore311_env/bin/python src/manage_blacklist.py check url "http://suspicious-site.com"
 ```
 

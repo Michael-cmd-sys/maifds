@@ -49,7 +49,7 @@ maifds/
 │       ├── proactive_pre_tx_warning/
 │       └── telco_notification_webhook/
 │
-└── HUAWEI/                         # Enterprise services
+└── maifds_services/                         # Enterprise services
     ├── Phishing_Ad_Referral_Channel_Detector/
     ├── Blacklist_Watchlist_Service/
     └── Proactive_Warning_Service/
@@ -116,7 +116,7 @@ See `requirements.txt` for the complete list.
 - ✅ **Proactive Pre-TX Warning**: Early scam campaign detection
 - ✅ **Telco Notification Webhook**: Incident reporting integration
 
-### HUAWEI Services
+### maifds_services Services
 - ✅ **Phishing Detector**: MindSpore-based phishing detection
 - ✅ **Blacklist Service**: Real-time blacklist management
 - ✅ **Proactive Warning**: User protection services
@@ -161,7 +161,7 @@ pytest customer-reputation-system/tests/
 - **[SETUP.md](SETUP.md)** - Complete setup guide
 - **[customer-reputation-system/README.md](customer-reputation-system/README.md)** - Customer reputation system docs
 - **[mel_dev/features/](mel_dev/features/)** - Individual feature documentation
-- **[HUAWEI/SERVICES_OVERVIEW.md](HUAWEI/SERVICES_OVERVIEW.md)** - HUAWEI services overview
+- **[maifds_services/SERVICES_OVERVIEW.md](maifds_services/SERVICES_OVERVIEW.md)** - maifds_services services overview
 - **[API_DOCS/README.md](API_DOCS/README.md)** - Documentation for Our API
 
 ## 🤝 Contributing

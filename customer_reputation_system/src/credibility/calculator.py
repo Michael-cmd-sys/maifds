@@ -13,8 +13,8 @@ from datetime import datetime, timedelta
 import json
 import math
 
-from src.credibility.models import ReporterCredibility, CredibilityFactors
-from src.credibility.config import (
+from maifds_governance.credibility.models import ReporterCredibility, CredibilityFactors
+from maifds_governance.credibility.config import (
     TEXT_CREDIBILITY_WEIGHT,
     CONSISTENCY_WEIGHT,
     VERIFICATION_WEIGHT,

@@ -8,7 +8,7 @@ from pathlib import Path
 
 from config.settings import DATABASE_PATH
 from config.logging_config import setup_logger
-from src.storage.schemas import ALL_SCHEMAS
+from maifds_governance.storage.schemas import ALL_SCHEMAS
 
 logger = setup_logger(__name__)
 

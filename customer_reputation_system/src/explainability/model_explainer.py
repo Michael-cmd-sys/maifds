@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
 from config.logging_config import setup_logger
-from src.audit.logger import get_audit_logger
+from maifds_governance.audit.logger import get_audit_logger
 
 logger = setup_logger(__name__)
 

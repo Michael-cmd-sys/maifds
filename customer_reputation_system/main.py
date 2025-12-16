@@ -2,7 +2,7 @@
 Demo script for testing the report ingestion system
 """
 
-from src.ingestion.report_handler import ReportHandler
+from maifds_governance.ingestion.report_handler import ReportHandler
 from config.logging_config import setup_logger
 
 logger = setup_logger(__name__)

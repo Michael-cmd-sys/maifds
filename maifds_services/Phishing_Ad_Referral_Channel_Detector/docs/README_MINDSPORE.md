@@ -399,7 +399,7 @@ spec:
 ## 📁 Project Structure
 
 ```
-HUAWEI/
+maifds_services/
 ├── mindspore_detector.py      # Main detector class
 ├── train_mindspore.py         # Training script
 ├── api_mindspore.py          # Flask API

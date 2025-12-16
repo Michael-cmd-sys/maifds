@@ -8,8 +8,8 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from src.storage.database import DatabaseManager
-from src.credibility.calculator import CredibilityCalculator
+from maifds_governance.storage.database import DatabaseManager
+from maifds_governance.credibility.calculator import CredibilityCalculator
 from config.logging_config import setup_logger
 
 logger = setup_logger(__name__)
