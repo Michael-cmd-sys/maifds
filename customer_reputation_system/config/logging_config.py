@@ -4,7 +4,7 @@ Logging configuration for the application
 
 import logging
 import sys
-from config.settings import LOG_LEVEL, LOG_FORMAT, LOG_FILE
+from customer_reputation_system.config.settings import LOG_LEVEL, LOG_FORMAT, LOG_FILE
 
 
 def setup_logger(name: str) -> logging.Logger:

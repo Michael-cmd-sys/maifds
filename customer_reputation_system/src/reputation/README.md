@@ -52,7 +52,7 @@ Report Submission → NLP Analysis → Credibility Update → Reputation Update
 Reputation is automatically updated when reports are submitted:
 
 ```python
-from maifds_governance.ingestion.report_handler import ReportHandler
+from src.ingestion.report_handler import ReportHandler
 
 handler = ReportHandler()
 
@@ -192,9 +192,9 @@ Edit `src/reputation/config.py` to customize:
 
 ```python
 # Test reputation calculation
-from maifds_governance.reputation.calculator import ReputationCalculator
-from maifds_governance.storage.database import DatabaseManager
-from maifds_governance.credibility.calculator import CredibilityCalculator
+from src.reputation.calculator import ReputationCalculator
+from src.storage.database import DatabaseManager
+from src.credibility.calculator import CredibilityCalculator
 
 db = DatabaseManager()
 cred_calc = CredibilityCalculator(db)

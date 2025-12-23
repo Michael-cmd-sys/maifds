@@ -16,7 +16,7 @@ def test_core_functionality():
     # Test 1: Synthetic Data Generation
     print("\n1. 📊 Testing Synthetic Data Generation...")
     try:
-        from maifds_governance.synthetic_data.generator import SyntheticDataGenerator
+        from src.synthetic_data.generator import SyntheticDataGenerator
         
         generator = SyntheticDataGenerator(seed=42)
         dataset = generator.generate_synthetic_dataset(
@@ -44,7 +44,7 @@ def test_core_functionality():
     # Test 2: Database Operations
     print("\n2. 🗄️ Testing Database Operations...")
     try:
-        from maifds_governance.storage.database import DatabaseManager
+        from src.storage.database import DatabaseManager
         from pathlib import Path
         
         db_path = Path("test_integration.db")
@@ -94,7 +94,7 @@ def test_core_functionality():
     print("\n3. ⚡ Testing Risk Factor Calculations...")
     try:
         # Test agent risk factors
-        from maifds_governance.agents.models import AgentRiskFactors
+        from src.agents.models import AgentRiskFactors
         
         risk_factors = AgentRiskFactors(
             recruitment_velocity=0.8,
@@ -111,7 +111,7 @@ def test_core_functionality():
         print(f"✅ Agent risk calculation: {composite_risk:.3f}")
         
         # Test mule risk factors
-        from maifds_governance.mule_network.models import MuleRiskFactors
+        from src.mule_network.models import MuleRiskFactors
         
         mule_factors = MuleRiskFactors(
             rapid_transaction_score=0.9,
@@ -133,8 +133,8 @@ def test_core_functionality():
     # Test 4: Data Model Validation
     print("\n4. 📋 Testing Data Model Validation...")
     try:
-        from maifds_governance.agents.models import AgentRiskProfile
-        from maifds_governance.mule_network.models import MuleAccount, NetworkRiskMetrics
+        from src.agents.models import AgentRiskProfile
+        from src.mule_network.models import MuleAccount, NetworkRiskMetrics
         from datetime import datetime
         
         # Test AgentRiskProfile validation

@@ -11,7 +11,7 @@ from pathlib import Path
 import sys
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-from config.logging_config import setup_logger
+from customer_reputation_system.config.logging_config import setup_logger
 from . import models as audit_models
 from . import database as audit_db
 

@@ -9,19 +9,23 @@ import logging
 import pickle
 import os
 import redis
-import numpy as np
 from datetime import datetime
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from pathlib import Path
-from bitarray import bitarray
 import math
+from bitarray import bitarray
+
+
+SERVICE_DIR = Path(__file__).resolve().parents[1]  # .../Blacklist_Watchlist_Service
+SERVICE_DIR.mkdir(parents=True, exist_ok=True)
+
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('blacklist_watchlist_service.log'),
+        logging.FileHandler(str(SERVICE_DIR / 'blacklist_watchlist_service.log')),
         logging.StreamHandler()
     ]
 )
@@ -50,7 +54,7 @@ class BloomFilter:
         self.num_hashes = self._calculate_num_hashes(self.size, expected_elements)
 
         # Initialize bit array
-        self.bit_array = bitarray(self.size)
+        self.bit_array = bitarray(self.size, endian="big")
         self.bit_array.setall(0)
 
         # Statistics
@@ -132,19 +136,22 @@ class BloomFilter:
 
     @classmethod
     def load(cls, filepath: str):
-        """Load Bloom filter from disk"""
-        with open(filepath, 'rb') as f:
+        with open(filepath, "rb") as f:
             data = pickle.load(f)
 
-        bf = cls(data['expected_elements'], data['false_positive_rate'])
-        bf.size = data['size']
-        bf.num_hashes = data['num_hashes']
-        bf.num_elements = data['num_elements']
-        bf.bit_array = bitarray()
-        bf.bit_array.frombytes(data['bit_array'])
+        bf = cls(data["expected_elements"], data["false_positive_rate"])
+        bf.size = data["size"]
+        bf.num_hashes = data["num_hashes"]
+        bf.num_elements = data["num_elements"]
+
+        bits = bitarray(endian="big")
+        bits.frombytes(data["bit_array"])
+        bf.bit_array = bits[:bf.size]  # trim to exact size
 
         logger.info(f"Bloom filter loaded from {filepath}")
         return bf
+
+
 
 
 class HashGenerator:
@@ -219,8 +226,10 @@ class BlacklistDatabase:
                 logger.error(f"Error loading database: {e}")
 
     def _save_database(self):
-        """Save database to file"""
-        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+        #"""Save database to file"""
+        dirn = os.path.dirname(self.db_path)
+        if dirn:
+            os.makedirs(dirn, exist_ok=True)
         self.data['metadata']['last_updated'] = datetime.now().isoformat()
         self.data['metadata']['total_entries'] = (
             len(self.data['phone_numbers']) +
@@ -235,19 +244,23 @@ class BlacklistDatabase:
         except Exception as e:
             logger.error(f"Error saving database: {e}")
 
-    def add_entry(self, entry_type: str, hash_value: str, metadata: Dict):
-        """Add entry to blacklist"""
-        if entry_type not in self.data:
-            self.data[entry_type] = {}
+    def batch_add(self, entries: List[Tuple[str, str, Dict]]):
+        valid = {"phone_numbers", "device_ids", "urls"}
+        for entry_type, hash_value, metadata in entries:
+            if entry_type not in valid:
+                raise ValueError(f"Invalid entry_type for DB: {entry_type}")
 
-        self.data[entry_type][hash_value] = {
-            'added_date': datetime.now().isoformat(),
-            'reason': metadata.get('reason', 'fraud'),
-            'severity': metadata.get('severity', 'high'),
-            'source': metadata.get('source', 'manual'),
-            'additional_info': metadata.get('additional_info', {})
-        }
+            self.data[entry_type][hash_value] = {
+                "added_date": datetime.now().isoformat(),
+                "reason": metadata.get("reason", "fraud"),
+                "severity": metadata.get("severity", "high"),
+                "source": metadata.get("source", "manual"),
+                "additional_info": metadata.get("additional_info", {}),
+            }
+
         self._save_database()
+        logger.info(f"Batch added {len(entries)} entries")
+
 
     def get_entry(self, entry_type: str, hash_value: str) -> Optional[Dict]:
         """Get entry details"""
@@ -260,23 +273,21 @@ class BlacklistDatabase:
             self._save_database()
             return True
         return False
+    
+    def add_entry(self, entry_type: str, hash_value: str, metadata: Dict[str, Any]):
+        valid = {"phone_numbers", "device_ids", "urls"}
+        if entry_type not in valid:
+            raise ValueError(f"Invalid entry_type for DB: {entry_type}")
 
-    def batch_add(self, entries: List[Tuple[str, str, Dict]]):
-        """Add multiple entries efficiently"""
-        for entry_type, hash_value, metadata in entries:
-            if entry_type not in self.data:
-                self.data[entry_type] = {}
-
-            self.data[entry_type][hash_value] = {
-                'added_date': datetime.now().isoformat(),
-                'reason': metadata.get('reason', 'fraud'),
-                'severity': metadata.get('severity', 'high'),
-                'source': metadata.get('source', 'manual'),
-                'additional_info': metadata.get('additional_info', {})
-            }
-
+        self.data[entry_type][hash_value] = {
+            "added_date": datetime.now().isoformat(),
+            "reason": metadata.get("reason", "fraud"),
+            "severity": metadata.get("severity", "high"),
+            "source": metadata.get("source", "manual"),
+            "additional_info": metadata.get("additional_info", {}),
+        }
         self._save_database()
-        logger.info(f"Batch added {len(entries)} entries")
+
 
 
 class RedisCache:
@@ -344,7 +355,21 @@ class BlacklistWatchlistService:
     Uses Bloom filters for O(1) membership testing + Redis cache + authoritative DB
     """
 
-    def __init__(self, config_path: str = "config_blacklist.json"):
+    def _normalize_list_type(self, list_type: str) -> str:
+        lt = (list_type or "").strip().lower()
+        if lt in {"phone", "number", "numbers", "msisdn", "phone_number", "phone_numbers"}:
+            return "phone_numbers"
+        if lt in {"device", "device_id", "device_ids", "imei"}:
+            return "device_ids"
+        if lt in {"url", "urls", "link"}:
+            return "urls"
+        return lt
+
+
+    def __init__(self, config_path: str = None):
+        if config_path is None:
+            config_path = str(SERVICE_DIR / "config_blacklist.json")
+
         """Initialize the blacklist service"""
         self.config = self._load_config(config_path)
 
@@ -412,12 +437,38 @@ class BlacklistWatchlistService:
             try:
                 with open(config_path, 'r') as f:
                     config = json.load(f)
-                logger.info(f"Configuration loaded from {config_path}")
-                return {**default_config, **config}
-            except Exception as e:
-                logger.warning(f"Error loading config: {e}. Using defaults.")
 
+                logger.info(f"Configuration loaded from {config_path}")
+                merged = dict(default_config)
+                merged["storage"] = {**default_config["storage"], **config.get("storage", {})}
+                merged["redis"] = {**default_config["redis"], **config.get("redis", {})}
+                merged["bloom_filter"] = {**default_config["bloom_filter"], **config.get("bloom_filter", {})}
+                merged["actions"] = {**default_config["actions"], **config.get("actions", {})}
+                merged["notifications"] = {**default_config["notifications"], **config.get("notifications", {})}
+                merged["thresholds"] = {**default_config["thresholds"], **config.get("thresholds", {})}
+
+
+                # resolve storage paths relative to service dir (so uvicorn CWD won't break it)
+                storage = merged.get("storage", {}) or {}
+                db_path = storage.get("database_path", "data/blacklist_db.json")
+                bloom_dir = storage.get("bloom_filters_dir", "data/bloom_filters/")
+
+                if not os.path.isabs(db_path):
+                    storage["database_path"] = str(SERVICE_DIR / db_path)
+                if not os.path.isabs(bloom_dir):
+                    storage["bloom_filters_dir"] = str(SERVICE_DIR / bloom_dir)
+
+                merged["storage"] = storage
+                return merged
+
+            except Exception as e:
+                logger.warning(f"Error loading config {config_path}: {e}. Using defaults.")
+
+        # ensure defaults are also absolute
+        default_config["storage"]["database_path"] = str(SERVICE_DIR / default_config["storage"]["database_path"])
+        default_config["storage"]["bloom_filters_dir"] = str(SERVICE_DIR / default_config["storage"]["bloom_filters_dir"])
         return default_config
+
 
     def _initialize_bloom_filters(self):
         """Initialize or load Bloom filters"""
@@ -460,14 +511,15 @@ class BlacklistWatchlistService:
         Returns:
             Result dictionary
         """
-        # Generate hash
-        if entry_type == 'phone_number':
+        entry_type_norm = self._normalize_list_type(entry_type)
+
+        if entry_type_norm == 'phone_numbers':
             hash_value = self.hash_generator.hash_phone_number(value)
             bloom_filter = self.bloom_filter_numbers
-        elif entry_type == 'device_id':
+        elif entry_type_norm == 'device_ids':
             hash_value = self.hash_generator.hash_device_id(value)
             bloom_filter = self.bloom_filter_devices
-        elif entry_type == 'url':
+        elif entry_type_norm == 'urls':
             hash_value = self.hash_generator.hash_url(value)
             bloom_filter = self.bloom_filter_urls
         else:
@@ -476,29 +528,15 @@ class BlacklistWatchlistService:
         # Add to Bloom filter
         bloom_filter.add(hash_value)
 
-        # Add to database
-        self.database.add_entry(entry_type, hash_value, metadata)
+        # Add to database using plural key
+        self.database.add_entry(entry_type_norm, hash_value, metadata)
 
         # Add to Redis cache
-        cache_data = {
-            'hash': hash_value,
-            'type': entry_type,
-            'metadata': metadata
-        }
-        self.cache.set_blacklisted(
-            hash_value,
-            cache_data,
-            self.config['redis']['cache_expiry']
-        )
+        cache_data = {'hash': hash_value, 'type': entry_type_norm, 'metadata': metadata}
+        self.cache.set_blacklisted(hash_value, cache_data, self.config['redis']['cache_expiry'])
 
-        logger.info(f"Added to blacklist: {entry_type} - {hash_value[:16]}...")
+        return {'success': True, 'hash': hash_value, 'type': entry_type_norm, 'message': 'Entry added to blacklist'}
 
-        return {
-            'success': True,
-            'hash': hash_value,
-            'type': entry_type,
-            'message': 'Entry added to blacklist'
-        }
 
     def check_blacklist(self, signals: Dict) -> Dict:
         """
@@ -524,7 +562,7 @@ class BlacklistWatchlistService:
         # Check phone number
         if 'phone_number' in signals:
             phone_hash = self.hash_generator.hash_phone_number(signals['phone_number'])
-            if self._check_entry('phone_number', phone_hash, self.bloom_filter_numbers):
+            if self._check_entry('phone_numbers', phone_hash, self.bloom_filter_numbers):
                 results['is_blacklisted'] = True
                 results['matches'].append('phone_number')
                 self.detection_stats['phone_hits'] += 1
@@ -532,7 +570,7 @@ class BlacklistWatchlistService:
         # Check device ID
         if 'device_id' in signals:
             device_hash = self.hash_generator.hash_device_id(signals['device_id'])
-            if self._check_entry('device_id', device_hash, self.bloom_filter_devices):
+            if self._check_entry('device_ids', device_hash, self.bloom_filter_devices):
                 results['is_blacklisted'] = True
                 results['matches'].append('device_id')
                 self.detection_stats['device_hits'] += 1
@@ -540,7 +578,7 @@ class BlacklistWatchlistService:
         # Check URL
         if 'url' in signals:
             url_hash = self.hash_generator.hash_url(signals['url'])
-            if self._check_entry('url', url_hash, self.bloom_filter_urls):
+            if self._check_entry('urls', url_hash, self.bloom_filter_urls):
                 results['is_blacklisted'] = True
                 results['matches'].append('url')
                 self.detection_stats['url_hits'] += 1
@@ -563,21 +601,18 @@ class BlacklistWatchlistService:
         2. Check Bloom filter (O(1))
         3. If Bloom filter positive, verify with authoritative DB
         """
-        # Step 1: Check Redis cache
+        entry_type = self._normalize_list_type(entry_type)
+
         cached = self.cache.get_blacklisted(hash_value)
         if cached:
             logger.debug(f"Cache hit: {entry_type}")
             return True
 
-        # Step 2: Check Bloom filter
         if not bloom_filter.contains(hash_value):
-            # Definitely not in blacklist
             return False
 
-        # Step 3: Bloom filter says "possibly in set" - verify with DB
         db_entry = self.database.get_entry(entry_type, hash_value)
         if db_entry:
-            # True positive - update cache
             self.cache.set_blacklisted(
                 hash_value,
                 {'type': entry_type, 'metadata': db_entry},
@@ -585,7 +620,6 @@ class BlacklistWatchlistService:
             )
             return True
 
-        # False positive from Bloom filter
         logger.debug(f"Bloom filter false positive: {entry_type}")
         return False
 
@@ -620,30 +654,29 @@ class BlacklistWatchlistService:
 
     def remove_from_blacklist(self, entry_type: str, value: str) -> Dict:
         """Remove entry from blacklist"""
-        # Generate hash
-        if entry_type == 'phone_number':
+        entry_type_norm = self._normalize_list_type(entry_type)
+
+        if entry_type_norm == 'phone_numbers':
             hash_value = self.hash_generator.hash_phone_number(value)
-        elif entry_type == 'device_id':
+        elif entry_type_norm == 'device_ids':
             hash_value = self.hash_generator.hash_device_id(value)
-        elif entry_type == 'url':
+        elif entry_type_norm == 'urls':
             hash_value = self.hash_generator.hash_url(value)
         else:
             return {'success': False, 'error': f'Invalid entry type: {entry_type}'}
 
-        # Remove from database
-        success = self.database.remove_entry(entry_type, hash_value)
+        # Remove from database (plural key)
+        success = self.database.remove_entry(entry_type_norm, hash_value)
 
         # Remove from cache
         self.cache.delete_blacklisted(hash_value)
 
-        # Note: Cannot remove from Bloom filter (limitation of Bloom filters)
-        # Need to rebuild Bloom filter if many removals
-
         if success:
-            logger.info(f"Removed from blacklist: {entry_type} - {hash_value[:16]}...")
+            logger.info(f"Removed from blacklist: {entry_type_norm} - {hash_value[:16]}...")
             return {'success': True, 'message': 'Entry removed from blacklist'}
         else:
             return {'success': False, 'error': 'Entry not found in blacklist'}
+
 
     def save_bloom_filters(self):
         """Save all Bloom filters to disk"""
@@ -696,6 +729,44 @@ class BlacklistWatchlistService:
         self.save_bloom_filters()
 
         logger.info("Bloom filters rebuilt successfully")
+
+_service_singleton = None
+
+def _get_service() -> BlacklistWatchlistService:
+    global _service_singleton
+    if _service_singleton is None:
+        _service_singleton = BlacklistWatchlistService()
+    return _service_singleton
+
+def check_value(value: str, list_type: str) -> dict:
+    svc = _get_service()
+    lt = svc._normalize_list_type(list_type)
+
+    if lt == "phone_numbers":
+        return svc.check_blacklist({"phone_number": value})
+    if lt == "device_ids":
+        return svc.check_blacklist({"device_id": value})
+    if lt == "urls":
+        return svc.check_blacklist({"url": value})
+
+    return {"success": False, "error": f"Unsupported list_type: {list_type}"}
+
+def add_value(value: str, list_type: str, metadata: Optional[Dict[str, Any]] = None) -> dict:
+    svc = _get_service()
+    md = metadata or {"reason": "manual_add", "severity": "high", "source": "api", "additional_info": {}}
+    return svc.add_to_blacklist(list_type, value, md)
+
+def remove_value(value: str, list_type: str) -> dict:
+    svc = _get_service()
+    return svc.remove_from_blacklist(list_type, value)
+
+def stats() -> dict:
+    return _get_service().get_statistics()
+
+def rebuild() -> dict:
+    _get_service().rebuild_bloom_filters()
+    return {"success": True, "message": "Bloom filters rebuilt"}
+
 
 
 # Example usage

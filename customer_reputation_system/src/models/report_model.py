@@ -4,7 +4,7 @@ Pydantic models for report data validation
 
 from pydantic import BaseModel, Field, field_validator, ConfigDict
 from datetime import datetime
-from typing import Optional, Literal
+from typing import Optional, Literal, Dict, Any
 from uuid import uuid4
 import re
 
@@ -15,6 +15,8 @@ class ReportMetadata(BaseModel):
     platform: Literal["mobile", "web", "api"]
     location: Optional[str] = None
     device_info: Optional[str] = None
+    # ✅ allow NLP analysis to be stored without breaking reads
+    nlp_analysis: Optional[Dict[str, Any]] = None
 
     model_config = ConfigDict(extra="forbid")
 
@@ -26,7 +28,7 @@ class Report(BaseModel):
     timestamp: datetime = Field(default_factory=datetime.utcnow)
     reporter_id: str = Field(min_length=1, max_length=100)
     merchant_id: str = Field(min_length=1, max_length=100)
-    report_type: Literal["fraud", "service_issue", "technical", "other"]
+    report_type: Literal["fraud", "scam", "service_issue", "technical", "other"]
     rating: Optional[int] = Field(None, ge=1, le=5)
     title: str = Field(min_length=3, max_length=200)
     description: str = Field(min_length=10, max_length=5000)
@@ -90,17 +92,24 @@ class Report(BaseModel):
 
     @classmethod
     def from_dict(cls, data: dict) -> "Report":
-        """Create model from dictionary (from database)"""
+        """Create model from dictionary (from database), tolerant to extra DB columns."""
         import json
 
-        # Parse timestamp
-        if isinstance(data.get("timestamp"), str):
-            data["timestamp"] = datetime.fromisoformat(data["timestamp"])
+        if not isinstance(data, dict):
+            raise ValueError("from_dict expects a dict")
 
-        # Parse metadata
-        if data.get("metadata_json"):
-            metadata_dict = json.loads(data["metadata_json"])
-            data["metadata"] = ReportMetadata(**metadata_dict)
-            del data["metadata_json"]
+        # 1) Keep only fields that belong to the Pydantic model (plus metadata_json helper)
+        allowed = set(cls.model_fields.keys()) | {"metadata_json"}
+        cleaned = {k: v for k, v in data.items() if k in allowed}
 
-        return cls(**data)
+        # 2) Parse timestamp
+        if isinstance(cleaned.get("timestamp"), str):
+            cleaned["timestamp"] = datetime.fromisoformat(cleaned["timestamp"])
+
+        # 3) Parse metadata_json -> metadata
+        if cleaned.get("metadata_json"):
+            metadata_dict = json.loads(cleaned["metadata_json"])
+            cleaned["metadata"] = ReportMetadata(**metadata_dict)
+        cleaned.pop("metadata_json", None)
+
+        return cls(**cleaned)

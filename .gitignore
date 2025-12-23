@@ -209,3 +209,19 @@ __marimo__/
 mel_dev/features/call_triggered_defense/data/raw/
 mel_dev/features/click_tx_link_correlation/data/raw/
 mel_dev/features/proactive_pre_tx_warning/data/raw/
+
+venv/
+mindspore_env/
+
+# Node / UI
+node_modules/
+ui/node_modules/
+dist/
+ui/dist/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db

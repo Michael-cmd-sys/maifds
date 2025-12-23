@@ -11,8 +11,8 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-from config.logging_config import setup_logger
-from maifds_governance.audit.logger import get_audit_logger
+from customer_reputation_system.config.logging_config import setup_logger
+from customer_reputation_system.src.audit.logger import get_audit_logger
 
 logger = setup_logger(__name__)
 
@@ -33,8 +33,8 @@ class ModelExplainer:
         feature_names: Optional[List[str]] = None,
         user_id: Optional[str] = None,
         session_id: Optional[str] = None,
-        entity_id: Optional[str] = None
-        component: Optional[str] = None
+        entity_id: Optional[str] = None,
+        component: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         Generate explanation for a model prediction

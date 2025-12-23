@@ -8,6 +8,9 @@ from flask_cors import CORS
 import logging
 import os
 from datetime import datetime
+from pydantic import BaseModel
+from typing import Optional
+
 
 from blacklist_watchlist_service import BlacklistWatchlistService
 
@@ -24,6 +27,12 @@ logger = logging.getLogger(__name__)
 
 # Initialize blacklist service
 blacklist_service = None
+
+# Pydantic models for request validation
+class BlacklistCheckRequest(BaseModel):
+    phone_number: Optional[str] = None
+    device_id: Optional[str] = None
+    url: Optional[str] = None
 
 
 def init_service():

@@ -1,0 +1,12 @@
+{
+  "name": "maifds",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n backend,ui -c green,blue \"npm run dev:backend\" \"npm run dev:ui\"",
+    "dev:backend": "bash -lc 'source /home/melch/mindspore_env/bin/activate && uvicorn app:app --host 127.0.0.1 --port 8000 --reload'",
+    "dev:ui": "npm --prefix ui run dev -- --host 127.0.0.1 --port 5173"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

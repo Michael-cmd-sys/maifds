@@ -13,8 +13,8 @@ from datetime import datetime, timedelta
 import json
 import math
 
-from maifds_governance.credibility.models import ReporterCredibility, CredibilityFactors
-from maifds_governance.credibility.config import (
+from customer_reputation_system.src.credibility.models import ReporterCredibility, CredibilityFactors
+from customer_reputation_system.src.credibility.config import (
     TEXT_CREDIBILITY_WEIGHT,
     CONSISTENCY_WEIGHT,
     VERIFICATION_WEIGHT,
@@ -32,7 +32,7 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from config.logging_config import setup_logger
+from customer_reputation_system.config.logging_config import setup_logger
 
 logger = setup_logger(__name__)
 

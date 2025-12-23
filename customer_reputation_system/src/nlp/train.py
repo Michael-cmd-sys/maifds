@@ -9,9 +9,9 @@ from mindspore import nn, Tensor, ops
 from pathlib import Path
 from typing import Tuple
 
-from maifds_governance.nlp.preprocessor import TextPreprocessor
-from maifds_governance.nlp.model import SimpleTextClassifier
-from maifds_governance.nlp.config import (
+from customer_reputation_system.src.nlp.preprocessor import TextPreprocessor
+from customer_reputation_system.src.nlp.model import SimpleTextClassifier
+from customer_reputation_system.src.nlp.config import (
     BATCH_SIZE,
     EPOCHS,
     LEARNING_RATE,
@@ -32,7 +32,7 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from config.logging_config import setup_logger
+from customer_reputation_system.config.logging_config import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -146,7 +146,7 @@ def train():
     
     # Load data from database
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-    from config.settings import DATABASE_PATH
+    from customer_reputation_system.config.settings import DATABASE_PATH
     
     if not DATABASE_PATH.exists():
         logger.error(f"Database not found at {DATABASE_PATH}. "

@@ -14,8 +14,8 @@ from datetime import datetime, timedelta
 import json
 import math
 
-from maifds_governance.reputation.models import MerchantReputation, ReputationFactors
-from maifds_governance.reputation.config import (
+from customer_reputation_system.src.reputation.models import MerchantReputation, ReputationFactors
+from customer_reputation_system.src.reputation.config import (
     RATING_WEIGHT,
     SENTIMENT_WEIGHT,
     FRAUD_RISK_WEIGHT,
@@ -47,7 +47,7 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from config.logging_config import setup_logger
+from customer_reputation_system.config.logging_config import setup_logger
 
 logger = setup_logger(__name__)
 

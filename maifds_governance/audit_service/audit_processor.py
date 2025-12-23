@@ -17,7 +17,7 @@ import logging
 from collections import defaultdict, deque
 import statistics
 
-from .event_bus import Event, EventType, EventPriority, EventBus
+from .event_bus import Event, EventFilter, EventType, EventPriority, EventBus
 
 logger = logging.getLogger(__name__)
 
@@ -439,6 +439,9 @@ class AuditProcessor:
                 EventBus.EventFilter(),
                 self._create_processor_callback(processor_name, processor)
             )
+    # Backward compatibility for EventBus.EventFilter()
+    EventBus.EventFilter = EventFilter
+
     
     def _create_processor_callback(self, processor_name: str, processor: EventProcessor):
         """Create callback for event processor"""

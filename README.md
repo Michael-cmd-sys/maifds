@@ -20,7 +20,7 @@ That's it! See [SETUP.md](SETUP.md) for detailed instructions.
 
 ## 📋 What is MAIFDS?
 
-MAIFDS is a comprehensive fraud detection and cyber protection system designed for mobile money (MoMo) ecosystems. It combines multiple AI-powered features to protect users from:
+(Momo AI Fraud Detection System) MAIFDS is a comprehensive fraud detection and cyber protection system designed for mobile money (MoMo) ecosystems in Africa. It combines multiple AI-powered features to protect users from:
 
 - 📞➡️💸 **Call Triggered Defense (Call → Tx Mitigation)**
 - 🎣🛑 **Phishing Ad & Referral Channel Detector**
@@ -31,28 +31,126 @@ MAIFDS is a comprehensive fraud detection and cyber protection system designed f
 - 🧑‍💼🔔 **Human-in-the-Loop Alerting & Verification Portal**
 - 🛑💳 **Proactive Pre-Transaction Warning & User Prompting**
 - 📡📨 **Automated Telco Notification & Triage Webhook**
+- 📡📨 **Automated User Alert - Via SMS**
 - 🧠🔍 **Explainability, Audit Trail & Legal/Privacy Controls**
 
 
 ## 🏗️ Project Structure
 
 ```
-maifds/
-├── customer-reputation-system/    # Report ingestion & NLP analysis
-│   ├── Feature 1: Report Ingestion ✅
-│   └── Feature 2: NLP Text Analysis ✅
-│
-├── mel_dev/                        # Production fraud detection features
-│   └── features/
-│       ├── call_triggered_defense/
-│       ├── click_tx_link_correlation/
-│       ├── proactive_pre_tx_warning/
-│       └── telco_notification_webhook/
-│
-└── maifds_services/                         # Enterprise services
-    ├── Phishing_Ad_Referral_Channel_Detector/
-    ├── Blacklist_Watchlist_Service/
-    └── Proactive_Warning_Service/
+MAIFDS - Momo AI Fraud Detection System
+.
+├── API_DOCS
+│   └── tests_kit
+├── customer_reputation_system
+│   ├── config
+│   ├── customer_reputation_system_data
+│   │   └── data
+│   │       └── synthetic
+│   ├── data
+│   │   ├── database
+│   │   ├── processed
+│   │   └── raw
+│   ├── logs
+│   ├── src
+│   │   ├── agents
+│   │   ├── api
+│   │   ├── audit
+│   │   ├── correlation
+│   │   ├── credibility
+│   │   ├── explainability
+│   │   ├── infrastructure
+│   │   │   └── config
+│   │   ├── ingestion
+│   │   ├── models
+│   │   ├── mule_network
+│   │   ├── nlp
+│   │   │   └── models
+│   │   ├── reputation
+│   │   ├── storage
+│   │   ├── synthetic_data
+│   │   └── utils
+│   └── tests
+├── maifds_governance
+│   ├── audit_service
+│   └── privacy
+├── maifds_services
+│   ├── Blacklist_Watchlist_Service
+│   │   ├── data
+│   │   │   ├── bloom_filters
+│   │   │   ├── processed
+│   │   │   └── raw
+│   │   ├── docs
+│   │   └── src
+│   │       └── data
+│   │           └── bloom_filters
+│   └── Phishing_Ad_Referral_Channel_Detector
+│       ├── data
+│       │   ├── mindspore_models
+│       │   ├── processed
+│       │   │   └── models
+│       │   └── raw
+│       ├── docs
+│       └── src
+│           └── data
+│               └── mindspore_models
+├── mel_dev
+│   └── features
+│       ├── call_triggered_defense
+│       │   ├── data
+│       │   │   ├── processed
+│       │   │   └── raw
+│       │   ├── docs
+│       │   ├── notebooks
+│       │   └── src
+│       ├── click_tx_link_correlation
+│       │   ├── data
+│       │   │   ├── processed
+│       │   │   └── raw
+│       │   ├── docs
+│       │   └── src
+│       ├── orchestrator
+│       │   ├── data
+│       │   │   └── logs
+│       │   └── src
+│       ├── proactive_pre_tx_warning
+│       │   ├── data
+│       │   │   ├── processed
+│       │   │   └── raw
+│       │   ├── docs
+│       │   └── src
+│       ├── telco_notification_webhook
+│       │   ├── data
+│       │   │   └── logs
+│       │   ├── docs
+│       │   └── src
+│       └── user_sms_alert
+│           ├── data
+│           │   └── logs
+│           ├── docs
+│           └── src
+├── rank_0
+│   └── om
+└── ui
+    ├── dist
+    ├── public
+    │   └── logo
+    └── src
+        ├── api
+        ├── assets
+        ├── components
+        │   ├── charts
+        │   ├── layout
+        │   └── ui
+        ├── data
+        ├── hooks
+        ├── layouts
+        ├── pages
+        ├── theme
+        └── utils
+
+109 directories
+
 ```
 
 ## 🛠️ Installation
@@ -100,6 +198,16 @@ All dependencies are centralized in **`requirements.txt`** at the root. This inc
 - **Database**: redis, bitarray
 - **And more...**
 
+## 🧠 UI TECH STACK 
+- React + TypeScript
+- Vite (preferred) or Next.js 
+- Tailwind CSS (primary styling) 
+- Bootstrap (alerts, modals if useful) 
+- JavaScript fetch / axios to connect to Python backend 
+- Framer Motion for animations 
+- Recharts for charts/graphs 
+- Heroicons / Lucide / FontAwesome for icons
+
 See `requirements.txt` for the complete list.
 
 ## 🎯 Features
@@ -115,11 +223,15 @@ See `requirements.txt` for the complete list.
 - ✅ **Click-TX Link Correlation**: URL risk + transaction timing analysis
 - ✅ **Proactive Pre-TX Warning**: Early scam campaign detection
 - ✅ **Telco Notification Webhook**: Incident reporting integration
+- ✅ **User Notification Alert - Via SMS**: Incident reporting integration
 
 ### maifds_services Services
 - ✅ **Phishing Detector**: MindSpore-based phishing detection
 - ✅ **Blacklist Service**: Real-time blacklist management
-- ✅ **Proactive Warning**: User protection services
+
+### maifds_governance
+- ✅ **audit_service**
+- ✅ **privacy**
 
 ## 🚦 Getting Started
 
@@ -154,7 +266,13 @@ pytest
 
 # Test specific module
 pytest customer-reputation-system/tests/
+
+npm install # Build Node
+npm run dev # Backend and Front Runs
+
 ```
+
+
 
 ## 📚 Documentation
 
@@ -184,7 +302,7 @@ A Product built for Huawei Innovation Competition and to help solve the mobile m
 - All contributors to the project
 
 ## 👥 Development Team
-- Sackey Melchizedek Gbine (Leader)
+- Sackey Melchizedek Gbine - Leader (https://github.com/Gbine1)
 - Cyril Senanu (https://github.com/cysenanu123-oss)
 - Michael Awuni (https://github.com/Michael-cmd-sys)
 

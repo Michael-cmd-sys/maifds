@@ -1,0 +1,44 @@
+{
+  "report_id": "03f2ca69-3ed3-43a2-b481-cb1df8fad798",
+  "timestamp": "2025-12-19T23:11:55.864391",
+  "reporter_id": "user_102",
+  "merchant_id": "merchant_001",
+  "report_type": "scam",
+  "rating": 2,
+  "title": "Asked to pay outside app",
+  "description": "Merchant asked me to send money outside the platform and refused in-app payment.",
+  "transaction_id": "txn_5002",
+  "amount": 300.0,
+  "metadata": {
+    "platform": "web",
+    "location": "Kumasi",
+    "device_info": null,
+    "nlp_analysis": null
+  },
+  "nlp_analysis": {
+    "sentiment": "positive",
+    "sentiment_confidence": 0.6,
+    "urgency": "low",
+    "urgency_confidence": 0.6,
+    "credibility_score": 0.69,
+    "text_features": {
+      "word_count": 19,
+      "char_count": 106,
+      "avg_word_length": 4.631578947368421,
+      "exclamation_count": 0,
+      "question_count": 0,
+      "uppercase_ratio": 0.018867924528301886,
+      "urgency_keyword_count": 0,
+      "negative_word_count": 0
+    },
+    "analysis_method": "rule_based",
+    "title_analysis": {
+      "sentiment": "neutral",
+      "urgency": "low"
+    },
+    "description_analysis": {
+      "sentiment": "positive",
+      "urgency": "low"
+    }
+  }
+}

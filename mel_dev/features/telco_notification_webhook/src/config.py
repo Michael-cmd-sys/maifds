@@ -15,7 +15,7 @@ ERROR_LOG_PATH = LOG_DIR / "webhook_errors.jsonl"
 # In real deployments, these should come from environment variables or secure config.
 TELCO_WEBHOOK_URL = os.getenv(
     "TELCO_WEBHOOK_URL",
-    "https://webhook.site/092dcb2f-b791-44be-b1f5-291a3bbae1ef"  # placeholder
+    "https://webhook.site/034bbfa8-16ab-4737-aa28-697d447c146c"  # placeholder
 )
 
 TELCO_WEBHOOK_API_KEY = os.getenv(

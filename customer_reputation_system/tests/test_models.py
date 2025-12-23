@@ -6,7 +6,7 @@ import pytest
 from pydantic import ValidationError
 from datetime import datetime
 
-from maifds_governance.models.report_model import Report, ReportMetadata
+from customer_reputation_system.src.models.report_model import Report, ReportMetadata
 
 
 class TestReportMetadata:
