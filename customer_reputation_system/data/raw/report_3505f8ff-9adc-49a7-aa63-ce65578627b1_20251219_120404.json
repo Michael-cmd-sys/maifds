@@ -1,0 +1,43 @@
+{
+  "report_id": "3505f8ff-9adc-49a7-aa63-ce65578627b1",
+  "timestamp": "2025-12-19T12:04:04.814594",
+  "reporter_id": "user_001",
+  "merchant_id": "merchant_abc",
+  "report_type": "fraud",
+  "rating": 1,
+  "title": "Unauthorized charge",
+  "description": "I saw a charge I did not authorize. Please investigate.",
+  "transaction_id": "txn_12345",
+  "amount": 150.0,
+  "metadata": {
+    "platform": "mobile",
+    "location": "Accra",
+    "device_info": "Android"
+  },
+  "nlp_analysis": {
+    "sentiment": "neutral",
+    "sentiment_confidence": 0.6,
+    "urgency": "medium",
+    "urgency_confidence": 0.6,
+    "credibility_score": 0.59,
+    "text_features": {
+      "word_count": 9,
+      "char_count": 76,
+      "avg_word_length": 6.888888888888889,
+      "exclamation_count": 0,
+      "question_count": 0,
+      "uppercase_ratio": 0.05263157894736842,
+      "urgency_keyword_count": 1,
+      "negative_word_count": 0
+    },
+    "analysis_method": "rule_based",
+    "title_analysis": {
+      "sentiment": "neutral",
+      "urgency": "medium"
+    },
+    "description_analysis": {
+      "sentiment": "neutral",
+      "urgency": "low"
+    }
+  }
+}

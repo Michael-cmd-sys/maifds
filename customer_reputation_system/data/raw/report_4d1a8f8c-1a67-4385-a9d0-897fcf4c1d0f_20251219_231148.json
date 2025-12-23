@@ -1,0 +1,44 @@
+{
+  "report_id": "4d1a8f8c-1a67-4385-a9d0-897fcf4c1d0f",
+  "timestamp": "2025-12-19T23:11:48.500194",
+  "reporter_id": "user_101",
+  "merchant_id": "merchant_001",
+  "report_type": "fraud",
+  "rating": 1,
+  "title": "Unauthorized debit",
+  "description": "A debit was made without my approval. Please investigate urgently.",
+  "transaction_id": "txn_5001",
+  "amount": 120.5,
+  "metadata": {
+    "platform": "mobile",
+    "location": "Accra",
+    "device_info": "Android",
+    "nlp_analysis": null
+  },
+  "nlp_analysis": {
+    "sentiment": "positive",
+    "sentiment_confidence": 0.6,
+    "urgency": "medium",
+    "urgency_confidence": 0.6,
+    "credibility_score": 0.61,
+    "text_features": {
+      "word_count": 11,
+      "char_count": 86,
+      "avg_word_length": 6.7272727272727275,
+      "exclamation_count": 0,
+      "question_count": 0,
+      "uppercase_ratio": 0.03488372093023256,
+      "urgency_keyword_count": 1,
+      "negative_word_count": 0
+    },
+    "analysis_method": "rule_based",
+    "title_analysis": {
+      "sentiment": "neutral",
+      "urgency": "medium"
+    },
+    "description_analysis": {
+      "sentiment": "neutral",
+      "urgency": "low"
+    }
+  }
+}

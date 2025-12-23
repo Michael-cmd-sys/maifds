@@ -166,6 +166,17 @@ class AlertManager:
         
         # Initialize default policies
         self._initialize_default_policies()
+
+    def _safe_create_task(self, coro) -> None:
+        """Create an async task only if we're inside a running event loop."""
+        try:
+            loop = asyncio.get_running_loop()
+            loop.create_task(coro)
+        except RuntimeError:
+            # No running loop (called from sync context). Skip background processing.
+            # For production you might queue this or run via BackgroundTasks.
+            logger.debug("No running event loop; skipping background task.")
+
     
     def _initialize_default_policies(self) -> None:
         """Initialize default escalation policies"""
@@ -225,7 +236,7 @@ class AlertManager:
                    component: Optional[str] = None,
                    correlation_id: Optional[str] = None,
                    metadata: Optional[Dict[str, Any]] = None,
-                   tags: Optional[List[str]] = None) -> str:
+                   tags: Optional[List[str]] = None) -> Optional[str]:
         """Create new alert"""
         
         # Check for deduplication
@@ -267,7 +278,7 @@ class AlertManager:
         self.alert_stats[f"{alert_type.value}_{severity.value}"] += 1
         
         # Trigger immediate processing
-        asyncio.create_task(self._process_new_alert(alert))
+        self._safe_create_task(self._process_new_alert(alert))
         
         logger.warning(f"Alert created: {alert_type.value} - {title}")
         
@@ -286,7 +297,7 @@ class AlertManager:
         logger.info(f"Alert {alert_id} acknowledged by {acknowledged_by}")
         
         # Send acknowledgment notification
-        asyncio.create_task(self._send_acknowledgment_notification(alert))
+        self._safe_create_task(self._send_acknowledgment_notification(alert))
         
         return True
     
@@ -310,7 +321,7 @@ class AlertManager:
         logger.info(f"Alert {alert_id} resolved by {resolved_by}")
         
         # Send resolution notification
-        asyncio.create_task(self._send_resolution_notification(alert))
+        self._safe_create_task(self._send_resolution_notification(alert))
         
         return True
     
@@ -344,7 +355,7 @@ class AlertManager:
         logger.warning(f"Alert {alert_id} escalated to level {escalation_level}")
         
         # Send escalation notification
-        asyncio.create_task(self._send_escalation_notification(alert))
+        self._safe_create_task(self._send_escalation_notification(alert))
         
         return True
     
@@ -639,11 +650,15 @@ class AlertManager:
         original_count = len(self.alerts)
         
         # Remove old resolved alerts
-        alerts_to_remove = [
-            alert_id for alert_id, alert in self.alerts.items()
-            if (alert.status in [AlertStatus.RESOLVED, AlertStatus.SUPPRESSED] and
-                alert.resolved_at and alert.resolved_at < cutoff_time)
-        ]
+        alerts_to_remove = []
+        for alert_id, alert in self.alerts.items():
+            if alert.status == AlertStatus.RESOLVED:
+                if alert.resolved_at and alert.resolved_at < cutoff_time:
+                    alerts_to_remove.append(alert_id)
+            elif alert.status == AlertStatus.SUPPRESSED:
+                # suppressed alerts may not have resolved_at, so use timestamp
+                if alert.timestamp < cutoff_time:
+                    alerts_to_remove.append(alert_id)
         
         for alert_id in alerts_to_remove:
             del self.alerts[alert_id]

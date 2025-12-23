@@ -239,7 +239,7 @@ def demo_agent_merchant_risk_profiling():
     print("\n📁 PROJECT STRUCTURE:")
     
     structure = """
-customer-reputation-system/
+customer_reputation_system_data/
 ├── src/
 │   ├── agents/
 │   │   ├── models.py          # Agent risk data models

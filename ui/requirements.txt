@@ -1,0 +1,31 @@
+# MAIFDS UI Requirements
+
+## Runtime Environment
+- Node.js >= 18.0.0
+- npm >= 9.0.0
+
+## Production Dependencies
+- react
+- react-dom
+- react-router-dom
+- axios
+- framer-motion
+- lucide-react
+- recharts
+- date-fns
+- clsx
+- tailwind-merge
+- class-variance-authority
+- tailwindcss-animate
+
+## Dev Dependencies
+- vite
+- tailwindcss
+- typescript
+- eslint
+- postcss
+- autoprefixer
+
+## Installation
+Run the following command to install all dependencies:
+npm install

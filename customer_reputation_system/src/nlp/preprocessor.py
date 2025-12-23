@@ -14,7 +14,7 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from config.logging_config import setup_logger
+from customer_reputation_system.config.logging_config import setup_logger
 
 logger = setup_logger(__name__)
 

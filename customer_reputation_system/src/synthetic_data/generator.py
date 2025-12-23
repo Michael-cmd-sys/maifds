@@ -284,7 +284,7 @@ if __name__ == "__main__":
         high_risk_ratio=0.2
     )
     
-    generator.save_dataset_to_files(dataset, "customer-reputation-system/data/synthetic")
+    generator.save_dataset_to_files(dataset, "customer_reputation_system_data/data/synthetic")
     
     print(f"\nDataset Summary:")
     print(f"Agents: {len(dataset['agents'])}")

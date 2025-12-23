@@ -19,7 +19,7 @@ This system allows customers to submit reports about merchants, which are valida
 ## 📁 Project Structure
 
 ```
-customer-reputation-system/
+customer_reputation_system_data/
 ├── config/
 │   ├── settings.py           # Configuration settings
 │   └── logging_config.py     # Logging setup
@@ -47,7 +47,7 @@ customer-reputation-system/
 
 ```bash
 git clone <repository-url>
-cd customer-reputation-system
+cd customer_reputation_system_data
 ```
 
 2. **Create virtual environment**
@@ -81,7 +81,7 @@ This will:
 ### Submitting a Report
 
 ```python
-from maifds_governance.ingestion.report_handler import ReportHandler
+from src.ingestion.report_handler import ReportHandler
 
 # Initialize handler
 handler = ReportHandler()
@@ -254,7 +254,7 @@ See `src/credibility/README.md` for detailed documentation.
 **Quick Start:**
 ```bash
 # Get reporter credibility
-python -c "from maifds_governance.ingestion.report_handler import ReportHandler; h = ReportHandler(); print(h.get_reporter_credibility('user_123'))"
+python -c "from src.ingestion.report_handler import ReportHandler; h = ReportHandler(); print(h.get_reporter_credibility('user_123'))"
 
 # Recalculate all credibilities
 cd src/credibility
@@ -276,7 +276,7 @@ See `src/reputation/README.md` for detailed documentation.
 **Quick Start:**
 ```bash
 # Get merchant reputation
-python -c "from maifds_governance.ingestion.report_handler import ReportHandler; h = ReportHandler(); print(h.get_merchant_reputation('merchant_abc'))"
+python -c "from src.ingestion.report_handler import ReportHandler; h = ReportHandler(); print(h.get_merchant_reputation('merchant_abc'))"
 
 # Recalculate all reputations
 cd src/reputation

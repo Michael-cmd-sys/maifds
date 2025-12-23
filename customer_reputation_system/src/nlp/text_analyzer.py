@@ -27,7 +27,7 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from config.logging_config import setup_logger
+from customer_reputation_system.config.logging_config import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -86,7 +86,7 @@ class TextAnalyzer:
                     dropout_rate=DROPOUT_RATE,
                 )
             else:
-                from maifds_governance.nlp.model import ReportTextClassifier
+                from customer_reputation_system.src.nlp.model import ReportTextClassifier
                 self.model = ReportTextClassifier(
                     vocab_size=self.vocab_size,
                     embedding_dim=EMBEDDING_DIM,

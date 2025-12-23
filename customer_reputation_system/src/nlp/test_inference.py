@@ -3,7 +3,7 @@ Test script for NLP text analysis inference
 """
 
 from text_analyzer import TextAnalyzer
-from config.logging_config import setup_logger
+from customer_reputation_system.config.logging_config import setup_logger
 
 logger = setup_logger(__name__)
 

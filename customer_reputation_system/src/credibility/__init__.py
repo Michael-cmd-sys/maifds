@@ -1,7 +1,7 @@
 """Reporter Credibility System module"""
 
-from maifds_governance.credibility.calculator import CredibilityCalculator
-from maifds_governance.credibility.models import ReporterCredibility
+from customer_reputation_system.src.credibility.calculator import CredibilityCalculator
+from customer_reputation_system.src.credibility.models import ReporterCredibility
 
 __all__ = ["CredibilityCalculator", "ReporterCredibility"]
 

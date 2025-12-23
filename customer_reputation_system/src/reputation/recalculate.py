@@ -8,10 +8,10 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from maifds_governance.storage.database import DatabaseManager
-from maifds_governance.credibility.calculator import CredibilityCalculator
-from maifds_governance.reputation.calculator import ReputationCalculator
-from config.logging_config import setup_logger
+from customer_reputation_system.src.storage.database import DatabaseManager
+from customer_reputation_system.src.credibility.calculator import CredibilityCalculator
+from customer_reputation_system.src.reputation.calculator import ReputationCalculator
+from customer_reputation_system.config.logging_config import setup_logger
 
 logger = setup_logger(__name__)
 

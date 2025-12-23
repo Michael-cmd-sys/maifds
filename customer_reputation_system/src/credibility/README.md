@@ -49,7 +49,7 @@ Report Submission → NLP Analysis → Credibility Calculation → Database Upda
 Credibility is automatically updated when reports are submitted:
 
 ```python
-from maifds_governance.ingestion.report_handler import ReportHandler
+from src.ingestion.report_handler import ReportHandler
 
 handler = ReportHandler()
 
@@ -176,8 +176,8 @@ The credibility system uses NLP credibility scores from Feature 2:
 
 ```python
 # Test credibility calculation
-from maifds_governance.credibility.calculator import CredibilityCalculator
-from maifds_governance.storage.database import DatabaseManager
+from src.credibility.calculator import CredibilityCalculator
+from src.storage.database import DatabaseManager
 
 db = DatabaseManager()
 calc = CredibilityCalculator(db)

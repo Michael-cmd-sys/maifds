@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-from config.logging_config import setup_logger
+from customer_reputation_system.config.logging_config import setup_logger
 from schemas import ALL_AUDIT_SCHEMAS
 from models import (
     AuditEvent, DecisionEvent, DataAccessEvent, 

@@ -315,3 +315,59 @@ class DataAnonymizer:
             self.config.hash_algorithm = config_data['hash_algorithm']
             self.config.mask_char = config_data['mask_char']
             self.config.epsilon = config_data['epsilon']
+    
+    def anonymize(self, text: str, strategy: str = "mask") -> str:
+        """
+        Anonymize free-form text by detecting common PII patterns
+        and applying masking/tokenization based on strategy.
+        strategy: "mask" | "tokenize" | "hash"
+        """
+        if text is None:
+            return None
+
+        s = str(text)
+
+        # Strategy mapping
+        strat = (strategy or "mask").lower()
+        if strat in ("tokenize", "reversible", "token"):
+            self.config.reversible = True
+        else:
+            self.config.reversible = False
+
+        # 1) Emails
+        def repl_email(m):
+            return self.anonymize_field(m.group(0), "email")
+
+        s = self.email_pattern.sub(repl_email, s)
+
+        # 2) Phones (note: your phone_pattern is US-like; this still tokenizes/masks matches it finds)
+        def repl_phone(m):
+            return self.anonymize_field(m.group(0), "phone")
+
+        s = self.phone_pattern.sub(repl_phone, s)
+
+        # 3) SSN
+        def repl_ssn(m):
+            return self.anonymize_field(m.group(0), "ssn")
+
+        s = self.ssn_pattern.sub(repl_ssn, s)
+
+        # 4) Credit cards
+        def repl_cc(m):
+            return self.anonymize_field(m.group(0), "credit_card")
+
+        s = self.credit_card_pattern.sub(repl_cc, s)
+
+        # 5) IP addresses
+        def repl_ip(m):
+            return self.anonymize_field(m.group(0), "ip_address")
+
+        s = self.ip_pattern.sub(repl_ip, s)
+
+        # If user asked for hash explicitly, hash the whole output (optional behavior)
+        if strat in ("hash", "irreversible_hash"):
+            # keep it short and consistent
+            self.config.reversible = False
+            s = self._anonymize_text(s)
+
+        return s

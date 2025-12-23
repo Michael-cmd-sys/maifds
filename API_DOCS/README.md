@@ -172,25 +172,48 @@ If ML always returns ~0.0, verify:
 
 - `actions`
 
-**Feature Registry (to be expanded)**
-Append new features below as they are implemented:
+**Feature Registry**
 
-Feature 1: Call-Triggered Defense ✅
+## Feature 1: Call-Triggered Defense ✅
 
-Feature 2: (TBD)
+Real-time fraud prevention triggered by telecom call events, combining ML scoring and deterministic rules to block or hold high-risk transactions immediately after suspicious calls.
 
-Feature 3: (TBD)
+## Feature 2: Phishing Ad & Referral Channel Detector ✅
 
-Feature 4: (TBD)
+Detection of malicious ads, referral links, and phishing entry points using URL analysis, reputation signals, and blacklist/watchlist correlation.
 
-Feature 5: (TBD)
+## Feature 3: Click-to-Transaction Link Correlation & Blocker ✅
 
-Feature 6: (TBD)
+Correlates user clicks, calls, and navigation events with downstream transactions to detect scam funnels and block transactions linked to suspicious interaction paths.
 
-Feature 7: (TBD)
+## Feature 4: Customer Reporting & Crowd-Sourced Reputation System ✅
 
-Feature 8: (TBD)
+User-driven reporting of scams, bad actors, and suspicious entities, feeding a shared reputation system that influences real-time risk scoring.
 
-Feature 9: (TBD)
+## Feature 5: Real-Time Blacklist / Watchlist Service (Bloom Filters) ✅
 
-Feature 10: (TBD)
+Ultra-low-latency screening of phone numbers, URLs, IPs, wallets, and accounts using Bloom filters for hot-path transaction gating.
+
+## Feature 6: Agent / Merchant Risk Profiling & Mule Network Detection ✅
+
+Behavioral profiling and network-level analysis to identify high-risk agents, merchants, and mule networks through transaction patterns and shared attributes.
+
+## Feature 7: Human-in-the-Loop Alerting & Verification Portal ✅
+
+Operational dashboard for analysts and compliance teams to review alerts, verify cases, override decisions, and provide feedback to models.
+
+## Feature 8: Proactive Pre-Transaction Warning & User Prompting ✅
+
+Risk-aware user warnings, confirmations, or step-up checks issued before transaction execution to prevent social-engineering fraud.
+
+## Feature 9: Automated Telco Notification & Triage Webhook ✅
+
+Automated escalation of confirmed or high-risk cases to telecom partners via webhooks for call blocking, SIM monitoring, or further investigation.
+
+## Feature 10: Automated User Notification via SMS ✅
+
+Real-time SMS alerts to users for suspicious activity, blocked transactions, or confirmation requests, closing the loop with the customer.
+
+## Feature 11: Explainability, Audit Trail & Legal / Privacy Controls ✅
+
+End-to-end explainability, immutable audit trails, event correlation, privacy-aware data classification, anonymization, consent management, and GDPR-aligned controls.

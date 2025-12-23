@@ -346,26 +346,28 @@ class DataClassifier:
         """Calculate confidence score for a rule match"""
         if not rule.patterns:
             return 0.0
-        
+
+        data = str(data)
         max_confidence = 0.0
-        
+
         for pattern in rule.patterns:
             try:
-                matches = re.findall(pattern, data, re.IGNORECASE)
-                if matches:
-                    # Base confidence on number and quality of matches
-                    pattern_confidence = min(1.0, len(matches) * 0.3)
-                    
-                    # Adjust confidence based on pattern specificity
-                    if len(pattern) > 20:  # More specific patterns
-                        pattern_confidence *= 1.2
-                    
+                # One match is enough to be considered strong (PII patterns are precise)
+                if re.search(pattern, data, re.IGNORECASE):
+                    pattern_confidence = 0.95  # strong default signal
+
+                    # Slight boost for more specific patterns
+                    if len(pattern) > 20:
+                        pattern_confidence = min(1.0, pattern_confidence + 0.03)
+
                     max_confidence = max(max_confidence, pattern_confidence)
+
             except re.error:
                 logger.warning(f"Invalid regex pattern in rule {rule.rule_id}: {pattern}")
                 continue
-        
+
         return min(1.0, max_confidence)
+
     
     def detect_pii_types(self, data: str) -> List[str]:
         """Detect specific PII types in data"""

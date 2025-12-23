@@ -6,9 +6,9 @@ import sqlite3
 from typing import Optional, List, Dict, Any
 from pathlib import Path
 
-from config.settings import DATABASE_PATH
-from config.logging_config import setup_logger
-from maifds_governance.storage.schemas import ALL_SCHEMAS
+from customer_reputation_system.config.settings import DATABASE_PATH
+from customer_reputation_system.config.logging_config import setup_logger
+from customer_reputation_system.src.storage.schemas import ALL_SCHEMAS
 
 logger = setup_logger(__name__)
 
