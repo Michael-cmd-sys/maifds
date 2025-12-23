@@ -1,6 +1,6 @@
-# Fraud Detection API Docs
+# Fraud Defense API Docs
 
-This document describes the Fraud Detection System API endpoints, request/response formats, risk interpretation, and test kits.
+This document describes the Fraud Defense System API endpoints, request/response formats, risk interpretation, and test kits.
 
 Base URL (local):
 - `http://127.0.0.1:8000`

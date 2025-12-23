@@ -20,14 +20,14 @@ That's it! See [SETUP.md](SETUP.md) for detailed instructions.
 
 ## 📋 What is MAIFDS?
 
-(Momo AI Fraud Detection System) MAIFDS is a comprehensive fraud detection and cyber protection system designed for mobile money (MoMo) ecosystems in Africa. It combines multiple AI-powered features to protect users from:
+(Momo AI Fraud Defense System) MAIFDS is a comprehensive fraud Defense and cyber protection system designed for mobile money (MoMo) ecosystems in Africa. It combines multiple AI-powered features to protect users from:
 
 - 📞➡️💸 **Call Triggered Defense (Call → Tx Mitigation)**
 - 🎣🛑 **Phishing Ad & Referral Channel Detector**
 - 🔗📉 **Click to Transaction Link Correlation & Blocker**
 - 🧑‍🤝‍🧑📢 **Customer Reporting & Crowd-Sourced Reputation System**
 - ⚡🕵️ **Real-Time Blacklist / Watchlist Service (with Bloom Filters)**
-- 🏧🔍 **Agent / Merchant Risk Profiling & Mule Network Detection**
+- 🏧🔍 **Agent / Merchant Risk Profiling & Mule Network Defense**
 - 🧑‍💼🔔 **Human-in-the-Loop Alerting & Verification Portal**
 - 🛑💳 **Proactive Pre-Transaction Warning & User Prompting**
 - 📡📨 **Automated Telco Notification & Triage Webhook**
@@ -38,7 +38,7 @@ That's it! See [SETUP.md](SETUP.md) for detailed instructions.
 ## 🏗️ Project Structure
 
 ```
-MAIFDS - Momo AI Fraud Detection System
+MAIFDS - Momo AI Fraud Defense System
 .
 ├── API_DOCS
 │   └── tests_kit
@@ -216,17 +216,17 @@ See `requirements.txt` for the complete list.
 - ✅ Report ingestion with validation
 - ✅ NLP-powered text analysis (sentiment, urgency, credibility)
 - ✅ SQLite storage with PostgreSQL migration path
-- ✅ Security features (SQL injection, XSS detection)
+- ✅ Security features (SQL injection, XSS Defense)
 
-### MEL Dev - Fraud Detection
-- ✅ **Call Triggered Defense**: MLP + rule-based fraud detection
+### MEL Dev - Fraud Defense
+- ✅ **Call Triggered Defense**: MLP + rule-based fraud Defense
 - ✅ **Click-TX Link Correlation**: URL risk + transaction timing analysis
-- ✅ **Proactive Pre-TX Warning**: Early scam campaign detection
+- ✅ **Proactive Pre-TX Warning**: Early scam campaign Defense
 - ✅ **Telco Notification Webhook**: Incident reporting integration
 - ✅ **User Notification Alert - Via SMS**: Incident reporting integration
 
 ### maifds_services Services
-- ✅ **Phishing Detector**: MindSpore-based phishing detection
+- ✅ **Phishing Detector**: MindSpore-based phishing Defense
 - ✅ **Blacklist Service**: Real-time blacklist management
 
 ### maifds_governance
@@ -254,7 +254,7 @@ python test_inference.py  # Test inference
 
 ```bash
 cd mel_dev/features/call_triggered_defense/src
-python train.py  # Train fraud detection model
+python train.py  # Train fraud Defense model
 python test_inference.py  # Test inference
 ```
 
