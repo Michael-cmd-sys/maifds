@@ -1,5 +1,5 @@
 # MAIFDS
-**AI powered cyber protection for Ghana's MoMo ecosystem**
+**AI powered cyber protection for Africa's MoMo ecosystem**
 
 [![Python 3.9-3.11](https://img.shields.io/badge/python-3.9--3.11-blue.svg)](https://www.python.org/downloads/)
 [![MindSpore](https://img.shields.io/badge/MindSpore-2.4+-orange.svg)](https://www.mindspore.cn/)
