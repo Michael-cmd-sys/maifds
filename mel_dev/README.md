@@ -16,7 +16,7 @@ Each feature is modular, production-ready, and exposes:
 
 This branch belongs to Gbine1, team lead and architect of these four modules.
 
-**🧠 Implemented Features (4 / 10)**
+**🧠 Implemented Features (5)**
 Feature	Description	ML Model	Rule Engine	Status
 
 | Feature | Description | ML Model | Rule Engine | Status |
@@ -25,6 +25,7 @@ Feature	Description	ML Model	Rule Engine	Status
 | 🔗 Click → Transaction Link Correlation | Detects risk based on phishing URL clicks prior to a transaction. | MindSpore MLP | Yes | ✅ Complete |
 | ⚠️ Proactive Pre-Transaction Warning | Predicts risk cohorts and proactively warns vulnerable users. | MindSpore MLP | Yes | ✅ Complete |
 | 📡 Telco Notification Webhook | Sends structured fraud incidents to telco for investigation and mitigation. | No ML | Webhook & Auditing | ✅ Complete |
+| 📡 User Notification (SMS) | Sends structured fraud incidents to User via SMS for investigation and mitigation. | No ML | SMS & Auditing | ✅ Complete |
 
 
 **🧠 Model Implementations (Feature-Level)**
@@ -34,6 +35,7 @@ Feature	Description	ML Model	Rule Engine	Status
 | Click → Transaction Link Correlation | `ClickTxLinkNet` | Tabular MLP Binary Classifier | MindSpore | `click_tx_link_model.ckpt` |
 | Proactive Pre-Transaction Warning | `ProactiveWarningNet` | Tabular MLP Binary Classifier | MindSpore | `proactive_warning_mlp.ckpt` |
 | Telco Notification Webhook | — | Event-driven Webhook (No ML) | — | Audit logs (`incidents.jsonl`) |
+| User Notification (SMS) | — | Event-driven SMS Alert (No ML) | — | Audit logs (`incidents.jsonl`) |
 > All machine-learning models are custom-designed tabular MLPs trained from scratch using MindSpore and combined with deterministic rule engines for high-precision fraud mitigation.
 
    
@@ -41,48 +43,49 @@ Feature	Description	ML Model	Rule Engine	Status
 
 ```
 mel_dev/
-│
-├── features/
-│   ├── call_triggered_defense/
-│   │   ├── data/
-│   │   │   ├── raw/                # (ignored in Git)
-│   │   │   └── processed/
-│   │   │       └── call_tx_training_table.parquet
-│   │   ├── docs/
-│   │   │   ├── DATA_SETS.md
-│   │   │   └── README_call_triggered_defense.md
-│   │   ├── notebooks/
-│   │   └── src/
-│   │       ├── config.py
-│   │       ├── data_pipeline.py
-│   │       ├── model.py
-│   │       ├── rules.py
-│   │       ├── inference.py
-│   │       └── train.py
-│
-│   ├── click_tx_link_correlation/
-│   │   ├── data/
-│   │   ├── docs/
-│   │   ├── notebooks/
-│   │   └── src/
-│
-│   ├── proactive_pre_tx_warning/
-│   │   ├── data/
-│   │   ├── docs/
-│   │   ├── notebooks/
-│   │   └── src/
-│
-│   └── telco_notification_webhook/
-│       ├── data/
-│       │   └── logs/
-│       ├── docs/
-│       └── src/
-│           ├── client.py
-│           ├── schemas.py
-│           ├── storage.py
-│           └── test_client.py
-│
-└── requirements.txt
+├── __pycache__
+└── features
+    ├── call_triggered_defense
+    │   ├── data
+    │   │   ├── processed
+    │   │   └── raw
+    │   ├── docs
+    │   ├── notebooks
+    │   └── src
+    │       └── __pycache__
+    ├── click_tx_link_correlation
+    │   ├── data
+    │   │   ├── processed
+    │   │   └── raw
+    │   ├── docs
+    │   └── src
+    │       └── __pycache__
+    ├── orchestrator
+    │   ├── data
+    │   │   └── logs
+    │   └── src
+    │       └── __pycache__
+    ├── proactive_pre_tx_warning
+    │   ├── data
+    │   │   ├── processed
+    │   │   └── raw
+    │   ├── docs
+    │   └── src
+    │       └── __pycache__
+    ├── telco_notification_webhook
+    │   ├── data
+    │   │   └── logs
+    │   ├── docs
+    │   └── src
+    │       └── __pycache__
+    └── user_sms_alert
+        ├── data
+        │   └── logs
+        ├── docs
+        └── src
+            └── __pycache__
+
+42 directories
 ```
 
 
