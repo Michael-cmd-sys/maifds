@@ -109,6 +109,21 @@ CREATE_INDEXES = [
     # "CREATE INDEX IF NOT EXISTS idx_agent_risk_score ON agents(risk_score);",
 ]
 
+CREATE_ALERTS_TABLE = """
+CREATE TABLE IF NOT EXISTS alerts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    alert_type TEXT NOT NULL,
+    entity_id TEXT,
+    entity_name TEXT,
+    risk_score REAL,
+    severity TEXT NOT NULL,
+    description TEXT NOT NULL,
+    status TEXT DEFAULT 'active',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    resolved_at DATETIME
+);
+"""
+
 ALL_SCHEMAS = [
     CREATE_REPORTS_TABLE,
     CREATE_REPORTERS_TABLE,
@@ -116,4 +131,5 @@ ALL_SCHEMAS = [
     CREATE_AGENTS_TABLE,
     CREATE_AGENT_NETWORKS_TABLE,
     CREATE_MULE_ACCOUNTS_TABLE,
+    CREATE_ALERTS_TABLE,
 ] + CREATE_INDEXES

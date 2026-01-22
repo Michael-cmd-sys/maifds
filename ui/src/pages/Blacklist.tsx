@@ -8,8 +8,10 @@ import { apiClient } from '@/api/client';
 import { ENDPOINTS } from '@/api/endpoints';
 import { ShieldAlert, ShieldCheck, Search, PlusCircle, Trash2, Database, RotateCw } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useToast } from "@/hooks/use-toast"
 
 export default function Blacklist() {
+    const { toast } = useToast()
     const [stats, setStats] = useState<any>(null);
     const [checkValue, setCheckValue] = useState('');
     const [checkResult, setCheckResult] = useState<any>(null);
@@ -21,7 +23,8 @@ export default function Blacklist() {
     const fetchStats = async () => {
         try {
             const res = await apiClient.get(ENDPOINTS.STATS.BLACKLIST);
-            setStats(res.data);
+            // Backend returns { feature: "...", result: { ... } }
+            setStats(res.data.result || res.data);
         } catch (error) {
             console.error("Failed to fetch blacklist stats");
         }
@@ -39,7 +42,7 @@ export default function Blacklist() {
             const payload = isPhone ? { phone_number: checkValue } : { url: checkValue };
 
             const res = await apiClient.post(ENDPOINTS.FEATURES.BLACKLIST_CHECK, payload);
-            setCheckResult(res.data);
+            setCheckResult(res.data.result || res.data);
         } catch (e) {
             setCheckResult({ error: "Check failed" });
         } finally {
@@ -48,6 +51,7 @@ export default function Blacklist() {
     };
 
     const handleAdd = async () => {
+        if (!addValue) return;
         setLoading('add');
         try {
             await apiClient.post(ENDPOINTS.BLACKLIST.ADD, {
@@ -57,15 +61,24 @@ export default function Blacklist() {
             });
             setAddValue('');
             await fetchStats();
-            alert("Added successfully");
+            toast({
+                title: "Entity Blacklisted",
+                description: `${addValue} has been added to the blacklist.`,
+                className: "bg-red-500 border-red-600 text-white",
+            })
         } catch (e) {
-            alert("Failed to add");
+            toast({
+                title: "Operation Failed",
+                description: "Failed to add to blacklist.",
+                variant: "destructive",
+            })
         } finally {
             setLoading(null);
         }
     };
 
     const handleRemove = async () => {
+        if (!removeValue) return;
         setLoading('remove');
         try {
             await apiClient.post(ENDPOINTS.BLACKLIST.REMOVE, {
@@ -74,9 +87,16 @@ export default function Blacklist() {
             });
             setRemoveValue('');
             await fetchStats();
-            alert("Removed successfully");
+            toast({
+                title: "Entity Removed",
+                description: "Successfully removed from blacklist.",
+            })
         } catch (e) {
-            alert("Failed to remove (or not found)");
+            toast({
+                title: "Removal Failed",
+                description: "Failed to verify removal or entity not found.",
+                variant: "destructive",
+            })
         } finally {
             setLoading(null);
         }
@@ -95,19 +115,19 @@ export default function Blacklist() {
             <div className="grid gap-6 md:grid-cols-4">
                 <Card className="glass-card border-none bg-red-500/10 text-red-600">
                     <CardHeader className="pb-2"><CardTitle className="text-sm">Total Blocked</CardTitle></CardHeader>
-                    <CardContent><div className="text-3xl font-bold">{stats?.total_count || 0}</div></CardContent>
+                    <CardContent><div className="text-3xl font-bold">{stats?.database_entries || 0}</div></CardContent>
                 </Card>
                 <Card className="glass-card">
                     <CardHeader className="pb-2"><CardTitle className="text-sm">Phone Numbers</CardTitle></CardHeader>
-                    <CardContent><div className="text-3xl font-bold">{stats?.by_type?.phone_number || 0}</div></CardContent>
+                    <CardContent><div className="text-3xl font-bold">{stats?.bloom_filter_numbers?.num_elements || 0}</div></CardContent>
                 </Card>
                 <Card className="glass-card">
                     <CardHeader className="pb-2"><CardTitle className="text-sm">URLs / Domains</CardTitle></CardHeader>
-                    <CardContent><div className="text-3xl font-bold">{stats?.by_type?.url || 0}</div></CardContent>
+                    <CardContent><div className="text-3xl font-bold">{stats?.bloom_filter_urls?.num_elements || 0}</div></CardContent>
                 </Card>
                 <Card className="glass-card">
                     <CardHeader className="pb-2"><CardTitle className="text-sm">Devices</CardTitle></CardHeader>
-                    <CardContent><div className="text-3xl font-bold">{stats?.by_type?.device_id || 0}</div></CardContent>
+                    <CardContent><div className="text-3xl font-bold">{stats?.bloom_filter_devices?.num_elements || 0}</div></CardContent>
                 </Card>
             </div>
 

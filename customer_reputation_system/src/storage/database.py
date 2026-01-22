@@ -328,6 +328,56 @@ class DatabaseManager:
             logger.error(f"Failed to execute query: {e}")
             return []
 
+    def log_alert(self, alert_data: Dict[str, Any]) -> bool:
+        """Insert a system alert"""
+        try:
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    """
+                    INSERT INTO alerts (
+                        alert_type, entity_id, entity_name, risk_score, 
+                        severity, description, status, created_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        alert_data["alert_type"],
+                        alert_data.get("entity_id"),
+                        alert_data.get("entity_name"),
+                        alert_data.get("risk_score"),
+                        alert_data["severity"],
+                        alert_data["description"],
+                        "active",
+                        alert_data.get("timestamp") or datetime.now().isoformat()
+                    )
+                )
+                conn.commit()
+                return True
+        except Exception as e:
+            logger.error(f"Failed to log alert: {e}")
+            return False
+
+    def get_recent_alerts(self, limit: int = 100, severity: str = None) -> List[Dict[str, Any]]:
+        """Get recent alerts"""
+        try:
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                query = "SELECT * FROM alerts"
+                params = []
+                
+                if severity:
+                    query += " WHERE severity = ?"
+                    params.append(severity)
+                
+                query += " ORDER BY created_at DESC LIMIT ?"
+                params.append(limit)
+                
+                cursor.execute(query, tuple(params))
+                return [dict(row) for row in cursor.fetchall()]
+        except Exception as e:
+            logger.error(f"Failed to fetch alerts: {e}")
+            return []
+
     def execute_update(self, query: str, params: tuple = ()) -> bool:
         """
         Execute an INSERT/UPDATE/DELETE query

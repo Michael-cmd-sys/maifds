@@ -181,6 +181,66 @@ class PrivacyComplianceProcessor(EventProcessor):
             'most_common_violation': max(self.violation_count.items(), key=lambda x: x[1])[0] if self.violation_count else None
         }
 
+class FileStorageProcessor(EventProcessor):
+    """Processor that persists events to a JSONL file"""
+
+    def __init__(self, storage_path: str = "data/audit_events.jsonl"):
+        super().__init__("file_storage")
+        self.storage_path = storage_path
+        self._ensure_dir()
+
+    def _ensure_dir(self):
+        import os
+        os.makedirs(os.path.dirname(self.storage_path), exist_ok=True)
+
+    async def _process_event(self, event: Event) -> bool:
+        """Write event to file"""
+        try:
+            import json
+            # Serialize properly
+            data = {
+                "event_id": event.event_id,
+                "timestamp": event.timestamp.isoformat(),
+                "event_type": event.event_type.value if hasattr(event.event_type, "value") else str(event.event_type),
+                "priority": event.priority.value if hasattr(event.priority, "value") else str(event.priority),
+                "source": event.source,
+                "user_id": event.user_id,
+                "component": event.component,
+                "action": event.metadata.get("action", ""),
+                "outcome": event.metadata.get("outcome", ""),
+                "data": event.data,
+                "metadata": event.metadata
+            }
+            
+            with open(self.storage_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(data) + "\n")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to write event to file: {e}")
+            return False
+
+    def get_recent_logs(self, limit: int = 100) -> List[Dict]:
+        """Read recent logs from file (inefficient but works for dashboard)"""
+        import json
+        logs = []
+        try:
+            if not os.path.exists(self.storage_path):
+                return []
+            
+            with open(self.storage_path, "r", encoding="utf-8") as f:
+                # Read all lines (careful with large files, but okay for prototype)
+                lines = f.readlines()
+                for line in reversed(lines):
+                    if len(logs) >= limit:
+                        break
+                    try:
+                        logs.append(json.loads(line))
+                    except:
+                        pass
+        except Exception as e:
+            logger.error(f"Failed to read logs: {e}")
+        return logs
+
 class AnomalyDetectionProcessor(EventProcessor):
     """Processor for anomaly detection in events"""
     
@@ -430,7 +490,8 @@ class AuditProcessor:
         self.processors = {
             'privacy_compliance': PrivacyComplianceProcessor(),
             'anomaly_detection': AnomalyDetectionProcessor(),
-            'security_events': SecurityEventProcessor()
+            'security_events': SecurityEventProcessor(),
+            'file_storage': FileStorageProcessor()
         }
         
         # Subscribe to event bus
@@ -543,3 +604,9 @@ class AuditProcessor:
             logger.info(f"Removed processor: {processor_name}")
             return True
         return False
+
+    def get_audit_logs(self, limit: int = 100) -> List[Dict]:
+        """Get recent audit logs from file storage"""
+        if 'file_storage' in self.processors:
+            return self.processors['file_storage'].get_recent_logs(limit)
+        return []

@@ -1,0 +1,236 @@
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Medium.eot");
+	src: local("../../webfontses/SF Pro Display Medium"), local("SFProDisplay-Medium"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Medium.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Medium.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Medium.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Heavy.eot");
+	src: local("SF Pro Display Heavy"), local("SFProDisplay-Heavy"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Heavy.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Heavy.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Heavy.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Heavy.ttf") format("truetype");
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-UltralightItalic.eot");
+	src: local("SF Pro Display UltralightItalic"),
+		local("SFProDisplay-UltralightItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-UltralightItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-UltralightItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-UltralightItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-UltralightItalic.ttf") format("truetype");
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-RegularItalic.eot");
+	src: local("SF Pro Display Regular Italic"),
+		local("SFProDisplay-RegularItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-RegularItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-RegularItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-RegularItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-RegularItalic.ttf") format("truetype");
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Thin.eot");
+	src: local("SF Pro Display Thin"), local("SFProDisplay-Thin"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Thin.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Thin.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Thin.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Thin.ttf") format("truetype");
+	font-weight: 100;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Light.eot");
+	src: local("SF Pro Display Light"), local("SFProDisplay-Light"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Light.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Light.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Light.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Light.ttf") format("truetype");
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-BlackItalic.eot");
+	src: local("SF Pro Display Black Italic"), local("SFProDisplay-BlackItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-BlackItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-BlackItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-BlackItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-BlackItalic.ttf") format("truetype");
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Bold.eot");
+	src: local("SF Pro Display Bold"), local("SFProDisplay-Bold"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Bold.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Bold.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Bold.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Black.eot");
+	src: local("SF Pro Display Black"), local("SFProDisplay-Black"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Black.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Black.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Black.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Black.ttf") format("truetype");
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-SemiboldItalic.eot");
+	src: local("SF Pro Display SemiboldItalic"),
+		local("SFProDisplay-SemiboldItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-SemiboldItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-SemiboldItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-SemiboldItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-SemiboldItalic.ttf") format("truetype");
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Ultralight.eot");
+	src: local("SF Pro Display Ultralight"), local("SFProDisplay-Ultralight"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Ultralight.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Ultralight.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Ultralight.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Ultralight.ttf") format("truetype");
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-LightItalic.eot");
+	src: local("SF Pro Display LightItalic"), local("SFProDisplay-LightItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-LightItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-LightItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-LightItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-LightItalic.ttf") format("truetype");
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-ThinItalic.eot");
+	src: local("SF Pro Display ThinItalic"), local("SFProDisplay-ThinItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-ThinItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-ThinItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-ThinItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-ThinItalic.ttf") format("truetype");
+	font-weight: 100;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-MediumItalic.eot");
+	src: local("SF Pro Display MediumItalic"), local("SFProDisplay-MediumItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-MediumItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-MediumItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-MediumItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-MediumItalic.ttf") format("truetype");
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Semibold.eot");
+	src: local("SF Pro Display Semibold"), local("SFProDisplay-Semibold"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Semibold.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Semibold.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Semibold.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Semibold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-HeavyItalic.eot");
+	src: local("SF Pro Display HeavyItalic"), local("SFProDisplay-HeavyItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-HeavyItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-HeavyItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-HeavyItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-HeavyItalic.ttf") format("truetype");
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Regular.eot");
+	src: local("SF Pro Display Regular"), local("SFProDisplay-Regular"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Regular.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-Regular.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-Regular.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-BoldItalic.eot");
+	src: local("SF Pro Display BoldItalic"), local("SFProDisplay-BoldItalic"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-BoldItalic.eot?")
+			format("embedded-opentype"),
+		url("../../webfontses/SFProDisplay-BoldItalic.woff2") format("woff2"),
+		url("../../webfontses/SFProDisplay-BoldItalic.woff") format("woff"),
+		url("https://saaslyn-merge-html.netlify.app/assets/webfontses/SFProDisplay-BoldItalic.ttf") format("truetype");
+	font-weight: bold;
+	font-style: italic;
+}

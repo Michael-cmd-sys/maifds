@@ -6,12 +6,15 @@ import { Badge } from '@/components/ui/badge';
 import { apiClient } from '@/api/client';
 import { ENDPOINTS } from '@/api/endpoints';
 import { DataTable, TableRow, TableCell } from '@/components/ui/data-table';
-import { Users, AlertTriangle, Activity, Search, BarChart3 } from 'lucide-react';
+import { Users, AlertTriangle, Activity, Search, BarChart3, FileText } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast"
 
 export default function Reputation() {
+    const { toast } = useToast()
     const [networkStats, setNetworkStats] = useState<any>(null);
     const [suspiciousTx, setSuspiciousTx] = useState<any[]>([]);
     const [alerts, setAlerts] = useState<any[]>([]);
+    const [recentReports, setRecentReports] = useState<any[]>([]);
 
     const [targetId, setTargetId] = useState('');
     const [riskResult, setRiskResult] = useState<any>(null);
@@ -20,20 +23,29 @@ export default function Reputation() {
     useEffect(() => {
         // 1. Fetch Network Stats (Overview)
         apiClient.get(ENDPOINTS.FEATURES.ALERTS, { params: { threshold: 0.5 } })
-            .then(res => setAlerts(res.data.alerts || []))
+            .then(res => {
+                const data = res.data.result || [];
+                setAlerts(Array.isArray(data) ? data : (data.alerts || []));
+            })
             .catch(console.error);
 
         // 2. Fetch Suspicious Txs
-        apiClient.get(ENDPOINTS.FEATURES.CLICK_TX_CORRELATION + '?debug=true') // Hack: using correlation or any stat endpoint. 
-        // Actually per API analysis: 
-        // /v1/customer-reputation/transactions/suspicious is the correct one.
         apiClient.get('/v1/customer-reputation/transactions/suspicious?hours=24')
-            .then(res => setSuspiciousTx(res.data.transactions || []))
+            .then(res => {
+                // Suspicious tx result is likely a list or list wrapper
+                const resData = res.data.result || [];
+                setSuspiciousTx(Array.isArray(resData) ? resData : (resData.transactions || []));
+            })
             .catch(console.error);
 
         // 3. Overall Stats
         apiClient.get(ENDPOINTS.STATS.REPUTATION)
-            .then(res => setNetworkStats(res.data))
+            .then(res => setNetworkStats(res.data.result || res.data))
+            .catch(console.error);
+
+        // 4. Recent Reports (NEW)
+        apiClient.get(ENDPOINTS.STATS.REPUTATION_RECENT_REPORTS)
+            .then(res => setRecentReports(res.data.result || []))
             .catch(console.error);
     }, []);
 
@@ -44,15 +56,31 @@ export default function Reputation() {
         try {
             // Trying both Agent and Merchant since UI is generic
             // In real App, user would select type.
+            let res;
+            let type = 'Entity';
             try {
-                const res = await apiClient.get(ENDPOINTS.FEATURES.AGENT_RISK(targetId));
-                setRiskResult({ type: 'Agent', ...res.data });
+                res = await apiClient.get(ENDPOINTS.FEATURES.AGENT_RISK(targetId));
+                type = 'Agent';
             } catch {
-                const res = await apiClient.get(ENDPOINTS.FEATURES.MERCHANT_RISK(targetId));
-                setRiskResult({ type: 'Merchant', ...res.data });
+                res = await apiClient.get(ENDPOINTS.FEATURES.MERCHANT_RISK(targetId));
+                type = 'Merchant';
             }
+
+            if (res && res.data) {
+                setRiskResult({ type, ...res.data.result });
+                toast({
+                    title: "Risk Scan Complete",
+                    description: `Successfully scanned ${type} ID: ${targetId}`,
+                })
+            }
+
         } catch {
             setRiskResult({ error: 'Entity not found or analysis failed' });
+            toast({
+                title: "Scan Failed",
+                description: "Entity not found or analysis failed",
+                variant: "destructive"
+            })
         } finally {
             setLoading(false);
         }
@@ -145,52 +173,80 @@ export default function Reputation() {
                     </Card>
                 </div>
 
-                {/* Suspicious Transactions Table */}
-                <div className="md:col-span-2">
-                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                        <BarChart3 className="text-accent" /> Recent Suspicious Activity
-                    </h3>
-                    <DataTable
-                        headers={["Tx ID", "Entities", "Risk", "Time"]}
-                        data={suspiciousTx}
-                        renderRow={(tx, i) => (
-                            <TableRow key={i}>
-                                <TableCell className="font-mono text-xs">{tx.tx_id.substring(0, 8)}...</TableCell>
-                                <TableCell>
-                                    <div className="flex flex-col text-xs">
-                                        <span>Src: {tx.sender_id}</span>
-                                        <span className="text-slate-400">Dst: {tx.receiver_id}</span>
-                                    </div>
-                                </TableCell>
-                                <TableCell>
-                                    <Badge variant={tx.risk_score > 0.8 ? "destructive" : "secondary"}>
-                                        {(tx.risk_score * 100).toFixed(0)}%
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="text-xs text-slate-500">
-                                    {new Date(tx.timestamp).toLocaleTimeString()}
-                                </TableCell>
-                            </TableRow>
-                        )}
-                        emptyMessage="No suspicious transactions detected recently."
-                    />
+                {/* Suspicious Transactions & Reports Table */}
+                <div className="md:col-span-2 space-y-8">
+                    {/* Recent Reports Table (New) */}
+                    <div>
+                        <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                            <FileText className="text-blue-500" /> Recent User Reports
+                        </h3>
+                        <DataTable
+                            headers={["Title", "Type", "Merchant", "Rating", "Time"]}
+                            data={recentReports}
+                            renderRow={(report, i) => (
+                                <TableRow key={i}>
+                                    <TableCell className="font-medium">{report.title}</TableCell>
+                                    <TableCell>
+                                        <Badge variant="outline">{report.report_type}</Badge>
+                                    </TableCell>
+                                    <TableCell className="text-xs">{report.merchant_id}</TableCell>
+                                    <TableCell>{report.rating ? `${report.rating}/5` : '-'}</TableCell>
+                                    <TableCell className="text-xs text-slate-500">
+                                        {report.timestamp ? new Date(report.timestamp).toLocaleDateString() : 'N/A'}
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            emptyMessage="No reports submitted yet."
+                        />
+                    </div>
 
-                    <h3 className="text-xl font-bold mt-8 mb-4 flex items-center gap-2">
-                        <AlertTriangle className="text-orange-500" /> Community Alerts
-                    </h3>
-                    <DataTable
-                        headers={["Entity", "Reason", "Reporter", "Date"]}
-                        data={alerts}
-                        renderRow={(alert, i) => (
-                            <TableRow key={i}>
-                                <TableCell className="font-bold">{alert.target_id}</TableCell>
-                                <TableCell>{alert.reason}</TableCell>
-                                <TableCell className="text-xs text-slate-500">{alert.reporter_id}</TableCell>
-                                <TableCell className="text-xs text-slate-500">{new Date(alert.created_at).toLocaleDateString()}</TableCell>
-                            </TableRow>
-                        )}
-                        emptyMessage="No active crowd-sourced alerts."
-                    />
+                    {/* Suspicious Tx */}
+                    <div>
+                        <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                            <BarChart3 className="text-accent" /> Recent Suspicious Activity
+                        </h3>
+                        <DataTable
+                            headers={["Tx ID", "Entities", "Risk", "Time"]}
+                            data={suspiciousTx}
+                            renderRow={(tx, i) => (
+                                <TableRow key={i}>
+                                    <TableCell className="font-mono text-xs text-slate-500">{tx.tx_id.substring(0, 8)}...</TableCell>
+                                    <TableCell>
+                                        <div className="flex flex-col text-xs">
+                                            <span>Src: {tx.sender_id}</span>
+                                            <span className="text-slate-400">Dst: {tx.receiver_id}</span>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Badge variant={tx.risk_score > 0.8 ? "destructive" : "secondary"}>
+                                            {(tx.risk_score * 100).toFixed(0)}%
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell className="text-xs text-slate-500">
+                                        {new Date(tx.timestamp).toLocaleTimeString()}
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            emptyMessage="No suspicious transactions detected recently."
+                        />
+
+                        <h3 className="text-xl font-bold mt-8 mb-4 flex items-center gap-2">
+                            <AlertTriangle className="text-orange-500" /> Community Alerts
+                        </h3>
+                        <DataTable
+                            headers={["Entity", "Reason", "Reporter", "Date"]}
+                            data={alerts}
+                            renderRow={(alert, i) => (
+                                <TableRow key={i}>
+                                    <TableCell className="font-bold">{alert.target_id}</TableCell>
+                                    <TableCell>{alert.reason}</TableCell>
+                                    <TableCell className="text-xs text-slate-500">{alert.reporter_id}</TableCell>
+                                    <TableCell className="text-xs text-slate-500">{new Date(alert.created_at).toLocaleDateString()}</TableCell>
+                                </TableRow>
+                            )}
+                            emptyMessage="No active crowd-sourced alerts."
+                        />
+                    </div>
                 </div>
             </div>
         </div>
