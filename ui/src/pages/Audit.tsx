@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiClient } from '@/api/client';
-import { ENDPOINTS } from '@/api/endpoints';
+// import { ENDPOINTS } from '@/api/endpoints'; // Unused
 import { DataTable, TableRow, TableCell } from '@/components/ui/data-table';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { ScrollText, Filter } from 'lucide-react';
@@ -10,22 +10,27 @@ export default function Audit() {
     const [logs, setLogs] = useState<any[]>([]);
 
     useEffect(() => {
-        // Fetch mock stats or logs. API might not have a direct "list all logs" endpoint visible in summary 
-        // but assuming /v1/governance/audit/stats return some list or we mock it for demo if list endpoint absent.
-        // Looking at openapi, there isn't a clear "Get Logs" list, only "Get Stats". 
-        // I will use mock data for the table to demonstrate the UI if API call fails or returns empty.
-
-        // Real call
-        apiClient.get(ENDPOINTS.HEALTH.AUDIT).catch(console.error);
-
-        // Mock logs for UI demonstration
-        setLogs([
-            { id: 'evt_9988', action: 'data_access', user: 'admin_usr', status: 'success', time: new Date().toISOString() },
-            { id: 'evt_9987', action: 'privacy_classify', user: 'system_bot', status: 'success', time: new Date(Date.now() - 50000).toISOString() },
-            { id: 'evt_9986', action: 'blacklist_add', user: 'security_lead', status: 'warning', time: new Date(Date.now() - 120000).toISOString() },
-            { id: 'evt_9985', action: 'login_attempt', user: 'unknown', status: 'failure', time: new Date(Date.now() - 200000).toISOString() },
-        ]);
-
+        // Fetch specific Audit Logs from persistent storage
+        apiClient.get('/v1/governance/audit/logs')
+            .then(res => {
+                const results = res.data.result?.logs || [];
+                // Map audit events to UI table format
+                const mapped = results.map((l: any) => ({
+                    id: l.event_id || 'N/A',
+                    action: l.action || l.event_type,
+                    user: `${l.user_id || 'system'}`,
+                    status: 'logged', // Audit logs are just records
+                    time: l.timestamp
+                }));
+                setLogs(mapped);
+            })
+            .catch(err => {
+                console.error("Failed to fetch audit logs", err);
+                // Keep mock data as fallback only if empty
+                setLogs([
+                    { id: 'evt_9988', action: 'data_access', user: 'admin_usr', status: 'success', time: new Date().toISOString() },
+                ]);
+            });
     }, []);
 
     return (

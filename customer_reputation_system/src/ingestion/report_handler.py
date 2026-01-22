@@ -300,6 +300,14 @@ class ReportHandler:
             logger.error(f"Failed to retrieve reporter reports: {e}")
             return []
 
+    def get_recent_reports(self, limit: int = 10) -> List[Dict]:
+        """Get most recent reports globally via DB Manager."""
+        try:
+            return [Report.from_dict(r).to_dict() for r in self.db_manager.get_all_reports(limit)]
+        except Exception as e:
+            logger.error(f"Failed to get recent reports: {e}")
+            return []
+
 
     def get_statistics(self) -> Dict[str, Any]:
         """Get system stats from DB manager."""

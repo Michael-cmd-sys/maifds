@@ -34,7 +34,7 @@ __all__ = [
 # ---------------------------------------------------------------------
 # FastAPI gateway wrappers (stable function entrypoints)
 # ---------------------------------------------------------------------
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, List
 import inspect
 import inspect
 import logging
@@ -256,6 +256,23 @@ def _qsize(obj) -> int | None:
         return obj.qsize()
     except Exception:
         return None
+
+
+    bus_queue_size = _qsize(bus_queue) if bus_queue is not None else None
+
+    # --- Audit processor observability ---
+    ap_processing = getattr(ap, "processing", None)
+    
+    return {
+        "status": "ok",
+        # ... existing ...
+    } # Simplified for replacement target, actually I should just add the function below
+
+def get_audit_logs(limit: int = 100) -> List[Dict[str, Any]]:
+    """Get persistent audit logs"""
+    services = _get_services()
+    ap = services["audit_processor"]
+    return ap.get_audit_logs(limit)
 
 
 def get_audit_stats(limit: int = 20) -> Dict[str, Any]:

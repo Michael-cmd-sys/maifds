@@ -10,6 +10,7 @@ export const ENDPOINTS = {
         PRIVACY: '/v1/governance/privacy/classifications/stats',
         BLACKLIST: '/v1/blacklist/stats',
         REPUTATION: '/v1/customer-reputation/stats',
+        REPUTATION_RECENT_REPORTS: '/v1/customer-reputation/reports/recent',
     },
     FEATURES: {
         CALL_DEFENSE: '/v1/call-triggered-defense',

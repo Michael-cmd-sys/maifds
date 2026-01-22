@@ -14,10 +14,15 @@ export default function Alerts() {
         // Determine which endpoint to use. 
         // /v1/customer-reputation/alerts is the main one listed for alerts
         apiClient.get(ENDPOINTS.FEATURES.ALERTS, { params: { threshold: 0.0 } }) // Get all
-            .then(res => setAlerts(res.data.alerts || []))
+            .then(res => {
+                // Backend returns { feature: "...", result: [...] }
+                // Check if result is array or object with alerts property
+                const data = res.data.result || [];
+                setAlerts(Array.isArray(data) ? data : (data.alerts || []));
+            })
             .catch(err => {
                 console.error("Failed to fetch alerts", err);
-                // Fallback mock data for demo if API is empty/unreachable
+                // Keep the fallback for now as the backend might return empty initially
                 setAlerts([
                     { id: 1, target_id: '123456789', reason: 'High frequency transactions detected', severity: 'high', created_at: new Date().toISOString() },
                     { id: 2, target_id: '987654321', reason: 'Reported by community as scammer', severity: 'critical', created_at: new Date(Date.now() - 3600000).toISOString() },

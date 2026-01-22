@@ -21,6 +21,7 @@ from datetime import datetime, date
 from typing import Optional, Dict, Any, Literal, List
 
 from fastapi import FastAPI, HTTPException, Query, Body
+from fastapi.staticfiles import StaticFiles # Added for frontend serving
 from pydantic import BaseModel, Field, confloat, conint, model_validator
 from customer_reputation_system.src.ingestion.report_handler import ReportHandler
 from fastapi.middleware.cors import CORSMiddleware
@@ -72,6 +73,31 @@ app.add_middleware(
 )
 # -------------------------------------------------------------------------
 
+# Serve Static Files (Frontend)
+# This allows running everything on port 8000 (Backend + Frontend)
+ui_dist_path = os.path.join(ROOT, "ui", "dist")
+ui_assets_path = os.path.join(ui_dist_path, "assets")
+
+# Only mount if the assets directory actually exists to prevent RuntimeError
+if os.path.exists(ui_dist_path) and os.path.exists(ui_assets_path):
+    # Serve assets at /assets
+    app.mount("/assets", StaticFiles(directory=ui_assets_path), name="assets")
+
+    # Serve app index
+    @app.get("/app/{rest_of_path:path}")
+    async def serve_app(rest_of_path: str):
+        return FileResponse(os.path.join(ui_dist_path, "index.html"))
+
+    # Serve root index
+    @app.get("/")
+    async def serve_root():
+        return FileResponse(os.path.join(ui_dist_path, "index.html"))
+
+    from fastapi.responses import FileResponse
+else:
+    print(f"WARNING: UI build not found at {ui_dist_path}. Backend running in API-only mode.")
+    print("Run 'npm run build' in ui/ folder to enable backend serving of frontend.")
+
 
 @app.get("/health")
 def health() -> Dict[str, str]:
@@ -81,6 +107,24 @@ def health() -> Dict[str, str]:
 @app.get("/v1/health")
 def v1_health() -> Dict[str, str]:
     return {"status": "ok"}
+
+
+def _log_global_alert(alert_type: str, severity: str, description: str, entity_id: str = None, entity_name: str = None):
+    """Helper to log alerts to the central CRS database for dashboard visibility"""
+    try:
+        db = _crs_db_manager()
+        alert = {
+            "alert_type": alert_type,
+            "entity_id": entity_id,
+            "entity_name": entity_name,
+            "risk_score": 1.0 if severity == "critical" else 0.7 if severity == "high" else 0.4,
+            "severity": severity,
+            "description": description,
+            "timestamp": datetime.now().isoformat()
+        }
+        db.log_alert(alert)
+    except Exception as e:
+        print(f"Failed to log global alert: {e}")
 
 
 # -----------------------------------------------------------------------------
@@ -628,6 +672,16 @@ def blacklist_add(req: BlacklistAddRequest) -> Dict[str, Any]:
     # persist bloom filters (optional but good for demo)
     svc = getattr(mod, "_get_service")()
     svc.save_bloom_filters()
+    
+    # Log to dashboard alerts
+    _log_global_alert(
+        alert_type="blacklist_add",
+        severity=req.severity,
+        description=f"Manual addition to {req.list_type} blacklist: {req.value}. Reason: {req.reason}",
+        entity_id=req.value,
+        entity_name="Blacklist Entry"
+    )
+    
     return {"feature": "blacklist_watchlist_service", "result": _safe_jsonable(result)}
 
 @app.post("/v1/blacklist/remove")
@@ -679,6 +733,17 @@ def crs_submit_report(req: CRSReportSubmitRequest) -> Dict[str, Any]:
 
     payload = req.model_dump(exclude_none=True)
     result = handler.submit_report(payload)
+    
+    # Log significant reports as alerts
+    if req.report_type in ["fraud", "scam"]:
+        _log_global_alert(
+            alert_type="reputation_report",
+            severity="high",
+            description=f"New {req.report_type} report against {req.merchant_id}: {req.title}",
+            entity_id=req.merchant_id,
+            entity_name="Suspect Entity"
+        )
+        
     return {"feature": "customer_reputation_system", "result": _safe_jsonable(result)}
 
 
@@ -721,6 +786,18 @@ def crs_reporter_reports(reporter_id: str) -> Dict[str, Any]:
     return {
         "feature": "customer_reputation_system",
         "result": _safe_jsonable({"reporter_id": reporter_id, "reports": reports}),
+    }
+
+
+@app.get("/v1/customer-reputation/reports/recent")
+def crs_recent_reports(limit: int = 10) -> Dict[str, Any]:
+    from customer_reputation_system.src.ingestion.report_handler import ReportHandler
+    handler = ReportHandler(db_manager=_crs_db_manager())
+
+    reports = handler.get_recent_reports(limit)
+    return {
+        "feature": "customer_reputation_system",
+        "result": _safe_jsonable(reports),
     }
 
 

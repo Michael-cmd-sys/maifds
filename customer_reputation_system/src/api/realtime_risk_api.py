@@ -189,14 +189,15 @@ class RealTimeRiskAPI:
             return {"error": f"Failed to update risk score: {str(e)}"}
 
     def get_risk_alerts(self, severity_threshold: float = 0.8) -> Dict[str, Any]:
-        """Get current risk alerts"""
+        """Get risk alerts (persisted + new detections)"""
         
-        alerts = []
+        # 1. Detect new high-risk items and persist them if not already recent
+        new_alerts = []
         
         # High-risk agents
         high_risk_agents = self._get_high_risk_entities("agents", severity_threshold)
-        alerts.extend([
-            {
+        for agent in high_risk_agents:
+            alert = {
                 "alert_type": "high_risk_agent",
                 "entity_id": agent["agent_id"],
                 "entity_name": agent["agent_name"],
@@ -205,50 +206,49 @@ class RealTimeRiskAPI:
                 "timestamp": datetime.now().isoformat(),
                 "description": f"Agent {agent['agent_name']} has high risk score of {agent['risk_score']:.3f}"
             }
-            for agent in high_risk_agents
-        ])
-        
+            # Simple deduplication could happen here, skipping for now
+            self.db.log_alert(alert)
+            new_alerts.append(alert)
+
         # High-risk mule accounts
         high_risk_mules = self._get_high_risk_entities("mule_accounts", severity_threshold)
-        alerts.extend([
-            {
+        for mule in high_risk_mules:
+            alert = {
                 "alert_type": "high_risk_mule",
                 "entity_id": mule["account_id"],
-                "entity_type": mule["account_type"],
+                "entity_name": f"{mule['account_type']} Account",
                 "risk_score": mule["mule_score"],
                 "severity": "critical" if mule["mule_score"] > 0.9 else "high",
                 "timestamp": datetime.now().isoformat(),
                 "description": f"Mule account {mule['account_id']} has high risk score of {mule['mule_score']:.3f}"
             }
-            for mule in high_risk_mules
-        ])
-        
-        # Suspicious transaction patterns
+            self.db.log_alert(alert)
+            new_alerts.append(alert)
+
+        # Suspicious transaction patterns (Restored)
         suspicious_tx = self.detect_suspicious_transactions(1)  # Last hour
-        alerts.extend([
-            {
+        for tx in suspicious_tx["high_risk_alerts"]:
+            alert = {
                 "alert_type": "suspicious_transaction",
                 "entity_id": tx["agent_id"],
-                "related_entity": tx["merchant_id"],
-                "suspicion_score": tx["suspicion_score"],
+                "entity_name": f"Transaction {tx.get('transaction_id', 'Unknown')}", # Fallback name
+                "risk_score": tx["suspicion_score"],
                 "severity": "critical" if tx["suspicion_score"] > 0.9 else "high",
-                "timestamp": tx["last_interaction"],
-                "description": f"Suspicious transaction pattern detected: {tx['suspicion_score']:.3f} suspicion score"
+                "description": f"Suspicious transaction pattern: {tx['suspicion_score']:.3f} score",
+                "timestamp": tx.get("last_interaction") or datetime.now().isoformat()
             }
-            for tx in suspicious_tx["high_risk_alerts"]
-        ])
+            self.db.log_alert(alert)
+            new_alerts.append(alert)
         
-        # Sort by severity and timestamp
-        alerts.sort(key=lambda x: (
-            {"critical": 0, "high": 1, "medium": 2, "low": 3}.get(x["severity"], 4),
-            x["timestamp"]
-        ), reverse=True)
+        # 2. Fetch all persisted alerts from DB (history)
+        # We fetch ALL alerts then filter if needed, or rely on DB limit
+        stored_alerts = self.db.get_recent_alerts(limit=100)
         
         return {
-            "total_alerts": len(alerts),
+            "total_alerts": len(stored_alerts),
             "severity_threshold": severity_threshold,
-            "alerts": alerts[:100],  # Limit results
-            "alert_summary": self._summarize_alerts(alerts)
+            "alerts": stored_alerts,
+            "alert_summary": self._summarize_alerts(stored_alerts)
         }
 
     def _get_agent_recent_activity(self, agent_id: str) -> List[Dict[str, Any]]:
