@@ -15,13 +15,13 @@ import {
 import { Button } from '@/components/ui/button';
 
 const NAV_ITEMS = [
-    { label: 'Overview', path: '/app/overview', icon: LayoutDashboard },
-    { label: 'Playground', path: '/app/playground', icon: FlaskConical },
-    { label: 'Blacklist', path: '/app/blacklist', icon: ShieldAlert },
-    { label: 'Reputation', path: '/app/reputation', icon: Users },
-    { label: 'Privacy', path: '/app/governance/privacy', icon: Scale },
-    { label: 'Audit', path: '/app/governance/audit', icon: FileText },
-    { label: 'Alerts', path: '/app/alerts', icon: Bell },
+    { label: 'Overview', path: '/overview', icon: LayoutDashboard },
+    { label: 'Playground', path: '/playground', icon: FlaskConical },
+    { label: 'Blacklist', path: '/blacklist', icon: ShieldAlert },
+    { label: 'Reputation', path: '/reputation', icon: Users },
+    { label: 'Privacy', path: '/governance/privacy', icon: Scale },
+    { label: 'Audit', path: '/governance/audit', icon: FileText },
+    { label: 'Alerts', path: '/alerts', icon: Bell },
 ];
 
 export function Sidebar() {
