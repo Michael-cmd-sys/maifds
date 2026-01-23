@@ -7,7 +7,14 @@ from flask_cors import CORS
 import sys
 sys.path.append('.')
 from mindspore_detector import MindSporePhishingDetector
+from domain_intelligence import DomainIntelligence
 import logging
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -20,6 +27,12 @@ CORS(app)
 logger.info("Initializing MindSpore Phishing Detector...")
 detector = MindSporePhishingDetector()
 logger.info(f"Detector initialized. Trained: {detector.is_trained}")
+
+# Initialize domain intelligence
+logger.info("Initializing Domain Intelligence...")
+domain_intel = DomainIntelligence()
+logger.info("Domain Intelligence initialized")
+
 
 @app.route('/health', methods=['GET'])
 def health_check():
@@ -250,6 +263,117 @@ def get_features():
         'feature_count': len(detector.feature_names),
         'features': detector.feature_names
     })
+
+@app.route('/analyze-domain', methods=['POST'])
+def analyze_domain():
+    """
+    Comprehensive domain analysis using WhoisXML API
+    
+    Expected JSON body:
+    {
+        "url": "https://example.com/suspicious-page"
+    }
+    
+    Returns comprehensive intelligence including:
+    - URL expansion (unshortening)
+    - WHOIS data (domain age, owner)
+    - Reputation score
+    - Geolocation
+    - DNS records
+    - Risk assessment
+    """
+    try:
+        data = request.json
+        url = data.get('url')
+        
+        if not url:
+            return jsonify({'error': 'URL required'}), 400
+        
+        logger.info(f"Analyzing domain for URL: {url}")
+        
+        # Perform comprehensive analysis
+        analysis = domain_intel.analyze_url_comprehensive(url)
+        
+        return jsonify(analysis)
+        
+    except Exception as e:
+        logger.error(f"Domain analysis error: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/expand-url', methods=['POST'])
+def expand_url():
+    """
+    Expand shortened URL to reveal real domain
+    
+    Expected JSON body:
+    {
+        "url": "https://bit.ly/abc123"
+    }
+    """
+    try:
+        data = request.json
+        url = data.get('url')
+        
+        if not url:
+            return jsonify({'error': 'URL required'}), 400
+        
+        result = domain_intel.expand_url(url)
+        return jsonify(result)
+        
+    except Exception as e:
+        logger.error(f"URL expansion error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/domain-whois', methods=['POST'])
+def domain_whois():
+    """
+    Get WHOIS data for a domain
+    
+    Expected JSON body:
+    {
+        "domain": "example.com"
+    }
+    """
+    try:
+        data = request.json
+        domain = data.get('domain')
+        
+        if not domain:
+            return jsonify({'error': 'Domain required'}), 400
+        
+        result = domain_intel.get_whois_data(domain)
+        return jsonify(result)
+        
+    except Exception as e:
+        logger.error(f"WHOIS lookup error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/domain-reputation', methods=['POST'])
+def domain_reputation():
+    """
+    Check domain reputation
+    
+    Expected JSON body:
+    {
+        "domain": "example.com"
+    }
+    """
+    try:
+        data = request.json
+        domain = data.get('domain')
+        
+        if not domain:
+            return jsonify({'error': 'Domain required'}), 400
+        
+        result = domain_intel.check_reputation(domain)
+        return jsonify(result)
+        
+    except Exception as e:
+        logger.error(f"Reputation check error: {e}")
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     # Check if model is trained

@@ -1,0 +1,22 @@
+[Unit]
+Description=MAIFDS FastAPI Backend Service
+After=network.target
+
+[Service]
+Type=simple
+User=maifds
+Group=maifds
+WorkingDirectory=/var/www/maifds
+Environment="PATH=/var/www/maifds/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/var/www/maifds/.venv/bin/uvicorn app:app --host 0.0.0.0 --port 8000 --workers 4
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
