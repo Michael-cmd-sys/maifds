@@ -324,6 +324,9 @@ BlacklistCheckRequest.model_rebuild()
 class PhishingScoreRequest(BaseModel):
     url: str = Field(..., min_length=1)
 
+class DomainIntelRequest(BaseModel):
+    domain: str = Field(..., min_length=1, description="Domain name to analyze")
+
 # maifds_services CRS feature request models
 class CRSReportSubmitRequest(BaseModel):
     reporter_id: str
@@ -710,6 +713,14 @@ def phishing_ad_referral_score(req: PhishingScoreRequest) -> Dict[str, Any]:
     signals = {"referrer_url": req.url}
     result = _call_fn_or_class_method(mod, ["detect_phishing"], signals)
     return {"feature": "phishing_ad_referral_channel_detector", "result": _safe_jsonable(result)}
+
+@app.post("/v1/phishing-ad-referral/domain-intel")
+def domain_intelligence(req: DomainIntelRequest) -> Dict[str, Any]:
+    from maifds_services.Phishing_Ad_Referral_Channel_Detector.src.domain_intelligence import DomainIntelligence
+    intel = DomainIntelligence()
+    result = intel.analyze_domain(req.domain)
+    return {"feature": "domain_intelligence", "result": _safe_jsonable(result)}
+
 
 # -----------------------------------------------------------------------------
 # customer_reputation_system endpoints
