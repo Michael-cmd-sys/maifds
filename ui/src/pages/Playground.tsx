@@ -79,6 +79,17 @@ const FEATURES = [
         }
     },
     {
+        id: 'domain_intel',
+        name: 'Domain Intelligence',
+        path: '/v1/phishing-ad-referral/domain-intel',
+        method: 'POST',
+        icon: ShieldCheck,
+        desc: 'Comprehensive domain analysis with WHOIS, reputation, and geolocation.',
+        sample: {
+            "domain": "https://maifds.com/"
+        }
+    },
+    {
         id: 'click_tx',
         name: 'Click-to-Transaction',
         path: ENDPOINTS.FEATURES.CLICK_TX_CORRELATION,
