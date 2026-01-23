@@ -128,10 +128,12 @@ class DomainIntelligence:
             registrant = whois_record.get('registrant', {})
             registrar = whois_record.get('registrarName')
             
-            # Calculate age
-            age_days = None
+            # Use WhoisXML's pre-calculated domain age (most reliable)
+            age_days = whois_record.get('estimatedDomainAge')
             creation_date = None
-            if created_date_raw:
+            
+            # Fallback to date parsing if estimatedDomainAge not available
+            if age_days is None and created_date_raw:
                 try:
                     # WhoisXML returns ISO format like "1997-09-15T07:00:00+0000" or "1997-09-15T04:00:00Z"
                     # Python's fromisoformat needs +00:00 format (with colon), so fix it
