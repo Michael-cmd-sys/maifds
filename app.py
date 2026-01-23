@@ -718,7 +718,7 @@ def phishing_ad_referral_score(req: PhishingScoreRequest) -> Dict[str, Any]:
 def domain_intelligence(req: DomainIntelRequest) -> Dict[str, Any]:
     from maifds_services.Phishing_Ad_Referral_Channel_Detector.src.domain_intelligence import DomainIntelligence
     intel = DomainIntelligence()
-    result = intel.analyze_domain(req.domain)
+    result = intel.analyze_url_comprehensive(req.domain)
     return {"feature": "domain_intelligence", "result": _safe_jsonable(result)}
 
 
