@@ -133,11 +133,16 @@ class DomainIntelligence:
             creation_date = None
             if created_date_raw:
                 try:
-                    # WhoisXML returns ISO format like "1997-09-15T04:00:00Z"
-                    creation_date = datetime.fromisoformat(created_date_raw.replace('Z', '+00:00'))
+                    # WhoisXML returns ISO format like "1997-09-15T07:00:00+0000" or "1997-09-15T04:00:00Z"
+                    # Python's fromisoformat needs +00:00 format (with colon), so fix it
+                    date_str = created_date_raw.replace('Z', '+00:00')
+                    # Handle +0000 format (add colon to make +00:00)
+                    if '+' in date_str and date_str[-4:].isdigit():
+                        date_str = date_str[:-2] + ':' + date_str[-2:]
+                    creation_date = datetime.fromisoformat(date_str)
                     age_days = (datetime.now(creation_date.tzinfo) - creation_date).days
                 except Exception as date_error:
-                    logger.warning(f"Date parsing failed for {domain}: {date_error}")
+                    logger.warning(f"Date parsing failed for {domain}: {date_error} (raw: {created_date_raw})")
             
             return {
                 'success': True,
