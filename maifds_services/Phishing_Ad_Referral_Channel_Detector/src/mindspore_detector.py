@@ -69,13 +69,43 @@ class URLFeatureExtractor:
     
     @staticmethod
     def get_domain_age(domain: str) -> int:
-        """Get domain age via WHOIS"""
+        """Get domain age via WhoisXML API"""
         try:
-            w = whois.whois(domain)
-            if w.creation_date:
-                creation_date = w.creation_date[0] if isinstance(w.creation_date, list) else w.creation_date
-                age_days = (pd.to_datetime('now') - creation_date).days
+            # Use WhoisXML API for reliable WHOIS data
+            api_key = os.environ.get('WHOISXML_API_KEY')
+            if not api_key:
+                logger.debug("WHOISXML_API_KEY not set, cannot lookup domain age")
+                return -1
+            
+            url = "https://www.whoisxmlapi.com/whoisserver/WhoisService"
+            params = {
+                'apiKey': api_key,
+                'domainName': domain,
+                'outputFormat': 'JSON'
+            }
+            
+            response = requests.get(url, params=params, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            
+            whois_record = data.get('WhoisRecord', {})
+            
+            # Use pre-calculated estimatedDomainAge if available
+            age_days = whois_record.get('estimatedDomainAge')
+            if age_days is not None:
                 return max(0, age_days)
+            
+            # Fallback to parsing created date
+            created_date_raw = whois_record.get('createdDate')
+            if created_date_raw:
+                # Handle timezone format
+                date_str = created_date_raw.replace('Z', '+00:00')
+                if '+' in date_str and date_str[-4:].isdigit():
+                    date_str = date_str[:-2] + ':' + date_str[-2:]
+                creation_date = datetime.fromisoformat(date_str)
+                age_days = (datetime.now(creation_date.tzinfo) - creation_date).days
+                return max(0, age_days)
+            
             return -1
         except Exception as e:
             logger.debug(f"WHOIS lookup failed for {domain}: {e}")
