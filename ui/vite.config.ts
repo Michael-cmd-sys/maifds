@@ -34,14 +34,8 @@ export default defineConfig({
         target: 'http://127.0.0.1:8000',
         changeOrigin: true,
       }
-    }
-  },
-  build: {
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-        dashboard: path.resolve(__dirname, 'app/index.html'),
-      },
     },
-  },
-})
+    build: {
+      outDir: 'dist',
+    },
+  })
